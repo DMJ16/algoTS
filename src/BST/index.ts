@@ -1,64 +1,55 @@
 interface INode {
   val: number;
-  left: INode | null;
-  right: INode | null;
+  left?: INode;
+  right?: INode;
 }
 
-interface ITree<T extends INode> {
-  root: T | null;
-  insert(val: number): BinarySearchTree | undefined;
+interface IBST {
+  root?: INode;
+  insert(val: number): IBST | undefined;
   search(val: number): boolean;
-  DFSPreOrd(): number[] | null;
-  DFSInOrd(): number[] | null;
-  DFSPostOrd(): number[] | null;
-  BFS(): number[] | null;
+  DFSPreOrd(): number[] | undefined;
+  DFSInOrd(): number[] | undefined;
+  DFSPostOrd(): number[] | undefined;
+  BFS(): number[] | undefined;
 }
 
 export class Node implements INode {
-  public left: INode | null;
-  public right: INode | null;
-  constructor(public val: number = 0) {
-    this.val = val;
-    this.left = null;
-    this.right = null;
-  }
+  public left?: INode = undefined;
+  public right?: INode = undefined;
+  constructor(public val: number = 0) {}
 }
 
-export class BinarySearchTree implements ITree<INode> {
-  public root: INode | null;
-  constructor() {
-    this.root = null;
-  }
+export class BinarySearchTree implements IBST {
+  public root?: INode = undefined;
 
   insert(val: number): this | undefined {
     const newNode = new Node(val);
-    if (this.root === null) {
+    if (this.root === undefined) {
       this.root = newNode;
       return this;
     }
     let currentNode = this.root;
     while (currentNode) {
       if (val === currentNode.val) return undefined;
-      if (currentNode.val) {
-        if (val < currentNode.val) {
-          if (currentNode.left === null) {
-            currentNode.left = newNode;
-            return this;
-          }
-          currentNode = currentNode.left;
-        } else {
-          if (currentNode.right === null) {
-            currentNode.right = newNode;
-            return this;
-          }
-          currentNode = currentNode.right;
+      if (val < currentNode.val) {
+        if (currentNode.left === undefined) {
+          currentNode.left = newNode;
+          return this;
         }
+        currentNode = currentNode.left;
+      } else {
+        if (currentNode.right === undefined) {
+          currentNode.right = newNode;
+          return this;
+        }
+        currentNode = currentNode.right;
       }
     }
   }
 
   search(val: number): boolean {
-    if (this.root === null) return false;
+    if (this.root === undefined) return false;
     let currentNode = this.root;
     while (currentNode) {
       if (val < currentNode.val) currentNode = currentNode.left as INode;
@@ -68,8 +59,8 @@ export class BinarySearchTree implements ITree<INode> {
     return false;
   }
 
-  BFS(): number[] | null {
-    if (!this.root) return null;
+  BFS(): number[] | undefined {
+    if (!this.root) return undefined;
     let q: INode[] = [];
     let data: number[] = [];
     let node = this.root;
@@ -85,40 +76,40 @@ export class BinarySearchTree implements ITree<INode> {
     return data;
   }
 
-  DFSPreOrd(): number[] | null {
-    if (!this.root) return null;
+  DFSPreOrd(): number[] | undefined {
+    if (!this.root) return undefined;
     const root = this.root;
     let result: number[] = [];
-    const traverse = (node: Node): void => {
-      if (typeof node.val === "number") result.push(node.val);
+    const traverse = (node: INode): void => {
+      result.push(node.val);
       if (node.left) traverse(node.left);
       if (node.right) traverse(node.right);
     };
-    if (root) traverse(root);
+    traverse(root);
     return result;
   }
 
-  DFSInOrd(): number[] | null {
-    if (!this.root) return null;
+  DFSInOrd(): number[] | undefined {
+    if (!this.root) return undefined;
     const root = this.root;
     let result: number[] = [];
-    const traverse = (node: Node): void => {
+    const traverse = (node: INode): void => {
       if (node.left) traverse(node.left);
-      if (typeof node.val === "number") result.push(node.val);
+      result.push(node.val);
       if (node.right) traverse(node.right);
     };
-    if (root) traverse(root);
+    traverse(root);
     return result;
   }
 
-  DFSPostOrd(): number[] | null {
-    if (!this.root) return null;
+  DFSPostOrd(): number[] | undefined {
+    if (!this.root) return undefined;
     const root = this.root;
     let result: number[] = [];
-    const traverse = (node: Node): void => {
+    const traverse = (node: INode): void => {
       if (node.left) traverse(node.left);
       if (node.right) traverse(node.right);
-      if (typeof node.val === "number") result.push(node.val);
+      result.push(node.val);
     };
     traverse(root);
     return result;
