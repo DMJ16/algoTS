@@ -1,19 +1,18 @@
-// import { BinarySearchTree } from "./BST";
-// const tree = new BinarySearchTree();
-// tree.insert(10);
-// tree.insert(7);
-// tree.insert(120);
-// tree.insert(1);
-// console.log(tree.insert(90));
-// console.log(tree.BFS());
+import { Graph } from "./Graph";
 
-import { LinkedList } from "./LinkedList";
-
-const list = new LinkedList<number>();
-list.insert(0, 100);
-
-list.insert(1, 300);
-list.push(1);
-list.push(3);
-list.push(5);
-list.push(1);
+const graph = new Graph();
+graph.addVertex("A");
+graph.addVertex("B");
+graph.addVertex("C");
+graph.addVertex("D");
+graph.addVertex("E");
+graph.addVertex("F");
+graph.addEdge("A", "B", 4);
+graph.addEdge("A", "C", 2);
+graph.addEdge("B", "E", 3);
+graph.addEdge("C", "D", 2);
+graph.addEdge("C", "F", 4);
+graph.addEdge("D", "E", 3);
+graph.addEdge("D", "F", 1);
+graph.addEdge("E", "F", 1);
+console.log(graph.Dijkstra("A", "E"));
