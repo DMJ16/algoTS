@@ -1,4 +1,5 @@
 type Node = { vertex: string; weight: number };
+
 interface IAdjList {
   [key: string]: Node[];
 }

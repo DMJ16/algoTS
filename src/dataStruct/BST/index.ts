@@ -14,13 +14,13 @@ interface IBST {
   BFS(): number[] | undefined;
 }
 
-export class Node implements INode {
+class Node implements INode {
   public left?: INode = undefined;
   public right?: INode = undefined;
   constructor(public val: number = 0) {}
 }
 
-export class BinarySearchTree implements IBST {
+export class BST implements IBST {
   public root?: INode = undefined;
 
   insert(val: number): this | undefined {
@@ -57,6 +57,17 @@ export class BinarySearchTree implements IBST {
       else return true;
     }
     return false;
+  }
+
+  invert(): this | undefined {
+    if (!this.root) return undefined;
+    const traverse = (node: INode): void => {
+      [node.left, node.right] = [node.right, node.left];
+      if (node.left) traverse(node.left);
+      if (node.right) traverse(node.right);
+    };
+    traverse(this.root);
+    return this;
   }
 
   BFS(): number[] | undefined {
