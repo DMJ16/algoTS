@@ -16,22 +16,40 @@ import {
 } from "../algorithms/sorting";
 
 describe("general computer science and interview problems", () => {
+  test("fibonacci function", () => {
+    expect(fib(0)).toBe(0);
+    expect(fib(1)).toBe(1);
+    expect(fib(2)).toBe(1);
+    expect(fib(3)).toBe(2);
+    expect(fib(4)).toBe(3);
+    expect(fib(5)).toBe(5);
+  });
+
+  test("factorial function", () => {
+    expect(factorial(1)).toBe(1);
+    expect(factorial(2)).toBe(2);
+    expect(factorial(3)).toBe(6);
+    expect(factorial(4)).toBe(24);
+    expect(factorial(5)).toBe(120);
+    expect(factorial(6)).toBe(720);
+  });
+
   test("palindromes return true, else false", () => {
-    expect(isPalindrome("hannah")).toStrictEqual(true);
-    expect(isPalindrome("racecar")).toStrictEqual(true);
-    expect(isPalindrome("david")).toStrictEqual(false);
+    expect(isPalindrome("hannah")).toBe(true);
+    expect(isPalindrome("racecar")).toBe(true);
+    expect(isPalindrome("david")).toBe(false);
   });
 
   test("characters shift k positions in alphabet", () => {
-    expect(caesarCipherEncryptor("a", 2)).toStrictEqual("c");
-    expect(caesarCipherEncryptor("abc", 3)).toStrictEqual("def");
-    expect(caesarCipherEncryptor("a", 4)).toStrictEqual("e");
-    expect(caesarCipherEncryptor("z", 4)).toStrictEqual("d");
-    expect(caesarCipherEncryptor("z", 1)).toStrictEqual("a");
-    expect(caesarCipherEncryptor("xyz", 2)).toStrictEqual("zab");
+    expect(caesarCipherEncryptor("a", 2)).toBe("c");
+    expect(caesarCipherEncryptor("abc", 3)).toBe("def");
+    expect(caesarCipherEncryptor("a", 4)).toBe("e");
+    expect(caesarCipherEncryptor("z", 4)).toBe("d");
+    expect(caesarCipherEncryptor("z", 1)).toBe("a");
+    expect(caesarCipherEncryptor("xyz", 2)).toBe("zab");
   });
 
-  test("flatten", () => {
+  test("flatten nest arrays", () => {
     const arr = [[[[[[55], 33], 28]]]];
     expect(flatten(arr)).toStrictEqual([55, 33, 28]);
   });
@@ -40,13 +58,13 @@ describe("general computer science and interview problems", () => {
     console.log("test");
     return a + b;
   }
-  test("memoize", () => {
+  test("memoize a function", () => {
     const memAdd = memoize(add);
-    expect(memAdd(2, 3)).toStrictEqual(5);
-    expect(memAdd(2, 3)).toStrictEqual(5);
+    expect(memAdd(2, 3)).toBe(5);
+    expect(memAdd(2, 3)).toBe(5);
   });
 
-  test("reduce", () => {
+  test("reduce an array", () => {
     expect(reduce.bind([1, 2, 3, 4], add)()).toBe(10);
   });
 });
@@ -89,39 +107,33 @@ describe("sorting algorithms", () => {
   });
 
   describe("search algorithms", () => {
-    test("kmpSearch", () => {
-      expect(kmpSearch("hannahhahhahahahhahahahannah", "hannah")).toStrictEqual(
-        2
-      );
-      expect(kmpSearch("hannahhahhahahahhahahahannah", "dsds")).toStrictEqual(
-        0
-      );
-      expect(kmpSearch("hannahhahhahahahhahahahannah", "ha")).toStrictEqual(9);
-      expect(
-        kmpSearch("hannahhahhahahah hahah     ahannah", "hannah")
-      ).toStrictEqual(2);
+    test("kmpSearch returns frequency of substring occurence", () => {
+      expect(kmpSearch("hannahhahhahahahhahahahannah", "hannah")).toBe(2);
+      expect(kmpSearch("hannahhahhahahahhahahahannah", "dsds")).toBe(0);
+      expect(kmpSearch("hannahhahhahahahhahahahannah", "ha")).toBe(9);
+      expect(kmpSearch("hannahhahhahahah hahah     ahannah", "hannah")).toBe(2);
     });
   });
 
   test("binarySearch returns index or -1 if search val not found", () => {
-    expect(binarySearch([1, 2, 58, 99, 100], 100)).toStrictEqual(4);
-    expect(binarySearch([1, 2, 5, 99, 10], 5)).toStrictEqual(2);
-    expect(binarySearch([2, 5, 6, 9, 13, 15, 28, 30], 13)).toStrictEqual(4);
-    expect(binarySearch([2, 5, 6, 9, 13, 15, 28, 30], 1000)).toStrictEqual(-1);
-    expect(binarySearch([2, 5, 6, 9, 13, 15, 28, 30], 50)).toStrictEqual(-1);
+    expect(binarySearch([1, 2, 58, 99, 100], 100)).toBe(4);
+    expect(binarySearch([1, 2, 5, 99, 10], 5)).toBe(2);
+    expect(binarySearch([2, 5, 6, 9, 13, 15, 28, 30], 13)).toBe(4);
+    expect(binarySearch([2, 5, 6, 9, 13, 15, 28, 30], 1000)).toBe(-1);
+    expect(binarySearch([2, 5, 6, 9, 13, 15, 28, 30], 50)).toBe(-1);
   });
 });
 
 describe("dataStructures", () => {
   test("stack", () => {
     const stack = new Stack();
-    expect(stack.pop()).toStrictEqual(undefined);
-    expect(stack.push(10)).toStrictEqual(1);
-    expect(stack.push(100)).toStrictEqual(2);
-    expect(stack.push(1)).toStrictEqual(3);
-    expect(stack.push(5)).toStrictEqual(4);
-    expect(stack.pop()).toStrictEqual(5);
-    expect(stack.pop()).toStrictEqual(1);
+    expect(stack.pop()).toBe(undefined);
+    expect(stack.push(10)).toBe(1);
+    expect(stack.push(100)).toBe(2);
+    expect(stack.push(1)).toBe(3);
+    expect(stack.push(5)).toBe(4);
+    expect(stack.pop()).toBe(5);
+    expect(stack.pop()).toBe(1);
   });
 
   test("binary search tree", () => {
@@ -132,6 +144,7 @@ describe("dataStructures", () => {
     tree.insert(10);
     tree.insert(30);
     tree.invert();
+    expect(tree.DFSPostOrd()).toStrictEqual([500, 30, 10, 20, 50]);
   });
 
   test("graph", () => {
