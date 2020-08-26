@@ -1,17 +1,23 @@
 {
-  "name": "algoDataStruct",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "name": "algoTS",
+  "version": "0.0.1",
+  "description": "Algorithms, data structures, and general CS problems in TypeScript",
   "scripts": {
     "start:build": "tsc -w",
     "start:run": "nodemon build/index.js",
     "start": "concurrently npm:start:*",
     "test": "jest"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "data structures",
+    "algorithms",
+    "typescript"
+  ],
+  "author": "david josephs",
   "license": "ISC",
+  "jest": {
+    "preset": "ts-jest"
+  },
   "devDependencies": {
     "@types/jest": "^26.0.10",
     "concurrently": "^5.3.0",
