@@ -118,6 +118,7 @@ export class LinkedList<T> implements IList<T> {
     const removeNode = prevNode.next as INode<T>;
     prevNode.next = removeNode.next;
     removeNode.next = undefined;
+    this.length--;
     return removeNode;
   }
 

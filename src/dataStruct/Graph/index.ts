@@ -126,7 +126,6 @@ export class Graph implements IGraph<string> {
     let path: string[] = [];
     let smallest: string = "";
 
-    //initialize state
     Object.keys(this.adjList).forEach((v) => {
       if (v === start) {
         distances[v] = 0;
@@ -175,7 +174,6 @@ class HeapNode {
   constructor(public val: string, public priority: number) {}
 }
 
-// minHeap
 class PriorityQueue {
   public values: HeapNode[] = [];
 
