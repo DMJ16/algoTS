@@ -26,7 +26,5 @@
     "ts-jest": "^26.2.0",
     "typescript": "^4.0.2"
   },
-  "dependencies": {
-    "as-bignum": "^0.2.3"
-  }
+  "dependencies": {}
 }
