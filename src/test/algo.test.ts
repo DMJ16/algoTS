@@ -1,10 +1,11 @@
-import { binarySearch, kmpSearch, kadanesAlgo } from "../algorithms/search";
-
 import {
+  binarySearch,
+  kmpSearch,
+  kadanesAlgo,
   bubbleSort,
   insertionSort,
   selectionSort,
-} from "../algorithms/sorting";
+} from "../algorithms";
 
 describe("sorting algorithms", () => {
   test("bubbleSort", () => {
