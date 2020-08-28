@@ -64,8 +64,11 @@ describe("dataStructures", () => {
     tree.insert(500);
     tree.insert(10);
     tree.insert(30);
-    tree.invert();
+    expect(tree.validate()).toBe(true);
+    expect(tree.rangeSum(10, 30)).toBe(60);
+    expect(tree.rangeSum(10, 500)).toBe(610);
 
+    tree.invert();
     expect(tree.BFS()).toStrictEqual([50, 500, 20, 30, 10]);
     expect(tree.DFSPreOrd()).toStrictEqual([50, 500, 20, 30, 10]);
     expect(tree.DFSInOrd()).toStrictEqual([500, 50, 30, 20, 10]);

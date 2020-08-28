@@ -12,6 +12,9 @@ interface IBST {
   DFSInOrd(): number[] | undefined;
   DFSPostOrd(): number[] | undefined;
   BFS(): number[] | undefined;
+  invert(): this | undefined;
+  validate(): boolean;
+  rangeSum(left: number, right: number): number | undefined;
 }
 
 class Node implements INode {
@@ -124,5 +127,33 @@ export class BST implements IBST {
     };
     traverse(root);
     return result;
+  }
+
+  validate(): boolean {
+    const helper = (
+      node: INode | undefined,
+      min: number,
+      max: number
+    ): boolean => {
+      if (!node) return true;
+      if (node.val < min || node.val >= max) return false;
+      const leftIsValid = helper(node.left, min, node.val);
+      return leftIsValid && helper(node.right, node.val, max);
+    };
+    return helper(this.root, -Infinity, Infinity);
+  }
+
+  rangeSum(left: number, right: number): number | undefined {
+    if (!this.root) return undefined;
+    let sum = 0;
+    const traverse = (node: INode): void => {
+      if (node) {
+        if (node.left && left < node.val) traverse(node.left);
+        if (node.val >= left && node.val <= right) sum += node.val;
+        if (node.right && right > node.val) traverse(node.right);
+      }
+    };
+    traverse(this.root);
+    return sum;
   }
 }

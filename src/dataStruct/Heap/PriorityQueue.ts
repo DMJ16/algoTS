@@ -5,9 +5,9 @@ interface INode<T> {
 }
 
 interface IPriorityQueue<T> {
-  values: Node<T>[];
+  values: INode<T>[];
   enqueue(val: T, priority: number): void;
-  dequeue(): Node<T>;
+  dequeue(): INode<T>;
   sinkDown(): void;
 }
 
@@ -17,7 +17,7 @@ class Node<T> implements INode<T> {
 }
 
 export class PriorityQueue<T> implements IPriorityQueue<T> {
-  public values: Node<T>[] = [];
+  public values: INode<T>[] = [];
 
   enqueue(val: T, priority: number): void {
     let newNode = new Node(val, priority);
@@ -34,7 +34,7 @@ export class PriorityQueue<T> implements IPriorityQueue<T> {
     }
   }
 
-  dequeue(): Node<T> {
+  dequeue(): INode<T> {
     const min = this.values[0];
     const end = this.values.pop();
     if (end instanceof Node && this.values.length > 0) {
@@ -52,8 +52,8 @@ export class PriorityQueue<T> implements IPriorityQueue<T> {
     while (true) {
       let leftChildIdx = 2 * i + 1;
       let rightChildIdx = 2 * i + 2;
-      let leftChild: Node<T>;
-      let rightChild: Node<T>;
+      let leftChild: INode<T>;
+      let rightChild: INode<T>;
       let swap: number | undefined = undefined;
       if (leftChildIdx < len) {
         leftChild = this.values[leftChildIdx];
