@@ -1,6 +1,6 @@
 # AlgoTS 💡
 
-⚙️ TypeScript + Jest
+🧰 TypeScript + Jest
 
 📖 Algorithms, data structures, and general computer science problems in TypeScript.
 
