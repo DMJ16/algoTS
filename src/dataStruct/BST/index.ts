@@ -1,58 +1,59 @@
 interface INode {
   val: number;
-  left?: INode;
-  right?: INode;
+  left: INode | null;
+  right: INode | null;
 }
 
 interface IBST {
-  root?: INode;
-  insert(val: number): IBST | undefined;
+  root: INode | null;
+  insert(val: number): IBST | null;
   search(val: number): boolean;
-  DFSPreOrd(): number[] | undefined;
-  DFSInOrd(): number[] | undefined;
-  DFSPostOrd(): number[] | undefined;
-  BFS(): number[] | undefined;
-  invert(): this | undefined;
+  DFSPreOrd(): number[] | null;
+  DFSInOrd(): number[] | null;
+  DFSPostOrd(): number[] | null;
+  BFS(): number[] | null;
+  invert(): this | null;
   validate(): boolean;
-  rangeSum(left: number, right: number): number | undefined;
+  rangeSum(left: number, right: number): number | null;
 }
 
 class Node implements INode {
-  public left?: INode = undefined;
-  public right?: INode = undefined;
+  public left: INode | null = null;
+  public right: INode | null = null;
   constructor(public val: number = 0) {}
 }
 
 export class BST implements IBST {
-  public root?: INode = undefined;
+  public root: INode | null = null;
 
-  insert(val: number): this | undefined {
+  insert(val: number): this | null {
     const newNode = new Node(val);
-    if (this.root === undefined) {
+    if (this.root === null) {
       this.root = newNode;
       return this;
     }
     let currentNode = this.root;
     while (currentNode) {
-      if (val === currentNode.val) return undefined;
+      if (val === currentNode.val) return null;
       if (val < currentNode.val) {
-        if (currentNode.left === undefined) {
+        if (currentNode.left === null) {
           currentNode.left = newNode;
           return this;
         }
         currentNode = currentNode.left;
       } else {
-        if (currentNode.right === undefined) {
+        if (currentNode.right === null) {
           currentNode.right = newNode;
           return this;
         }
         currentNode = currentNode.right;
       }
     }
+    return null;
   }
 
   search(val: number): boolean {
-    if (this.root === undefined) return false;
+    if (this.root === null) return false;
     let currentNode = this.root;
     while (currentNode) {
       if (val < currentNode.val) currentNode = currentNode.left as INode;
@@ -62,8 +63,8 @@ export class BST implements IBST {
     return false;
   }
 
-  invert(): this | undefined {
-    if (!this.root) return undefined;
+  invert(): this | null {
+    if (!this.root) return null;
     const traverse = (node: INode): void => {
       [node.left, node.right] = [node.right, node.left];
       if (node.left) traverse(node.left);
@@ -73,8 +74,8 @@ export class BST implements IBST {
     return this;
   }
 
-  BFS(): number[] | undefined {
-    if (!this.root) return undefined;
+  BFS(): number[] | null {
+    if (!this.root) return null;
     let q: INode[] = [];
     let data: number[] = [];
     let node = this.root;
@@ -90,8 +91,8 @@ export class BST implements IBST {
     return data;
   }
 
-  DFSPreOrd(): number[] | undefined {
-    if (!this.root) return undefined;
+  DFSPreOrd(): number[] | null {
+    if (!this.root) return null;
     const root = this.root;
     let result: number[] = [];
     const traverse = (node: INode): void => {
@@ -103,8 +104,8 @@ export class BST implements IBST {
     return result;
   }
 
-  DFSInOrd(): number[] | undefined {
-    if (!this.root) return undefined;
+  DFSInOrd(): number[] | null {
+    if (!this.root) return null;
     const root = this.root;
     let result: number[] = [];
     const traverse = (node: INode): void => {
@@ -116,8 +117,8 @@ export class BST implements IBST {
     return result;
   }
 
-  DFSPostOrd(): number[] | undefined {
-    if (!this.root) return undefined;
+  DFSPostOrd(): number[] | null {
+    if (!this.root) return null;
     const root = this.root;
     let result: number[] = [];
     const traverse = (node: INode): void => {
@@ -130,11 +131,7 @@ export class BST implements IBST {
   }
 
   validate(): boolean {
-    const helper = (
-      node: INode | undefined,
-      min: number,
-      max: number
-    ): boolean => {
+    const helper = (node: INode | null, min: number, max: number): boolean => {
       if (!node) return true;
       if (node.val < min || node.val >= max) return false;
       const leftIsValid = helper(node.left, min, node.val);
@@ -143,8 +140,8 @@ export class BST implements IBST {
     return helper(this.root, -Infinity, Infinity);
   }
 
-  rangeSum(left: number, right: number): number | undefined {
-    if (!this.root) return undefined;
+  rangeSum(left: number, right: number): number | null {
+    if (!this.root) return null;
     let sum = 0;
     const traverse = (node: INode): void => {
       if (node) {

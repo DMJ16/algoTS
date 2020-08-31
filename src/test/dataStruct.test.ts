@@ -11,7 +11,7 @@ import {
 describe("dataStructures", () => {
   test("stack", () => {
     const stack = new Stack();
-    expect(stack.pop()).toBe(undefined);
+    expect(stack.pop()).toBe(null);
     expect(stack.push(10)).toBe(1);
     expect(stack.push(100)).toBe(2);
     expect(stack.push(1)).toBe(3);
@@ -46,7 +46,7 @@ describe("dataStructures", () => {
     expect(list.tail?.val).toBe(100);
     const removedNode = list.remove(1);
     expect(removedNode?.val).toBe(36);
-    expect(removedNode?.next).toBe(undefined);
+    expect(removedNode?.next).toBe(null);
     expect(list.len).toBe(2);
     list.unshift(50000);
     expect(list.len).toBe(3);

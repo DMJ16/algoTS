@@ -1,24 +1,24 @@
 interface INode<T> {
   val: T;
-  next?: INode<T>;
+  next: INode<T> | null;
 }
 
 interface IQueue<T> {
-  first?: INode<T>;
-  last?: INode<T>;
+  first: INode<T> | null;
+  last: INode<T> | null;
   size: number;
   enqueue(val: T): number;
-  dequeue(): T | undefined;
+  dequeue(): T | null;
 }
 
 export class Node<T> implements INode<T> {
-  next?: INode<T> = undefined;
+  next: INode<T> | null = null;
   constructor(public val: T) {}
 }
 
 export class Queue<T> implements IQueue<T> {
-  first?: INode<T> = undefined;
-  last?: INode<T> = undefined;
+  first: INode<T> | null = null;
+  last: INode<T> | null = null;
   size: number = 0;
 
   enqueue(val: T): number {
@@ -33,11 +33,11 @@ export class Queue<T> implements IQueue<T> {
     return ++this.size;
   }
 
-  dequeue(): T | undefined {
-    if (!this.first) return undefined;
+  dequeue(): T | null {
+    if (!this.first) return null;
     const first = this.first;
     if (this.first === this.last) {
-      this.last = undefined;
+      this.last = null;
     }
     this.first = this.first.next;
     this.size--;

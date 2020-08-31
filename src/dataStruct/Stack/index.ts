@@ -1,24 +1,24 @@
 interface INode<T> {
   val: T;
-  next?: INode<T>;
+  next: INode<T> | null;
 }
 
 interface IStack<T> {
-  first?: INode<T>;
-  last?: INode<T>;
+  first: INode<T> | null;
+  last: INode<T> | null;
   size: number;
   push(val: T): number;
-  pop(): T | undefined;
+  pop(): T | null;
 }
 
 export class Node<T> implements INode<T> {
-  next?: INode<T> = undefined;
+  next: INode<T> | null = null;
   constructor(public val: T) {}
 }
 
 export class Stack<T> implements IStack<T> {
-  first?: INode<T> = undefined;
-  last?: INode<T> = undefined;
+  first: INode<T> | null = null;
+  last: INode<T> | null = null;
   size: number = 0;
 
   push(val: T): number {
@@ -33,11 +33,11 @@ export class Stack<T> implements IStack<T> {
     }
     return ++this.size;
   }
-  pop(): T | undefined {
-    if (!this.first) return undefined;
+  pop(): T | null {
+    if (!this.first) return null;
     let popped = this.first;
     if (this.first === this.last) {
-      this.last = undefined;
+      this.last = null;
     }
     this.first = this.first.next;
     this.size--;

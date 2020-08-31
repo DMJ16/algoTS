@@ -122,7 +122,7 @@ export class Graph implements IGraph<string> {
   Dijkstra(start: string, end: string): string[] {
     let distances: { [key: string]: number } = {};
     const q = new PriorityQueue();
-    let previous: { [key: string]: string | undefined } = {};
+    let previous: { [key: string]: string | null } = {};
     let path: string[] = [];
     let smallest: string = "";
 
@@ -134,7 +134,7 @@ export class Graph implements IGraph<string> {
         distances[v] = Infinity;
         q.enqueue(v, Infinity);
       }
-      previous[v] = undefined;
+      previous[v] = null;
     });
 
     while (q.values.length) {
