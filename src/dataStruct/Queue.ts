@@ -1,28 +1,20 @@
-interface INode<T> {
-  val: T;
-  next: INode<T> | null;
-}
+import { Node } from "./Node";
 
 interface IQueue<T> {
-  first: INode<T> | null;
-  last: INode<T> | null;
+  first?: Node<T>;
+  last?: Node<T>;
   size: number;
   enqueue(val: T): number;
-  dequeue(): T | null;
-}
-
-export class Node<T> implements INode<T> {
-  next: INode<T> | null = null;
-  constructor(public val: T) {}
+  dequeue(): T | undefined;
 }
 
 export class Queue<T> implements IQueue<T> {
-  first: INode<T> | null = null;
-  last: INode<T> | null = null;
+  first?: Node<T>;
+  last?: Node<T>;
   size: number = 0;
 
   enqueue(val: T): number {
-    const newNode = new Node(val);
+    const newNode = new Node<T>(val);
     if (!this.first) {
       this.first = newNode;
       this.last = newNode;
@@ -33,11 +25,11 @@ export class Queue<T> implements IQueue<T> {
     return ++this.size;
   }
 
-  dequeue(): T | null {
-    if (!this.first) return null;
+  dequeue(): T | undefined {
+    if (!this.first) return undefined;
     const first = this.first;
     if (this.first === this.last) {
-      this.last = null;
+      this.last = undefined;
     }
     this.first = this.first.next;
     this.size--;

@@ -1,30 +1,22 @@
-interface INode<T> {
-  val: T;
-  next: INode<T> | null;
-}
+import { Node } from "./Node";
 
 interface IList<T> {
-  head: INode<T> | null;
-  tail: INode<T> | null;
+  head?: Node<T>;
+  tail?: Node<T>;
   push(val: T): this;
-  pop(): INode<T> | null;
-  shift(): INode<T> | null;
+  pop(): Node<T> | undefined;
+  shift(): Node<T> | undefined;
   unshift(val: T): this;
-  get(idx: number): INode<T> | null;
+  get(idx: number): Node<T> | undefined;
   set(idx: number, val: T): boolean;
   insert(idx: number, val: T): boolean;
-  remove(idx: number): INode<T> | null;
+  remove(idx: number): Node<T> | undefined;
   reverse(): this;
 }
 
-export class Node<T> implements INode<T> {
-  public next: INode<T> | null = null;
-  constructor(public val: T) {}
-}
-
 export class LinkedList<T> implements IList<T> {
-  public head: INode<T> | null = null;
-  public tail: INode<T> | null = null;
+  public head?: Node<T>;
+  public tail?: Node<T>;
   private length: number = 0;
 
   get len(): number {
@@ -44,26 +36,26 @@ export class LinkedList<T> implements IList<T> {
     return this;
   }
 
-  pop(): INode<T> | null {
-    if (!this.head || !this.tail) return null;
+  pop(): Node<T> | undefined {
+    if (!this.head || !this.tail) return undefined;
     let currentNode = this.head;
     const oldTail = this.tail;
     while (currentNode.next) {
       if (currentNode.next === oldTail) break;
       currentNode = currentNode.next;
     }
-    currentNode.next = null;
+    currentNode.next = undefined;
     this.tail = currentNode;
     this.length--;
     return oldTail;
   }
 
-  shift(): INode<T> | null {
-    if (!this.head) return null;
+  shift(): Node<T> | undefined {
+    if (!this.head) return undefined;
     const shiftNode = this.head;
     this.head = this.head.next;
-    shiftNode.next = null;
-    if (this.length === 1) this.tail = null;
+    shiftNode.next = undefined;
+    if (this.length === 1) this.tail = undefined;
     this.length--;
     return shiftNode;
   }
@@ -81,12 +73,12 @@ export class LinkedList<T> implements IList<T> {
     return this;
   }
 
-  get(idx: number): INode<T> | null {
-    if (idx < 0 || idx >= this.length) return null;
+  get(idx: number): Node<T> | undefined {
+    if (idx < 0 || idx >= this.length) return undefined;
     let listIdx = 0;
     let currentNode = this.head;
     while (idx !== listIdx) {
-      currentNode = currentNode?.next ? currentNode?.next : null;
+      currentNode = currentNode?.next ? currentNode?.next : undefined;
       listIdx++;
     }
     return currentNode;
@@ -94,7 +86,7 @@ export class LinkedList<T> implements IList<T> {
 
   set(idx: number, val: T): boolean {
     if (idx < 0 || idx >= this.length) return false;
-    let setNode = this.get(idx) as INode<T>;
+    let setNode = this.get(idx) as Node<T>;
     setNode.val = val;
     return true;
   }
@@ -103,21 +95,21 @@ export class LinkedList<T> implements IList<T> {
     if (this.length < 0 || idx === 0) return !!this.unshift(val);
     if (idx === this.length) return !!this.push(val);
     const insertNode = new Node(val);
-    const prevNode = this.get(idx - 1) as INode<T>;
+    const prevNode = this.get(idx - 1) as Node<T>;
     insertNode.next = prevNode.next;
     prevNode.next = insertNode;
     this.length++;
     return true;
   }
 
-  remove(idx: number): INode<T> | null {
-    if (idx < 0 || idx >= this.length) return null;
+  remove(idx: number): Node<T> | undefined {
+    if (idx < 0 || idx >= this.length) return undefined;
     if (idx === 0) return this.shift();
     if (idx === this.length - 1) return this.pop();
-    const prevNode = this.get(idx - 1) as INode<T>;
-    const removeNode = prevNode.next as INode<T>;
+    const prevNode = this.get(idx - 1) as Node<T>;
+    const removeNode = prevNode.next as Node<T>;
     prevNode.next = removeNode.next;
-    removeNode.next = null;
+    removeNode.next = undefined;
     this.length--;
     return removeNode;
   }
@@ -125,10 +117,10 @@ export class LinkedList<T> implements IList<T> {
   reverse(): this {
     let currentNode = this.head;
     [this.head, this.tail] = [this.tail, currentNode];
-    let next = null;
-    let prev = null;
+    let next = undefined;
+    let prev = undefined;
     for (let i = 0; i < this.length; i++) {
-      next = currentNode?.next ? currentNode?.next : null;
+      next = currentNode?.next ? currentNode?.next : undefined;
       if (currentNode) currentNode.next = prev;
       prev = currentNode;
       currentNode = next;

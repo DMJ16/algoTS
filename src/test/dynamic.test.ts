@@ -1,4 +1,4 @@
-import { coinChange, maxSubsetSumNoAdjacent } from "../dynamicProgramming";
+import { coinChange, maxSubsetSumNoAdjacent } from "../dynamic";
 
 describe("dynamic programming problems", () => {
   test("returns smallest combination of coins in array to sum to given target", () => {

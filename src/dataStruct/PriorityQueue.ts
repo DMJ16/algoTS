@@ -1,26 +1,26 @@
-interface INode<T> {
+interface IPQNode<T> {
   val: T;
   priority: number;
   time: Date;
 }
 
 interface IPriorityQueue<T> {
-  values: INode<T>[];
+  values: IPQNode<T>[];
   enqueue(val: T, priority: number): void;
-  dequeue(): INode<T>;
+  dequeue(): IPQNode<T>;
   sinkDown(): void;
 }
 
-class Node<T> implements INode<T> {
+class PQNode<T> implements IPQNode<T> {
   public time = new Date();
   constructor(public val: T, public priority: number) {}
 }
 
 export class PriorityQueue<T> implements IPriorityQueue<T> {
-  public values: INode<T>[] = [];
+  public values: PQNode<T>[] = [];
 
   enqueue(val: T, priority: number): void {
-    let newNode = new Node(val, priority);
+    const newNode = new PQNode<T>(val, priority);
     this.values.push(newNode);
     let i = this.values.length - 1;
     const node = this.values[i];
@@ -34,7 +34,7 @@ export class PriorityQueue<T> implements IPriorityQueue<T> {
     }
   }
 
-  dequeue(): INode<T> {
+  dequeue(): PQNode<T> {
     const min = this.values[0];
     const end = this.values.pop();
     if (end instanceof Node && this.values.length > 0) {
@@ -52,9 +52,9 @@ export class PriorityQueue<T> implements IPriorityQueue<T> {
     while (true) {
       let leftChildIdx = 2 * i + 1;
       let rightChildIdx = 2 * i + 2;
-      let leftChild: INode<T>;
-      let rightChild: INode<T>;
-      let swap: number | null = null;
+      let leftChild: PQNode<T>;
+      let rightChild: PQNode<T>;
+      let swap: number | undefined = undefined;
       if (leftChildIdx < len) {
         leftChild = this.values[leftChildIdx];
         if (leftChild.priority < temp.priority) swap = leftChildIdx;
@@ -63,15 +63,15 @@ export class PriorityQueue<T> implements IPriorityQueue<T> {
       if (rightChildIdx < len) {
         rightChild = this.values[rightChildIdx];
         if (
-          (swap === null && rightChild.priority < temp.priority) ||
-          (swap !== null &&
+          (swap === undefined && rightChild.priority < temp.priority) ||
+          (swap !== undefined &&
             rightChild.priority < this.values[leftChildIdx].priority)
         ) {
           swap = rightChildIdx;
         }
       }
 
-      if (swap === null) break;
+      if (swap === undefined) break;
       [this.values[i], this.values[swap]] = [this.values[swap], temp];
       i = swap;
     }

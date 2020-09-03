@@ -1,21 +1,44 @@
-import { fib, factorial } from "../math";
+import {
+  getNthFibIter,
+  getNthFibRecurse,
+  factorialRecurse,
+  factorialIter,
+} from "../math";
 
-describe("general computer science and interview math problems", () => {
-  test("fibonacci function", () => {
-    expect(fib(0)).toBe(0);
-    expect(fib(1)).toBe(1);
-    expect(fib(2)).toBe(1);
-    expect(fib(3)).toBe(2);
-    expect(fib(4)).toBe(3);
-    expect(fib(5)).toBe(5);
+describe("math problems", () => {
+  test("fibonacci function recursive solution", () => {
+    expect(getNthFibRecurse(1)).toBe(0);
+    expect(getNthFibRecurse(2)).toBe(1);
+    expect(getNthFibRecurse(3)).toBe(1);
+    expect(getNthFibRecurse(4)).toBe(2);
+    expect(getNthFibRecurse(5)).toBe(3);
+    expect(getNthFibRecurse(6)).toBe(5);
   });
 
-  test("factorial function", () => {
-    expect(factorial(1)).toBe(1);
-    expect(factorial(2)).toBe(2);
-    expect(factorial(3)).toBe(6);
-    expect(factorial(4)).toBe(24);
-    expect(factorial(5)).toBe(120);
-    expect(factorial(6)).toBe(720);
+  test("fibonacci function iterative solution", () => {
+    expect(getNthFibIter(1)).toBe(0);
+    expect(getNthFibIter(2)).toBe(1);
+    expect(getNthFibIter(3)).toBe(1);
+    expect(getNthFibIter(4)).toBe(2);
+    expect(getNthFibIter(5)).toBe(3);
+    expect(getNthFibIter(6)).toBe(5);
+  });
+
+  test("factorial function recursive solution", () => {
+    expect(factorialRecurse(1)).toBe(1);
+    expect(factorialRecurse(2)).toBe(2);
+    expect(factorialRecurse(3)).toBe(6);
+    expect(factorialRecurse(4)).toBe(24);
+    expect(factorialRecurse(5)).toBe(120);
+    expect(factorialRecurse(6)).toBe(720);
+  });
+
+  test("factorial function iterative solution", () => {
+    expect(factorialIter(1)).toBe(1);
+    expect(factorialIter(2)).toBe(2);
+    expect(factorialIter(3)).toBe(6);
+    expect(factorialIter(4)).toBe(24);
+    expect(factorialIter(5)).toBe(120);
+    expect(factorialIter(6)).toBe(720);
   });
 });

@@ -1,6 +1,8 @@
 export { Graph } from "./Graph";
-export { BST } from "./BST";
+export { BinarySearchTree } from "./BST";
 export { LinkedList } from "./LinkedList";
+export { DoublyLinkedList } from "./DoublyLinkedList";
 export { Stack } from "./Stack";
-export { Queue, Node } from "./Queue";
-export { MaxBinaryHeap, PriorityQueue } from "./Heap";
+export { Queue } from "./Queue";
+export { MaxBinaryHeap } from "./MaxBinaryHeap";
+export { PriorityQueue } from "./PriorityQueue";

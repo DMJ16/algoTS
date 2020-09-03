@@ -1,2 +1,2 @@
-export { fib } from "./fib";
-export { factorial } from "./factorial";
+export { getNthFibRecurse, getNthFibIter } from "./getNthFib";
+export { factorialRecurse, factorialIter } from "./factorial";
