@@ -1,6 +1,6 @@
 import { isPalindrome, caesarCipherEncryptor, regExMatch } from "../strings";
 
-describe("string problems", () => {
+describe("string algorithms", () => {
   test("palindromes return true, else false", () => {
     expect(isPalindrome("hannah")).toBe(true);
     expect(isPalindrome("racecar")).toBe(true);

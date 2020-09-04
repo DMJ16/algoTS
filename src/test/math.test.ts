@@ -5,7 +5,7 @@ import {
   factorialIter,
 } from "../math";
 
-describe("math problems", () => {
+describe("math algorithms", () => {
   test("fibonacci function recursive solution", () => {
     expect(getNthFibRecurse(1)).toBe(0);
     expect(getNthFibRecurse(2)).toBe(1);

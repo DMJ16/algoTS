@@ -1,3 +1,4 @@
+export { kadanesAlgo } from "./kadanesAlgo";
 export { flatten } from "./flatten";
 export { reduce } from "./reduce";
 export { findThreeLargestNumbers } from "./findThreeLargestNumbers";
@@ -8,3 +9,4 @@ export { isMonotonic } from "./monotonic";
 export { spiralTraverse } from "./spiralTraverse";
 export { longestPeak } from "./longestPeak";
 export { permutation } from "./permutation";
+export { powerset } from "./powerset";

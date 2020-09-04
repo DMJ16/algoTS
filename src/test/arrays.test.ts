@@ -1,4 +1,5 @@
 import {
+  kadanesAlgo,
   flatten,
   reduce,
   findThreeLargestNumbers,
@@ -9,19 +10,25 @@ import {
   spiralTraverse,
   longestPeak,
   permutation,
+  powerset,
 } from "../arrays";
 
-describe("arrays", () => {
+describe("array algorithms", () => {
+  test("kadane's algorithm", () => {
+    expect(
+      kadanesAlgo([3, 5, -9, 1, 3, -2, 3, 4, 7, 2, -9, 6, 3, 1, -5, 4])
+    ).toBe(19);
+    expect(kadanesAlgo([-10, -2, -9, -4, -8, -6, -7, -1, -3, -5])).toBe(-1);
+  });
+
   test("flatten nest arrays", () => {
     const arr = [[[[[[55], 33], 28]]]];
     expect(flatten(arr)).toStrictEqual([55, 33, 28]);
   });
-
-  function add(a: number, b: number): number {
-    return a + b;
-  }
-
   test("reduce an array", () => {
+    function add(a: number, b: number): number {
+      return a + b;
+    }
     expect(reduce.bind([1, 2, 3, 4], add)()).toBe(10);
   });
 
@@ -41,7 +48,7 @@ describe("arrays", () => {
     ).toStrictEqual([7, 7, 8]);
   });
 
-  test("returns array of triplets that sum to a given target", () => {
+  test("return array of triplets that sum to a given target", () => {
     expect(threeNumSum([12, 3, 1, 2, -6, 5, -8, 6], 0)).toStrictEqual([
       [-8, 2, 6],
       [-8, 3, 5],
@@ -49,7 +56,7 @@ describe("arrays", () => {
     ]);
   });
 
-  test("returns smallest difference between two input arrays", () => {
+  test("return smallest difference between two input arrays", () => {
     expect(
       smallestDifference([-1, 5, 10, 20, 28, 3], [26, 134, 135, 15, 17])
     ).toStrictEqual([28, 26]);
@@ -59,7 +66,7 @@ describe("arrays", () => {
     ).toStrictEqual([20, 17]);
   });
 
-  test("returns array with value to move moved to the end", () => {
+  test("return array with value to move moved to the end", () => {
     expect(moveElementToEnd([1, 2, 3, 4, 5], 3)).toStrictEqual([1, 2, 5, 4, 3]);
     expect(
       moveElementToEnd(
@@ -75,7 +82,7 @@ describe("arrays", () => {
     ).toStrictEqual([12, 11, 10, 9, 8, 7, 1, 2, 3, 4, 6, 5, 5, 5, 5, 5, 5]);
   });
 
-  test("returns true if input array is monotonic", () => {
+  test("return true if input array is monotonic", () => {
     expect(isMonotonic([-1, -5, -10, -1100, -1100, -1101, -1102, -9001])).toBe(
       true
     );
@@ -132,7 +139,7 @@ describe("arrays", () => {
     expect(longestPeak([5, 4, 3, 2, 1, 2, 1])).toBe(3);
   });
 
-  test("returns all permutations of input number array", () => {
+  test("return all permutations of input number array", () => {
     expect(permutation([1, 2, 3])).toEqual([
       [1, 2, 3],
       [1, 3, 2],
@@ -140,6 +147,37 @@ describe("arrays", () => {
       [2, 3, 1],
       [3, 1, 2],
       [3, 2, 1],
+    ]);
+  });
+
+  test("return powerset of input array", () => {
+    expect(powerset([1, 2, 3])).toStrictEqual([
+      [],
+      [1],
+      [2],
+      [1, 2],
+      [3],
+      [1, 3],
+      [2, 3],
+      [1, 2, 3],
+    ]);
+    expect(powerset([1, 2, 3, 4])).toStrictEqual([
+      [],
+      [1],
+      [2],
+      [1, 2],
+      [3],
+      [1, 3],
+      [2, 3],
+      [1, 2, 3],
+      [4],
+      [1, 4],
+      [2, 4],
+      [1, 2, 4],
+      [3, 4],
+      [1, 3, 4],
+      [2, 3, 4],
+      [1, 2, 3, 4],
     ]);
   });
 });
