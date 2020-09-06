@@ -1,9 +1,9 @@
-interface Memoize {
+interface Cache {
   [key: string]: number;
 }
 export function getNthFibRecurse(
   n: number,
-  mem: Memoize = { 1: 0, 2: 1 }
+  mem: Cache = { 1: 0, 2: 1 }
 ): number {
   if (n in mem) {
     return mem[n];
