@@ -24,3 +24,10 @@ export function getNthFibIter(n: number): number {
   }
   return n > 1 ? lastTwoNums[1] : lastTwoNums[0];
 }
+
+export function getNthFibExp(n: number): number {
+  let sqrt5 = Math.sqrt(5);
+  let phi = (1 + sqrt5) / 2;
+  let q = 1 / phi;
+  return Math.floor((Math.pow(phi, n) + Math.pow(q, n)) / sqrt5 + 0.5);
+}

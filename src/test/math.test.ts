@@ -1,6 +1,7 @@
 import {
   getNthFibIter,
   getNthFibRecurse,
+  getNthFibExp,
   factorialRecurse,
   factorialIter,
 } from "../math";
@@ -22,6 +23,15 @@ describe("math algorithms", () => {
     expect(getNthFibIter(4)).toBe(2);
     expect(getNthFibIter(5)).toBe(3);
     expect(getNthFibIter(6)).toBe(5);
+  });
+
+  test("fibonacci function exponential solution", () => {
+    expect(getNthFibExp(1)).toBe(1);
+    expect(getNthFibExp(2)).toBe(1);
+    expect(getNthFibExp(3)).toBe(2);
+    expect(getNthFibExp(4)).toBe(3);
+    expect(getNthFibExp(5)).toBe(5);
+    expect(getNthFibExp(6)).toBe(8);
   });
 
   test("factorial function recursive solution", () => {
