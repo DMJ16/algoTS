@@ -6,6 +6,8 @@ import {
   climbStairs,
   genParens,
   uniquePaths,
+  getNumPermutations,
+  getStrPermutations,
 } from "../dynamic";
 
 describe("dynamic programming algorithms", () => {
@@ -57,5 +59,54 @@ describe("dynamic programming algorithms", () => {
   test("uniquePaths", () => {
     expect(uniquePaths(3, 2)).toBe(3);
     expect(uniquePaths(7, 3)).toBe(28);
+  });
+
+  test("getNumPermutations", () => {
+    expect(getNumPermutations([1, 2, 3])).toStrictEqual([
+      [1, 2, 3],
+      [1, 3, 2],
+      [2, 1, 3],
+      [2, 3, 1],
+      [3, 2, 1],
+      [3, 1, 2],
+    ]);
+    expect(getNumPermutations([1, 2, 3, 4])).toStrictEqual([
+      [1, 2, 3, 4],
+      [1, 2, 4, 3],
+      [1, 3, 2, 4],
+      [1, 3, 4, 2],
+      [1, 4, 3, 2],
+      [1, 4, 2, 3],
+      [2, 1, 3, 4],
+      [2, 1, 4, 3],
+      [2, 3, 1, 4],
+      [2, 3, 4, 1],
+      [2, 4, 3, 1],
+      [2, 4, 1, 3],
+      [3, 2, 1, 4],
+      [3, 2, 4, 1],
+      [3, 1, 2, 4],
+      [3, 1, 4, 2],
+      [3, 4, 1, 2],
+      [3, 4, 2, 1],
+      [4, 2, 3, 1],
+      [4, 2, 1, 3],
+      [4, 3, 2, 1],
+      [4, 3, 1, 2],
+      [4, 1, 3, 2],
+      [4, 1, 2, 3],
+    ]);
+  });
+
+  test("getStrPermutations", () => {
+    expect(getStrPermutations("")).toStrictEqual([""]);
+    expect(getStrPermutations("abc")).toStrictEqual([
+      "abc",
+      "acb",
+      "bac",
+      "bca",
+      "cab",
+      "cba",
+    ]);
   });
 });

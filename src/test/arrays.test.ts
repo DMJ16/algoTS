@@ -11,6 +11,7 @@ import {
   longestPeak,
   permutation,
   powerset,
+  wordSearch,
 } from "../arrays";
 
 describe("array algorithms", () => {
@@ -179,5 +180,38 @@ describe("array algorithms", () => {
       [2, 3, 4],
       [1, 2, 3, 4],
     ]);
+  });
+
+  test("wordSearch", () => {
+    expect(
+      wordSearch(
+        [
+          ["A", "B", "C", "E"],
+          ["S", "F", "C", "S"],
+          ["A", "D", "E", "E"],
+        ],
+        "ABCCED"
+      )
+    ).toBeTruthy();
+    expect(
+      wordSearch(
+        [
+          ["A", "B", "C", "E"],
+          ["S", "F", "C", "S"],
+          ["A", "D", "E", "E"],
+        ],
+        "SEE"
+      )
+    ).toBeTruthy();
+    expect(
+      wordSearch(
+        [
+          ["A", "B", "C", "E"],
+          ["S", "F", "C", "S"],
+          ["A", "D", "E", "E"],
+        ],
+        "ABCB"
+      )
+    ).toBeFalsy();
   });
 });
