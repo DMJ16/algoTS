@@ -1,4 +1,4 @@
-# algo-ts 💡
+# ts-algo 💡
 
 🧰 TypeScript + Jest
 
