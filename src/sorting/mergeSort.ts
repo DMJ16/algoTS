@@ -8,12 +8,10 @@ export function mergeSort(arr: number[]): number[] {
 
 function merge(arr1: number[], arr2: number[]): number[] {
   const result: number[] = [];
-  const len1 = arr1.length,
-    len2 = arr2.length;
-  let i = 0,
-    j = 0;
+  let i = 0;
+  let j = 0;
 
-  while (i < len1 && j < len2) {
+  while (i < arr1.length && j < arr2.length) {
     if (arr1[i] <= arr2[j]) {
       result.push(arr1[i]);
       i++;
@@ -23,11 +21,11 @@ function merge(arr1: number[], arr2: number[]): number[] {
     }
   }
 
-  while (i < len1) {
+  while (i < arr1.length) {
     result.push(arr1[i]);
     i++;
   }
-  while (j < len2) {
+  while (j < arr2.length) {
     result.push(arr2[j]);
     j++;
   }
