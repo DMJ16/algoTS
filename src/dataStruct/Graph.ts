@@ -16,7 +16,7 @@ interface IGraph<T> {
   Dijkstra(start: string, end: string): string[];
 }
 
-export class Graph<T> implements IGraph<string> {
+export class Graph implements IGraph<string> {
   public adjList: IAdjList = {};
 
   addVertex(vertex: string): void {
@@ -113,6 +113,32 @@ export class Graph<T> implements IGraph<string> {
           queue.push(edge.vertex);
         }
       });
+    }
+
+    return data;
+  }
+
+  topologicalSort(): string[] {
+    const stack: string[] = [];
+    const data: string[] = [];
+    const visited: Set<string> = new Set<string>();
+
+    const sort = (currentVertex: string): void => {
+      visited.add(currentVertex);
+      for (const neighbor of this.adjList[currentVertex]) {
+        if (!visited.has(neighbor.vertex)) {
+          sort(neighbor.vertex);
+        }
+      }
+      stack.push(currentVertex);
+    };
+
+    for (const vertex in this.adjList) {
+      if (!visited.has(vertex)) sort(vertex);
+    }
+
+    while (stack.length) {
+      data.push(stack.pop() as string);
     }
 
     return data;

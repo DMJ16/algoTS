@@ -1,7 +1,7 @@
 import { Graph } from "../../dataStruct";
 
 describe("Graph", () => {
-  const graph: Graph<string> = new Graph();
+  const graph: Graph = new Graph();
 
   test("add vertices", () => {
     graph.addVertex("A");
@@ -52,6 +52,33 @@ describe("Graph", () => {
 
   test("BFS traversal", () => {
     expect(graph.BFS("A")).toStrictEqual(["A", "B", "C", "E", "D", "F"]);
+  });
+
+  test("topological sort ", () => {
+    const dag = new Graph();
+    dag.addVertex("A");
+    dag.addVertex("B");
+    dag.addVertex("C");
+    dag.addVertex("D");
+    dag.addVertex("E");
+    dag.addVertex("F");
+    dag.addVertex("G");
+    dag.addEdge("A", "C", 1);
+    dag.addEdge("A", "B", 1);
+    dag.addEdge("A", "D", 1);
+    dag.addEdge("C", "D", 1);
+    dag.addEdge("D", "E", 1);
+    dag.addEdge("E", "F", 1);
+    dag.addEdge("B", "G", 1);
+    expect(dag.topologicalSort()).toStrictEqual([
+      "A",
+      "B",
+      "G",
+      "C",
+      "D",
+      "E",
+      "F",
+    ]);
   });
 
   test("Dijkstra's Algorithm", () => {
