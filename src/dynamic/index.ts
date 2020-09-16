@@ -1,6 +1,6 @@
 export { coinChange } from "./coinChange";
 export { maxSubsetSumNoAdjacent } from "./maxSubset";
-export { levenshteinDistance, levenshteinDist } from "./levenshteinDistance";
+export { levenshteinDistance } from "./levenshteinDistance";
 export { magicIndex } from "./magicIndex";
 export { climbStairs } from "./climbStairs";
 export { genParens } from "./generateParens";
