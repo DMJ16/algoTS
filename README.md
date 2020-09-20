@@ -1,6 +1,6 @@
 # ts-algo 💡
 
-![CircleCI](https://img.shields.io/circleci/build/github/DMJ16/ts-algo?style=for-the-badge)
+![CircleCI](https://img.shields.io/circleci/build/github/DMJ16/ts-algo?style=plastic)
 
 🧰 TypeScript + Jest
 
