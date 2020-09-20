@@ -1,4 +1,4 @@
-import { MaxBinaryHeap } from "../../dataStruct";
+import { MaxBinaryHeap } from "../../dataStructures";
 
 describe("MaxBinaryHeap", () => {
   const heap: MaxBinaryHeap = new MaxBinaryHeap();

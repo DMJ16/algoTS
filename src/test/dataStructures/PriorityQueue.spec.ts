@@ -1,4 +1,4 @@
-import { PriorityQueue } from "../../dataStruct";
+import { PriorityQueue } from "../../dataStructures";
 
 describe("PriorityQueue", () => {
   const PQ: PriorityQueue<string> = new PriorityQueue<string>();

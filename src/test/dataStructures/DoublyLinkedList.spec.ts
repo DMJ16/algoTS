@@ -1,4 +1,4 @@
-import { DoublyLinkedList } from "../../dataStruct";
+import { DoublyLinkedList } from "../../dataStructures";
 
 describe("DoublyLinkedList", () => {
   const list: DoublyLinkedList<number> = new DoublyLinkedList<number>();

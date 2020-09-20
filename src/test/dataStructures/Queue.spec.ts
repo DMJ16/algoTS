@@ -1,4 +1,4 @@
-import { Queue } from "../../dataStruct";
+import { Queue } from "../../dataStructures";
 
 describe("Queue", () => {
   const queue: Queue<number> = new Queue<number>();

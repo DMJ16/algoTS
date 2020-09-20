@@ -2,33 +2,60 @@ interface ITreeNode {
   val: number;
   left?: ITreeNode;
   right?: ITreeNode;
+  size(): number;
+  height(): number;
 }
 
-interface IBinarySearchTree {
+interface IBST {
   root?: ITreeNode;
   insert(val: number): this | undefined;
   search(val: number): boolean;
-  DFSPreOrd(): number[] | undefined;
-  DFSInOrd(): number[] | undefined;
-  DFSPostOrd(): number[] | undefined;
-  BFS(): number[] | undefined;
+  dfsPreOrd(): number[] | undefined;
+  dfsInOrd(): number[] | undefined;
+  dfsPostOrd(): number[] | undefined;
+  bfs(): number[] | undefined;
   invert(): this | undefined;
   validate(): boolean;
   rangeSum(left: number, right: number): number | undefined;
+  size(): number;
+  height(): number;
 }
 
 class TreeNode implements ITreeNode {
   public left?: TreeNode;
   public right?: TreeNode;
   constructor(public val: number = 0) {}
+  size(): number {
+    return (
+      1 +
+      (this.left ? this.left.size() : 0) +
+      (this.right ? this.right.size() : 0)
+    );
+  }
+  height(): number {
+    return Math.max(
+      this.right ? this.right.height() + 1 : 0,
+      this.left ? this.left.height() + 1 : 0
+    );
+  }
 }
 
-export class BinarySearchTree implements IBinarySearchTree {
+export class BST implements IBST {
   public root?: TreeNode;
+
+  size(): number {
+    if (!this.root) return 0;
+    return this.root.size();
+  }
+
+  height(): number {
+    if (!this.root) return 0;
+    return this.root.height();
+  }
 
   insert(val: number): this | undefined {
     const newNode = new TreeNode(val);
-    if (this.root === undefined) {
+    if (!this.root) {
       this.root = newNode;
       return this;
     }
@@ -53,7 +80,7 @@ export class BinarySearchTree implements IBinarySearchTree {
   }
 
   search(val: number): boolean {
-    if (this.root === undefined) return false;
+    if (!this.root) return false;
     let currentNode = this.root;
     while (currentNode) {
       if (val < currentNode.val) currentNode = currentNode.left as TreeNode;
@@ -75,7 +102,7 @@ export class BinarySearchTree implements IBinarySearchTree {
     return this;
   }
 
-  BFS(): number[] | undefined {
+  bfs(): number[] | undefined {
     let node = this.root;
     if (!node) return undefined;
     let q: TreeNode[] = [];
@@ -92,7 +119,7 @@ export class BinarySearchTree implements IBinarySearchTree {
     return data;
   }
 
-  DFSPreOrd(): number[] | undefined {
+  dfsPreOrd(): number[] | undefined {
     if (!this.root) return undefined;
     const root = this.root;
     let result: number[] = [];
@@ -105,7 +132,7 @@ export class BinarySearchTree implements IBinarySearchTree {
     return result;
   }
 
-  DFSInOrd(): number[] | undefined {
+  dfsInOrd(): number[] | undefined {
     if (!this.root) return undefined;
     const root = this.root;
     let result: number[] = [];
@@ -118,7 +145,7 @@ export class BinarySearchTree implements IBinarySearchTree {
     return result;
   }
 
-  DFSPostOrd(): number[] | undefined {
+  dfsPostOrd(): number[] | undefined {
     if (!this.root) return undefined;
     const root = this.root;
     let result: number[] = [];
@@ -131,7 +158,7 @@ export class BinarySearchTree implements IBinarySearchTree {
     return result;
   }
 
-  DFSPreOrdIter(): number[] | undefined {
+  dfsPreOrdIter(): number[] | undefined {
     let currentNode = this.root;
     if (!currentNode) return undefined;
     const stack: TreeNode[] = [];
@@ -146,7 +173,7 @@ export class BinarySearchTree implements IBinarySearchTree {
     return result;
   }
 
-  DFSInOrdIter(): number[] | undefined {
+  dfsInOrdIter(): number[] | undefined {
     let currentNode = this.root;
     if (!currentNode) return undefined;
     const stack: TreeNode[] = [];
@@ -165,7 +192,7 @@ export class BinarySearchTree implements IBinarySearchTree {
     return result;
   }
 
-  DFSPostOrdIter(): number[] | undefined {
+  dfsPostOrdIter(): number[] | undefined {
     let currentNode = this.root;
     if (!currentNode) return undefined;
     const stack: TreeNode[] = [];

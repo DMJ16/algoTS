@@ -2,8 +2,6 @@ export function wordSearch(
   board: (string | undefined)[][],
   word: string
 ): boolean {
-  let result = false;
-
   function traverse(rowIdx: number, colIdx: number, idx: number): void {
     if (!result) {
       if (
@@ -26,6 +24,7 @@ export function wordSearch(
       board[rowIdx][colIdx] = word[idx];
     }
   }
+  let result = false;
   for (let r = 0; r < board.length; r++) {
     const row = board[r];
     for (let c = 0; c < row.length; c++) {

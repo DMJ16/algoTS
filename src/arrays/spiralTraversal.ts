@@ -1,4 +1,4 @@
-export function spiralTraverse(arr: number[][]): number[] {
+export function spiralTraversal(arr: number[][]): number[] {
   const result: number[] = [];
   let startRow = 0;
   let endRow = arr.length - 1;
@@ -25,8 +25,8 @@ export function spiralTraverse(arr: number[][]): number[] {
     }
 
     startRow++;
-    endRow--;
     startCol++;
+    endRow--;
     endCol--;
   }
 

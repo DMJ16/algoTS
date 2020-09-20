@@ -5,6 +5,7 @@ import {
   getNthFibDP,
   factorialRecurse,
   factorialIter,
+  specialPythagoreanTriplet,
 } from "../math";
 
 describe("math algorithms", () => {
@@ -68,5 +69,9 @@ describe("math algorithms", () => {
     expect(factorialIter(4)).toBe(24);
     expect(factorialIter(5)).toBe(120);
     expect(factorialIter(6)).toBe(720);
+  });
+
+  test("special pythagorean triplet where a + b + c === 1000", () => {
+    expect(specialPythagoreanTriplet()).toBe(31875000);
   });
 });

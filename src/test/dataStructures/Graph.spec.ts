@@ -1,4 +1,4 @@
-import { Graph } from "../../dataStruct";
+import { Graph } from "../../dataStructures";
 
 describe("Graph", () => {
   const graph: Graph = new Graph();

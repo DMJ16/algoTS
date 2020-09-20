@@ -4,6 +4,7 @@ import {
   selectionSort,
   quickSort,
   mergeSort,
+  topologicalSort,
 } from "../sorting";
 
 describe("sorting algorithms", () => {
@@ -95,5 +96,37 @@ describe("sorting algorithms", () => {
       23,
     ]);
     expect(mergeSort([-3])).toStrictEqual([-3]);
+  });
+
+  test("topological sort", () => {
+    expect(
+      topologicalSort(
+        [1, 2, 3, 4],
+        [
+          [1, 2],
+          [1, 3],
+          [3, 2],
+          [4, 2],
+          [4, 3],
+        ]
+      )
+    ).toStrictEqual([4, 1, 3, 2]);
+
+    expect(
+      topologicalSort(
+        [1, 2, 3, 4, 5, 6, 7, 8],
+        [
+          [3, 1],
+          [8, 1],
+          [8, 7],
+          [5, 7],
+          [5, 2],
+          [1, 4],
+          [1, 6],
+          [1, 2],
+          [7, 6],
+        ]
+      )
+    ).toStrictEqual([8, 5, 7, 3, 1, 4, 6, 2]);
   });
 });

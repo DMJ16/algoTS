@@ -7,7 +7,7 @@ import {
   smallestDifference,
   moveElementToEnd,
   isMonotonic,
-  spiralTraverse,
+  spiralTraversal,
   longestPeak,
   permutation,
   powerset,
@@ -114,9 +114,9 @@ describe("array algorithms", () => {
     ).toBe(false);
   });
 
-  test("traverse and flatten two-dimensional array", () => {
+  test("spiral traversal", () => {
     expect(
-      spiralTraverse([
+      spiralTraversal([
         [1, 2, 3, 4],
         [12, 13, 14, 5],
         [11, 16, 15, 6],
@@ -125,7 +125,7 @@ describe("array algorithms", () => {
     ).toStrictEqual([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]);
 
     expect(
-      spiralTraverse([
+      spiralTraversal([
         [1, 2, 3],
         [12, 13, 4],
         [11, 14, 5],

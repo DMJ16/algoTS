@@ -97,9 +97,9 @@ export class Graph implements IGraph<string> {
   }
 
   BFS(startVertex: string): string[] {
-    let queue = [startVertex];
-    let data: string[] = [];
-    let visited: { [key: string]: boolean } = {};
+    const queue = [startVertex];
+    const data: string[] = [];
+    const visited: { [key: string]: boolean } = {};
     let currentVertex: string;
     visited[startVertex] = true;
 
@@ -144,49 +144,52 @@ export class Graph implements IGraph<string> {
     return data;
   }
 
-  Dijkstra(start: string, end: string): string[] {
-    let distances: { [key: string]: number } = {};
-    const queue = new PriorityQueue();
-    let previous: { [key: string]: string | undefined } = {};
-    let path: string[] = [];
-    let smallest: string = "";
+  Dijkstra(startVertex: string, endVertex: string): string[] {
+    const distances: { [key: string]: number } = {};
+    const PQ = new PriorityQueue();
+    const prev: { [key: string]: string } = {};
+    const resultPath: string[] = [];
+    let nearestVertex: string = "";
 
-    Object.keys(this.adjList).forEach((v) => {
-      if (v === start) {
-        distances[v] = 0;
-        queue.enqueue(v, 0);
+    Object.keys(this.adjList).forEach((vertex) => {
+      if (startVertex === vertex) {
+        distances[vertex] = 0;
+        PQ.enqueue(vertex, 0);
       } else {
-        distances[v] = Number.MAX_SAFE_INTEGER;
-        queue.enqueue(v, Number.MAX_SAFE_INTEGER);
+        distances[vertex] = Number.POSITIVE_INFINITY;
+        PQ.enqueue(vertex, Number.POSITIVE_INFINITY);
       }
-      previous[v] = undefined;
+      prev[vertex] = "";
     });
 
-    while (queue.values.length) {
-      smallest = queue.dequeue().val;
-      if (smallest === end) {
-        while (previous[smallest]) {
-          path.push(smallest);
-          smallest = previous[smallest] as string;
+    while (PQ.values.length) {
+      nearestVertex = PQ.dequeue().val;
+      if (nearestVertex === endVertex) {
+        while (prev[nearestVertex]) {
+          resultPath.push(nearestVertex);
+          nearestVertex = prev[nearestVertex];
         }
         break;
       }
 
-      if (smallest || distances[smallest] !== Number.MAX_SAFE_INTEGER) {
-        for (const neighbor in this.adjList[smallest]) {
-          let nextNode = this.adjList[smallest][neighbor];
-          let newDistance = distances[smallest] + nextNode.weight;
-          let nextNeighbor = nextNode.vertex;
-          if (newDistance < distances[nextNeighbor]) {
-            distances[nextNeighbor] = newDistance;
-            previous[nextNeighbor] = smallest;
-            queue.enqueue(nextNeighbor, newDistance);
+      if (
+        nearestVertex ||
+        distances[nearestVertex] !== Number.POSITIVE_INFINITY
+      ) {
+        for (const neighbor in this.adjList[nearestVertex]) {
+          let nextNode = this.adjList[nearestVertex][neighbor];
+          let newDistance = distances[nearestVertex] + nextNode.weight;
+          let nextNodeVertex = nextNode.vertex;
+          if (newDistance < distances[nextNodeVertex]) {
+            distances[nextNodeVertex] = newDistance;
+            prev[nextNodeVertex] = nearestVertex;
+            PQ.enqueue(nextNodeVertex, newDistance);
           }
         }
       }
     }
 
-    return path.concat(smallest).reverse();
+    return resultPath.concat(nearestVertex).reverse();
   }
 }
 

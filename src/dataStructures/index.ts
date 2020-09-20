@@ -1,5 +1,5 @@
 export { Graph } from "./Graph";
-export { BinarySearchTree } from "./BST";
+export { BST } from "./BST";
 export { LinkedList } from "./LinkedList";
 export { DoublyLinkedList } from "./DoublyLinkedList";
 export { Stack } from "./Stack";
