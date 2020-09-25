@@ -2,6 +2,7 @@ import { Queue } from "../../dataStructures";
 
 describe("Queue", () => {
   const queue: Queue<number> = new Queue<number>();
+
   test("dequeue empty queue returns null", () => {
     expect(queue.dequeue()).toBeFalsy();
   });

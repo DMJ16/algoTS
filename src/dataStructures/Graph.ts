@@ -17,10 +17,10 @@ interface IGraph<T> {
 }
 
 export class Graph implements IGraph<string> {
-  public adjList: IAdjList = {};
+  adjList: IAdjList = {};
 
   addVertex(vertex: string): void {
-    if (!this.adjList[vertex]) this.adjList[vertex] = [];
+    if (this.adjList[vertex] === undefined) this.adjList[vertex] = [];
   }
 
   addEdge(v1: string, v2: string, weight: number): void {
@@ -59,13 +59,13 @@ export class Graph implements IGraph<string> {
       return this.adjList[v].every((item) => !!visited[item.vertex] === true);
     };
     const DFS = (v: string): void => {
-      if (!this.adjList[v].length) return;
-      if (!(v in visited)) visited[v] = true;
+      if (this.adjList[v].length === 0) return;
+      if (v in visited === false) visited[v] = true;
       data.push(v);
       if (visitedHelper(v)) return;
       for (let i = 0, len = this.adjList[v].length; i < len; i++) {
         const node = this.adjList[v][i];
-        if (!visited[node.vertex]) {
+        if (visited[node.vertex] === undefined) {
           DFS(node.vertex);
         }
       }
@@ -86,7 +86,7 @@ export class Graph implements IGraph<string> {
       data.push(currentVertex);
 
       this.adjList[currentVertex].forEach((edge) => {
-        if (!visited[edge.vertex]) {
+        if (visited[edge.vertex] === undefined) {
           visited[edge.vertex] = true;
           stack.push(edge.vertex);
         }
@@ -108,7 +108,7 @@ export class Graph implements IGraph<string> {
       data.push(currentVertex);
 
       this.adjList[currentVertex].forEach((edge) => {
-        if (!visited[edge.vertex]) {
+        if (visited[edge.vertex] === undefined) {
           visited[edge.vertex] = true;
           queue.push(edge.vertex);
         }
@@ -126,7 +126,7 @@ export class Graph implements IGraph<string> {
     const sort = (currentVertex: string): void => {
       visited.add(currentVertex);
       for (const neighbor of this.adjList[currentVertex]) {
-        if (!visited.has(neighbor.vertex)) {
+        if (visited.has(neighbor.vertex) === false) {
           sort(neighbor.vertex);
         }
       }
@@ -134,7 +134,7 @@ export class Graph implements IGraph<string> {
     };
 
     for (const vertex in this.adjList) {
-      if (!visited.has(vertex)) sort(vertex);
+      if (visited.has(vertex) === false) sort(vertex);
     }
 
     while (stack.length) {
@@ -198,7 +198,7 @@ class HeapNode {
 }
 
 class PriorityQueue {
-  public values: HeapNode[] = [];
+  values: HeapNode[] = [];
 
   enqueue(val: string, priority: number) {
     let newNode = new HeapNode(val, priority);
@@ -231,7 +231,7 @@ class PriorityQueue {
       let leftChildIdx = 2 * i + 1;
       let rightChildIdx = 2 * i + 2;
       let leftChild, rightChild;
-      let swap = undefined;
+      let swap = null;
       if (leftChildIdx < len) {
         leftChild = this.values[leftChildIdx];
         if (leftChild.priority < temp.priority) swap = leftChildIdx;
@@ -240,13 +240,13 @@ class PriorityQueue {
         rightChild = this.values[rightChildIdx];
         if (leftChild)
           if (
-            (swap === undefined && rightChild.priority < temp.priority) ||
-            (swap !== undefined && rightChild.priority < leftChild.priority)
+            (swap === null && rightChild.priority < temp.priority) ||
+            (swap !== null && rightChild.priority < leftChild.priority)
           ) {
             swap = rightChildIdx;
           }
       }
-      if (swap === undefined) break;
+      if (swap === null) break;
       [this.values[i], this.values[swap]] = [this.values[swap], temp];
       i = swap;
     }

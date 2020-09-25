@@ -2,6 +2,7 @@ import { LinkedList } from "../../dataStructures";
 
 describe("LinkedList", () => {
   const list: LinkedList<number> = new LinkedList<number>();
+
   test("push, insert and get new nodes", () => {
     list.push(6);
     list.push(36);
@@ -24,7 +25,7 @@ describe("LinkedList", () => {
   test("remove and pop nodes", () => {
     const removedNode = list.remove(1);
     expect(removedNode?.val).toBe(36);
-    expect(removedNode?.next).toBeUndefined();
+    expect(removedNode?.next).toBeNull();
     const poppedNode = list.pop();
     expect(poppedNode?.val).toBe(100);
     expect(list.len).toBe(2);

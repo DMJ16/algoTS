@@ -4,7 +4,7 @@ describe("Stack", () => {
   const stack: Stack<number> = new Stack<number>();
 
   test("pop empty stack returns null", () => {
-    expect(stack.pop()).toBeUndefined();
+    expect(stack.pop()).toBeNull();
   });
 
   test("push node", () => {

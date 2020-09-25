@@ -2,6 +2,7 @@ import { PriorityQueue } from "../../dataStructures";
 
 describe("PriorityQueue", () => {
   const PQ: PriorityQueue<string> = new PriorityQueue<string>();
+
   test("enqueue nodes", () => {
     PQ.enqueue("entree", 3);
     expect(PQ.values.length).toBe(1);

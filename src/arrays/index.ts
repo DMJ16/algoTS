@@ -8,6 +8,7 @@ export { moveElementToEnd } from "./moveElementToEnd";
 export { isMonotonic } from "./monotonic";
 export { spiralTraversal } from "./spiralTraversal";
 export { longestPeak } from "./longestPeak";
-export { permutation } from "./permutation";
+export { getPermutationIter, getPermutationRecursive } from "./permutation";
 export { powerset } from "./powerset";
 export { wordSearch } from "./wordSearch";
+export { kDiffPairs } from "./kDiffPairs";

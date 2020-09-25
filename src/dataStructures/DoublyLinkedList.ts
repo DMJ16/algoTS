@@ -1,38 +1,38 @@
 interface IListNode<T> {
   val: T;
-  prev?: IListNode<T>;
-  next?: IListNode<T>;
+  prev: IListNode<T> | null;
+  next: IListNode<T> | null;
 }
 
 interface IDoublyLinkedList<T> {
-  head?: IListNode<T>;
-  tail?: IListNode<T>;
+  head: IListNode<T> | null;
+  tail: IListNode<T> | null;
   length: number;
   push(val: T): this;
-  pop(): IListNode<T> | undefined;
+  pop(): IListNode<T> | null;
   unshift(val: T): this;
-  shift(): IListNode<T> | undefined;
-  get(idx: number): IListNode<T> | undefined;
+  shift(): IListNode<T> | null;
+  get(idx: number): IListNode<T> | null;
   set(idx: number, val: T): boolean;
   insert(idx: number, val: T): boolean;
-  remove(idx: number): IListNode<T> | undefined;
+  remove(idx: number): IListNode<T> | null;
   reverse(): this;
 }
 
 class ListNode<T> implements ListNode<T> {
-  public prev?: ListNode<T>;
-  public next?: ListNode<T>;
+  prev: ListNode<T> | null = null;
+  next: ListNode<T> | null = null;
   constructor(public val: T) {}
 }
 
 export class DoublyLinkedList<T> implements IDoublyLinkedList<T> {
-  head?: ListNode<T>;
-  tail?: ListNode<T>;
+  head: ListNode<T> | null = null;
+  tail: ListNode<T> | null = null;
   length: number = 0;
 
   push(val: T): this {
     const newNode = new ListNode<T>(val);
-    if (!this.head) {
+    if (this.head === null) {
       this.head = newNode;
       this.tail = newNode;
     } else {
@@ -44,20 +44,20 @@ export class DoublyLinkedList<T> implements IDoublyLinkedList<T> {
     return this;
   }
 
-  pop(): ListNode<T> | undefined {
-    if (!this.head) return undefined;
+  pop(): ListNode<T> | null {
+    if (this.head === null) return null;
     const poppedNode = this.tail;
-    this.tail = poppedNode?.prev;
-    if (this.tail) this.tail.next = undefined;
-    if (poppedNode) poppedNode.prev = undefined;
-    if (this.length === 1) this.head = undefined;
+    if (poppedNode) this.tail = poppedNode.prev;
+    if (this.tail) this.tail.next = null;
+    if (poppedNode) poppedNode.prev = null;
+    if (this.length === 1) this.head = null;
     this.length--;
     return poppedNode;
   }
 
   unshift(val: T): this {
     const newNode = new ListNode<T>(val);
-    if (!this.head) {
+    if (this.head === null) {
       this.head = newNode;
       this.tail = newNode;
     } else {
@@ -69,23 +69,23 @@ export class DoublyLinkedList<T> implements IDoublyLinkedList<T> {
     return this;
   }
 
-  shift(): ListNode<T> | undefined {
-    if (!this.head) return undefined;
+  shift(): ListNode<T> | null {
+    if (this.head === null) return null;
     const shiftedNode = this.head;
     this.head = shiftedNode.next;
-    if (this.head) this.head.prev = undefined;
-    shiftedNode.next = undefined;
-    if (this.length === 1) this.tail = undefined;
+    if (this.head) this.head.prev = null;
+    shiftedNode.next = null;
+    if (this.length === 1) this.tail = null;
     this.length--;
     return shiftedNode;
   }
 
-  get(idx: number): ListNode<T> | undefined {
-    if (idx < 0 || idx >= this.length) return undefined;
-    let listIdx = 0;
+  get(idx: number): ListNode<T> | null {
+    if (idx < 0 || idx >= this.length) return null;
     let currentNode = this.head;
-    while (idx !== listIdx) {
-      currentNode = currentNode?.next;
+    let listIdx = 0;
+    while (idx !== listIdx && currentNode) {
+      currentNode = currentNode.next;
       listIdx++;
     }
     return currentNode;
@@ -105,8 +105,8 @@ export class DoublyLinkedList<T> implements IDoublyLinkedList<T> {
     if (idx === 0) return !!this.unshift(val);
     if (idx === this.length) return !!this.push(val);
     const newNode = new ListNode<T>(val);
-    const oldNode = this.get(idx);
-    const prevNode = oldNode?.prev;
+    const oldNode = this.get(idx)!;
+    const prevNode = oldNode.prev;
     if (oldNode) oldNode.prev = newNode;
     if (prevNode) prevNode.next = newNode;
     newNode.prev = prevNode;
@@ -115,16 +115,16 @@ export class DoublyLinkedList<T> implements IDoublyLinkedList<T> {
     return true;
   }
 
-  remove(idx: number): ListNode<T> | undefined {
-    if (idx < 0 || idx >= this.length) return undefined;
+  remove(idx: number): ListNode<T> | null {
+    if (idx < 0 || idx >= this.length) return null;
     const removedNode = this.get(idx);
     if (removedNode) {
       const prevNode = removedNode.prev;
       const nextNode = removedNode.next;
       if (prevNode) prevNode.next = nextNode;
       if (nextNode) nextNode.prev = prevNode;
-      removedNode.next = undefined;
-      removedNode.prev = undefined;
+      removedNode.next = null;
+      removedNode.prev = null;
     }
     this.length--;
     return removedNode;
@@ -135,12 +135,13 @@ export class DoublyLinkedList<T> implements IDoublyLinkedList<T> {
     [this.head, this.tail] = [this.tail, this.head];
     let currentNode = this.head;
     for (let i = 0; i < this.length; i++) {
-      if (currentNode)
+      if (currentNode) {
         [currentNode.next, currentNode.prev] = [
           currentNode.prev,
           currentNode.next,
         ];
-      currentNode = currentNode?.next;
+        currentNode = currentNode.next;
+      }
     }
     return this;
   }

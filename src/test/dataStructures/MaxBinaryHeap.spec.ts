@@ -2,6 +2,7 @@ import { MaxBinaryHeap } from "../../dataStructures";
 
 describe("MaxBinaryHeap", () => {
   const heap: MaxBinaryHeap = new MaxBinaryHeap();
+
   test("insert nodes into heap", () => {
     heap.insert(41);
     heap.insert(39);

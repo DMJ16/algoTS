@@ -2,6 +2,7 @@ import { BST } from "../../dataStructures";
 
 describe("BinarySearchTree", () => {
   const bst: BST = new BST();
+
   test("insert node", () => {
     bst.insert(100);
     bst.insert(1);
@@ -21,6 +22,10 @@ describe("BinarySearchTree", () => {
     expect(bst.rangeSum(1, 600)).toBe(1026);
   });
 
+  test("max sum of node path where each node has max 2 links", () => {
+    expect(bst.maxPathSum()).toBe(1026);
+  });
+
   test("insert node and find node by search", () => {
     expect(bst.search(100)).toBe(true);
     expect(bst.search(1)).toBe(true);
@@ -37,22 +42,27 @@ describe("BinarySearchTree", () => {
   });
 
   test("DFS PreOrder recursive and iterative traversal", () => {
-    expect(bst.dfsPreOrd()).toStrictEqual([100, 1, 20, 5, 600, 300]);
-    expect(bst.dfsPreOrdIter()).toStrictEqual([100, 1, 20, 5, 600, 300]);
+    expect(bst.dfsPreOrder()).toStrictEqual([100, 1, 20, 5, 600, 300]);
+    expect(bst.dfsPreOrderIter()).toStrictEqual([100, 1, 20, 5, 600, 300]);
   });
 
   test("DFS InOrder recursive and iterative traversal", () => {
-    expect(bst.dfsInOrd()).toStrictEqual([1, 5, 20, 100, 300, 600]);
-    expect(bst.dfsInOrdIter()).toStrictEqual([1, 5, 20, 100, 300, 600]);
+    expect(bst.dfsInOrder()).toStrictEqual([1, 5, 20, 100, 300, 600]);
+    expect(bst.dfsInOrderIter()).toStrictEqual([1, 5, 20, 100, 300, 600]);
   });
 
   test("DFS PostOrder recursive and iterative traversal", () => {
-    expect(bst.dfsPostOrd()).toStrictEqual([5, 20, 1, 300, 600, 100]);
-    expect(bst.dfsPostOrdIter()).toStrictEqual([5, 20, 1, 300, 600, 100]);
+    expect(bst.dfsPostOrder()).toStrictEqual([5, 20, 1, 300, 600, 100]);
+    expect(bst.dfsPostOrderIter()).toStrictEqual([5, 20, 1, 300, 600, 100]);
   });
 
   test("invert BST", () => {
     bst.invert();
     expect(bst.bfs()).toStrictEqual([100, 600, 1, 300, 20, 5]);
+  });
+
+  test("remove tree nodes", () => {
+    bst.remove(100);
+    expect(bst.root).toBeNull();
   });
 });

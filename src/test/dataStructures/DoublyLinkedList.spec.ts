@@ -2,6 +2,7 @@ import { DoublyLinkedList } from "../../dataStructures";
 
 describe("DoublyLinkedList", () => {
   const list: DoublyLinkedList<number> = new DoublyLinkedList<number>();
+
   test("push, insert and get new nodes", () => {
     list.push(6);
     list.push(36);
@@ -24,7 +25,7 @@ describe("DoublyLinkedList", () => {
   test("remove and pop nodes", () => {
     const removedNode = list.remove(1);
     expect(removedNode?.val).toBe(36);
-    expect(removedNode?.next).toBeUndefined();
+    expect(removedNode?.next).toBeNull();
     const poppedNode = list.pop();
     expect(poppedNode?.val).toBe(100);
     expect(list.length).toBe(2);

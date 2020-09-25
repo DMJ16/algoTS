@@ -6,7 +6,7 @@ interface IMaxBinaryHeap {
 }
 
 export class MaxBinaryHeap implements IMaxBinaryHeap {
-  public values: number[] = [];
+  values: number[] = [];
 
   insert(val: number): void {
     this.values.push(val);
@@ -43,7 +43,7 @@ export class MaxBinaryHeap implements IMaxBinaryHeap {
       let rightChildIdx = 2 * i + 2;
       let leftChild: number;
       let rightChild: number;
-      let swap: number | undefined = undefined;
+      let swap: number | null = null;
 
       if (leftChildIdx < len) {
         leftChild = this.values[leftChildIdx];
@@ -53,14 +53,14 @@ export class MaxBinaryHeap implements IMaxBinaryHeap {
       if (rightChildIdx < len) {
         rightChild = this.values[rightChildIdx];
         if (
-          (swap === undefined && rightChild > temp) ||
-          (swap !== undefined && rightChild > this.values[leftChildIdx])
+          (swap === null && rightChild > temp) ||
+          (swap !== null && rightChild > this.values[leftChildIdx])
         ) {
           swap = rightChildIdx;
         }
       }
 
-      if (swap === undefined) break;
+      if (swap === null) break;
       [this.values[i], this.values[swap]] = [this.values[swap], temp];
       i = swap;
     }

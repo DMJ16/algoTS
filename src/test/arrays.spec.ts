@@ -9,9 +9,11 @@ import {
   isMonotonic,
   spiralTraversal,
   longestPeak,
-  permutation,
+  getPermutationIter,
+  getPermutationRecursive,
   powerset,
   wordSearch,
+  kDiffPairs,
 } from "../arrays";
 
 describe("array algorithms", () => {
@@ -141,7 +143,15 @@ describe("array algorithms", () => {
   });
 
   test("return all permutations of input number array", () => {
-    expect(permutation([1, 2, 3])).toEqual([
+    expect(getPermutationIter([1, 2, 3])).toEqual([
+      [1, 2, 3],
+      [2, 1, 3],
+      [3, 1, 2],
+      [1, 3, 2],
+      [2, 3, 1],
+      [3, 2, 1],
+    ]);
+    expect(getPermutationRecursive([1, 2, 3])).toEqual([
       [1, 2, 3],
       [1, 3, 2],
       [2, 1, 3],
@@ -213,5 +223,11 @@ describe("array algorithms", () => {
         "ABCB"
       )
     ).toBeFalsy();
+  });
+
+  test("return n-pairs that have kth difference", () => {
+    expect(kDiffPairs([3, 1, 4, 1, 5], 2)).toBe(2);
+    expect(kDiffPairs([1, 2, 3, 4, 5], 1)).toBe(4);
+    expect(kDiffPairs([1, 3, 1, 5, 4], 0)).toBe(1);
   });
 });

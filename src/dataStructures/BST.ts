@@ -1,29 +1,30 @@
 interface ITreeNode {
   val: number;
-  left?: ITreeNode;
-  right?: ITreeNode;
+  left: ITreeNode | null;
+  right: ITreeNode | null;
   size(): number;
   height(): number;
 }
 
 interface IBST {
-  root?: ITreeNode;
-  insert(val: number): this | undefined;
+  root: ITreeNode | null;
+  insert(val: number): this | null;
   search(val: number): boolean;
-  dfsPreOrd(): number[] | undefined;
-  dfsInOrd(): number[] | undefined;
-  dfsPostOrd(): number[] | undefined;
-  bfs(): number[] | undefined;
-  invert(): this | undefined;
+  dfsPreOrder(): number[] | null;
+  dfsInOrder(): number[] | null;
+  dfsPostOrder(): number[] | null;
+  bfs(): number[] | null;
+  invert(): this | null;
   validate(): boolean;
-  rangeSum(left: number, right: number): number | undefined;
+  rangeSum(left: number, right: number): number | null;
   size(): number;
   height(): number;
+  remove(val: number): ITreeNode | null;
 }
 
 class TreeNode implements ITreeNode {
-  public left?: TreeNode;
-  public right?: TreeNode;
+  left: TreeNode | null = null;
+  right: TreeNode | null = null;
   constructor(public val: number = 0) {}
   size(): number {
     return (
@@ -41,46 +42,46 @@ class TreeNode implements ITreeNode {
 }
 
 export class BST implements IBST {
-  public root?: TreeNode;
+  root: TreeNode | null = null;
 
   size(): number {
-    if (!this.root) return 0;
+    if (this.root === null) return 0;
     return this.root.size();
   }
 
   height(): number {
-    if (!this.root) return 0;
+    if (this.root === null) return 0;
     return this.root.height();
   }
 
-  insert(val: number): this | undefined {
+  insert(val: number): this | null {
     const newNode = new TreeNode(val);
-    if (!this.root) {
+    if (this.root === null) {
       this.root = newNode;
       return this;
     }
     let currentNode = this.root;
     while (currentNode) {
-      if (val === currentNode.val) return undefined;
+      if (val === currentNode.val) return null;
       if (val < currentNode.val) {
-        if (currentNode.left === undefined) {
+        if (currentNode.left === null) {
           currentNode.left = newNode;
           return this;
         }
         currentNode = currentNode.left;
       } else {
-        if (currentNode.right === undefined) {
+        if (currentNode.right === null) {
           currentNode.right = newNode;
           return this;
         }
         currentNode = currentNode.right;
       }
     }
-    return undefined;
+    return null;
   }
 
   search(val: number): boolean {
-    if (!this.root) return false;
+    if (this.root === null) return false;
     let currentNode = this.root;
     while (currentNode) {
       if (val < currentNode.val) currentNode = currentNode.left as TreeNode;
@@ -91,8 +92,8 @@ export class BST implements IBST {
     return false;
   }
 
-  invert(): this | undefined {
-    if (!this.root) return undefined;
+  invert(): this | null {
+    if (this.root === null) return null;
     const traverse = (node: TreeNode): void => {
       [node.left, node.right] = [node.right, node.left];
       if (node.left) traverse(node.left);
@@ -102,15 +103,15 @@ export class BST implements IBST {
     return this;
   }
 
-  bfs(): number[] | undefined {
+  bfs(): number[] | null {
     let node = this.root;
-    if (!node) return undefined;
+    if (node === null) return null;
     let q: TreeNode[] = [];
     let data: number[] = [];
     q.push(node);
 
     while (q.length) {
-      node = q.shift();
+      node = q.shift() ?? null;
       if (node) data.push(node.val);
       if (node?.left) q.push(node.left);
       if (node?.right) q.push(node.right);
@@ -119,8 +120,8 @@ export class BST implements IBST {
     return data;
   }
 
-  dfsPreOrd(): number[] | undefined {
-    if (!this.root) return undefined;
+  dfsPreOrder(): number[] | null {
+    if (this.root === null) return null;
     const root = this.root;
     let result: number[] = [];
     const traverse = (node: TreeNode): void => {
@@ -132,8 +133,8 @@ export class BST implements IBST {
     return result;
   }
 
-  dfsInOrd(): number[] | undefined {
-    if (!this.root) return undefined;
+  dfsInOrder(): number[] | null {
+    if (this.root === null) return null;
     const root = this.root;
     let result: number[] = [];
     const traverse = (node: TreeNode): void => {
@@ -145,8 +146,8 @@ export class BST implements IBST {
     return result;
   }
 
-  dfsPostOrd(): number[] | undefined {
-    if (!this.root) return undefined;
+  dfsPostOrder(): number[] | null {
+    if (this.root === null) return null;
     const root = this.root;
     let result: number[] = [];
     const traverse = (node: TreeNode): void => {
@@ -158,14 +159,14 @@ export class BST implements IBST {
     return result;
   }
 
-  dfsPreOrdIter(): number[] | undefined {
+  dfsPreOrderIter(): number[] | null {
     let currentNode = this.root;
-    if (!currentNode) return undefined;
+    if (!currentNode) return null;
     const stack: TreeNode[] = [];
     const result: number[] = [];
     stack.push(currentNode);
     while (stack.length > 0) {
-      currentNode = stack.pop();
+      currentNode = stack.pop() ?? null;
       if (currentNode) result.push(currentNode.val);
       if (currentNode?.right) stack.push(currentNode.right);
       if (currentNode?.left) stack.push(currentNode.left);
@@ -173,33 +174,35 @@ export class BST implements IBST {
     return result;
   }
 
-  dfsInOrdIter(): number[] | undefined {
+  dfsInOrderIter(): number[] | null {
     let currentNode = this.root;
-    if (!currentNode) return undefined;
+    if (!currentNode) return null;
     const stack: TreeNode[] = [];
     const result: number[] = [];
 
-    while (stack.length > 0 || currentNode !== undefined) {
-      if (currentNode !== undefined) {
+    while (stack.length > 0 || currentNode !== null) {
+      if (currentNode !== null) {
         stack.push(currentNode);
         currentNode = currentNode.left;
       } else {
-        currentNode = stack.pop();
-        if (currentNode) result.push(currentNode.val);
-        currentNode = currentNode?.right;
+        currentNode = stack.pop() ?? null;
+        if (currentNode) {
+          result.push(currentNode.val);
+          currentNode = currentNode.right;
+        }
       }
     }
     return result;
   }
 
-  dfsPostOrdIter(): number[] | undefined {
+  dfsPostOrderIter(): number[] | null {
     let currentNode = this.root;
-    if (!currentNode) return undefined;
+    if (!currentNode) return null;
     const stack: TreeNode[] = [];
     const result: number[] = [];
     stack.push(currentNode);
     while (stack.length > 0) {
-      currentNode = stack.pop();
+      currentNode = stack.pop() ?? null;
       if (currentNode) result.unshift(currentNode.val);
       if (currentNode?.left) stack.push(currentNode.left);
       if (currentNode?.right) stack.push(currentNode.right);
@@ -209,11 +212,11 @@ export class BST implements IBST {
 
   validate(): boolean {
     const helper = (
-      node: TreeNode | undefined,
+      node: TreeNode | null,
       min: number,
       max: number
     ): boolean => {
-      if (!node) return true;
+      if (node === null) return true;
       if (node.val < min || node.val >= max) return false;
       const leftIsValid = helper(node.left, min, node.val);
       return leftIsValid && helper(node.right, node.val, max);
@@ -221,17 +224,82 @@ export class BST implements IBST {
     return helper(this.root, -Infinity, Infinity);
   }
 
-  rangeSum(left: number, right: number): number | undefined {
-    if (!this.root) return undefined;
+  rangeSum(left: number, right: number): number | null {
+    if (this.root === null) return null;
     let sum = 0;
     const traverse = (node: TreeNode): void => {
-      if (node) {
-        if (node.left && left < node.val) traverse(node.left);
-        if (node.val >= left && node.val <= right) sum += node.val;
-        if (node.right && right > node.val) traverse(node.right);
-      }
+      if (node.left && left < node.val) traverse(node.left);
+      if (node.val >= left && node.val <= right) sum += node.val;
+      if (node.right && right > node.val) traverse(node.right);
     };
     traverse(this.root);
     return sum;
+  }
+
+  maxPathSum(): number | null {
+    if (this.root === null) return null;
+    const traverse = (node: TreeNode | null): [number, number] => {
+      if (node === null) return [0, 0];
+      const [leftMaxBranchSum, leftMaxPathSum] = traverse(node.left);
+      const [rightMaxBranchSum, rightMaxPathSum] = traverse(node.right);
+      const maxChildBranchSum = Math.max(leftMaxBranchSum, rightMaxBranchSum);
+
+      const { val } = node;
+      const maxBranchSum = Math.max(maxChildBranchSum + val, val);
+      const maxRootPathSum = Math.max(
+        leftMaxBranchSum + val + rightMaxBranchSum,
+        maxBranchSum
+      );
+      const maxPathSum = Math.max(
+        leftMaxPathSum,
+        rightMaxPathSum,
+        maxRootPathSum
+      );
+      return [maxBranchSum, maxPathSum];
+    };
+    const [_, maxSum] = traverse(this.root);
+    return maxSum;
+  }
+
+  remove(val: number): TreeNode | null {
+    const removeNode = (
+      node: TreeNode | null,
+      val: number
+    ): TreeNode | null => {
+      if (node === null) return null;
+      if (val === node?.val) {
+        if (node.left === null && node.right === null) {
+          return null;
+        }
+
+        if (node.left === null) {
+          return node.right;
+        }
+
+        if (node.right === null) {
+          return node.left;
+        }
+
+        let temp: TreeNode | null = node.right;
+
+        while (temp?.left === null) {
+          temp = temp.left;
+        }
+
+        if (temp !== null) {
+          node.val = temp.val;
+          node.right = removeNode(node.right, temp.val);
+        }
+      } else if (val < node.val) {
+        node.left = removeNode(node.left, val);
+        return node;
+      } else {
+        node.right = removeNode(node.right, val);
+        return node;
+      }
+      return null;
+    };
+    this.root = removeNode(this.root, val);
+    return this.root;
   }
 }

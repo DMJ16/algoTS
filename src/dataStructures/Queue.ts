@@ -1,16 +1,16 @@
 import { Node } from "./Node";
 
 interface IQueue<T> {
-  head?: Node<T>;
-  tail?: Node<T>;
+  head: Node<T> | null;
+  tail: Node<T> | null;
   size: number;
   enqueue(val: T): number;
-  dequeue(): T | undefined;
+  dequeue(): T | null;
 }
 
 export class Queue<T> implements IQueue<T> {
-  head?: Node<T>;
-  tail?: Node<T>;
+  head: Node<T> | null = null;
+  tail: Node<T> | null = null;
   size: number = 0;
 
   enqueue(val: T): number {
@@ -25,11 +25,11 @@ export class Queue<T> implements IQueue<T> {
     return ++this.size;
   }
 
-  dequeue(): T | undefined {
-    if (!this.head) return undefined;
+  dequeue(): T | null {
+    if (!this.head) return null;
     const head = this.head;
     if (this.head === this.tail) {
-      this.tail = undefined;
+      this.tail = null;
     }
     this.head = this.head.next;
     this.size--;
