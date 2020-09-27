@@ -41,6 +41,10 @@ describe("BinarySearchTree", () => {
     expect(bst.bfs()).toStrictEqual([100, 1, 600, 20, 300, 5]);
   });
 
+  test("zigzagTraversal traversal", () => {
+    expect(bst.zigzagTraversal()).toStrictEqual([100, 600, 1, 20, 300, 5]);
+  });
+
   test("DFS PreOrder recursive and iterative traversal", () => {
     expect(bst.dfsPreOrder()).toStrictEqual([100, 1, 20, 5, 600, 300]);
     expect(bst.dfsPreOrderIter()).toStrictEqual([100, 1, 20, 5, 600, 300]);

@@ -12,3 +12,6 @@ export { getPermutationIter, getPermutationRecursive } from "./permutation";
 export { powerset } from "./powerset";
 export { wordSearch } from "./wordSearch";
 export { kDiffPairs } from "./kDiffPairs";
+export { mergeTwoSortedArrays } from "./mergeTwoSortedArrays";
+export { zigzagTraverse } from "./zigzagTraverse";
+export { sameBST } from "./sameBST";

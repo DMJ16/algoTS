@@ -14,6 +14,9 @@ import {
   powerset,
   wordSearch,
   kDiffPairs,
+  mergeTwoSortedArrays,
+  zigzagTraverse,
+  sameBST,
 } from "../arrays";
 
 describe("array algorithms", () => {
@@ -229,5 +232,37 @@ describe("array algorithms", () => {
     expect(kDiffPairs([3, 1, 4, 1, 5], 2)).toBe(2);
     expect(kDiffPairs([1, 2, 3, 4, 5], 1)).toBe(4);
     expect(kDiffPairs([1, 3, 1, 5, 4], 0)).toBe(1);
+  });
+
+  test("merge two sorted arrays in place", () => {
+    const result: number[] = [1, 2, 3, 0, 0, 0];
+    mergeTwoSortedArrays(result, 3, [2, 5, 6], 3);
+    expect(result).toStrictEqual([1, 2, 2, 3, 5, 6]);
+  });
+
+  test("zig zag traverse nxm matrix", () => {
+    expect(
+      zigzagTraverse([
+        [1, 3, 4, 10],
+        [2, 5, 9, 11],
+        [6, 8, 12, 15],
+        [7, 13, 14, 16],
+      ])
+    ).toEqual([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]);
+  });
+
+  test("return true if input arrays are the same binary search tree", () => {
+    expect(
+      sameBST(
+        [10, 15, 8, 12, 94, 81, 5, 2, 11],
+        [10, 8, 5, 15, 2, 12, 11, 94, 81]
+      )
+    ).toBe(true);
+    expect(
+      sameBST(
+        [10, 15, 8, 12, 94, 81, 5, 2, 11],
+        [10, 8, 5, 14, 2, 12, 11, 94, 81]
+      )
+    ).toBe(false);
   });
 });

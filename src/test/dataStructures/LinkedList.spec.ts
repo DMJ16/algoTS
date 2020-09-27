@@ -1,4 +1,4 @@
-import { LinkedList } from "../../dataStructures";
+import { LinkedList, mergeTwoSortedLists, Node } from "../../dataStructures";
 
 describe("LinkedList", () => {
   const list: LinkedList<number> = new LinkedList<number>();
@@ -48,5 +48,22 @@ describe("LinkedList", () => {
     expect(list.shift()?.val).toBe(30);
     expect(list.shift()?.val).toBe(6);
     expect(list.shift()?.val).toBe(50000);
+  });
+
+  test("merge two sorted LinkedLists", () => {
+    const testArr: number[] = [];
+    const list1: Node<number> | null = new Node<number>(1);
+    list1!.next = new Node<number>(2);
+    list1!.next!.next = new Node<number>(4);
+    const list2: Node<number> | null = new Node<number>(1);
+    list2!.next = new Node<number>(3);
+    list2!.next!.next = new Node<number>(4);
+
+    let mergedList = mergeTwoSortedLists(list1, list2);
+    while (mergedList) {
+      testArr.push(mergedList.val);
+      mergedList = mergedList.next;
+    }
+    expect(testArr).toStrictEqual([1, 1, 2, 3, 4, 4]);
   });
 });

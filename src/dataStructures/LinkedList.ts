@@ -128,3 +128,18 @@ export class LinkedList<T> implements IList<T> {
     return this;
   }
 }
+
+export function mergeTwoSortedLists(
+  list1: Node<number> | null,
+  list2: Node<number> | null
+): Node<number> | null {
+  if (list1 === null) return list2;
+  if (list2 === null) return list1;
+  if (list1.val < list2.val) {
+    list1.next = mergeTwoSortedLists(list1.next, list2);
+    return list1;
+  } else {
+    list2.next = mergeTwoSortedLists(list1, list2.next);
+    return list2;
+  }
+}

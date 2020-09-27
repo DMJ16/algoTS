@@ -14,6 +14,7 @@ interface IBST {
   dfsInOrder(): number[] | null;
   dfsPostOrder(): number[] | null;
   bfs(): number[] | null;
+  zigzagTraversal(): number[] | null;
   invert(): this | null;
   validate(): boolean;
   rangeSum(left: number, right: number): number | null;
@@ -106,17 +107,35 @@ export class BST implements IBST {
   bfs(): number[] | null {
     let node = this.root;
     if (node === null) return null;
-    let q: TreeNode[] = [];
+    let queue: TreeNode[] = [];
     let data: number[] = [];
-    q.push(node);
+    queue.push(node);
 
-    while (q.length) {
-      node = q.shift() ?? null;
+    while (queue.length) {
+      node = queue.shift() ?? null;
       if (node) data.push(node.val);
-      if (node?.left) q.push(node.left);
-      if (node?.right) q.push(node.right);
+      if (node?.left) queue.push(node.left);
+      if (node?.right) queue.push(node.right);
     }
 
+    return data;
+  }
+
+  zigzagTraversal(): number[] | null {
+    let node = this.root;
+    if (node === null) return null;
+    let deque: TreeNode[] = [];
+    let data: number[] = [];
+    let depth = 1;
+    deque.push(node);
+    while (deque.length) {
+      if (depth % 2 !== 0) node = deque.shift() ?? null;
+      else node = deque.pop() ?? null;
+      if (node !== null) data.push(node.val);
+      depth++;
+      if (node?.left) deque.push(node.left);
+      if (node?.right) deque.push(node.right);
+    }
     return data;
   }
 
