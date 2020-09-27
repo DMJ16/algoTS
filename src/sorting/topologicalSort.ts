@@ -2,7 +2,6 @@ export function topologicalSort(jobs: number[], deps: number[][]): number[] {
   const graph = createJobGraph(jobs, deps);
   return getOrderedJobs(graph);
 }
-
 function createJobGraph(jobs: number[], deps: number[][]): JobGraph {
   const graph = new JobGraph(jobs);
   for (let i = 0; i < deps.length; i++) {
@@ -12,7 +11,6 @@ function createJobGraph(jobs: number[], deps: number[][]): JobGraph {
   }
   return graph;
 }
-
 function getOrderedJobs(graph: JobGraph): number[] {
   const orderedJobs: number[] = [];
   const noReqNodes = graph.nodes.filter((node) => !node.reqsCount);
@@ -26,7 +24,6 @@ function getOrderedJobs(graph: JobGraph): number[] {
   const edges = graph.nodes.some((node) => node.reqsCount);
   return edges ? [] : orderedJobs;
 }
-
 function removeDeps(node: JobNode, noReqNodes: JobNode[]): void {
   while (node.deps.length) {
     const dep = node.deps.pop();

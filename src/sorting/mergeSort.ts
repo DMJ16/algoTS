@@ -5,12 +5,10 @@ export function mergeSort(arr: number[]): number[] {
   const right = mergeSort(arr.slice(mid));
   return merge(left, right);
 }
-
 function merge(arr1: number[], arr2: number[]): number[] {
   const result: number[] = [];
   let i = 0;
   let j = 0;
-
   while (i < arr1.length && j < arr2.length) {
     if (arr1[i] <= arr2[j]) {
       result.push(arr1[i]);
@@ -20,7 +18,6 @@ function merge(arr1: number[], arr2: number[]): number[] {
       j++;
     }
   }
-
   while (i < arr1.length) {
     result.push(arr1[i]);
     i++;
@@ -29,6 +26,5 @@ function merge(arr1: number[], arr2: number[]): number[] {
     result.push(arr2[j]);
     j++;
   }
-
   return result;
 }

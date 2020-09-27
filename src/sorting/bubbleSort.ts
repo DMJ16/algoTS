@@ -1,7 +1,6 @@
 export function bubbleSort(arr: number[]): number[] {
   let isSorted = false;
   let counter = 0;
-
   while (!isSorted) {
     isSorted = true;
     for (let i = 0; i < arr.length - 1 - counter; i++) {
@@ -12,6 +11,5 @@ export function bubbleSort(arr: number[]): number[] {
     }
     counter++;
   }
-
   return arr;
 }

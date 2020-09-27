@@ -17,7 +17,7 @@ import {
   factorialIter,
   specialPythagoreanTriplet,
   pow,
-} from "../dynamic";
+} from "../dp";
 
 describe("dynamic programming algorithms", () => {
   test("return smallest combination of coins in array to sum to given target", () => {

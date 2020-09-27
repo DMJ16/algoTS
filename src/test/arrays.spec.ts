@@ -17,6 +17,7 @@ import {
   mergeTwoSortedArrays,
   zigzagTraverse,
   sameBST,
+  riverSizes,
 } from "../arrays";
 
 describe("array algorithms", () => {
@@ -264,5 +265,24 @@ describe("array algorithms", () => {
         [10, 8, 5, 14, 2, 12, 11, 94, 81]
       )
     ).toBe(false);
+  });
+
+  test("riverSizes", () => {
+    expect(
+      riverSizes([
+        [1, 0, 0, 1, 0],
+        [1, 0, 1, 0, 0],
+        [0, 0, 1, 0, 1],
+        [1, 0, 1, 0, 1],
+        [1, 0, 1, 1, 0],
+      ])
+    ).toStrictEqual([2, 1, 5, 2, 2]);
+
+    expect(
+      riverSizes([
+        [0, 0, 0, 0],
+        [0, 0, 0, 0],
+      ])
+    ).toStrictEqual([]);
   });
 });

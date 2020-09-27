@@ -10,7 +10,6 @@ export function quickSort(
   }
   return arr;
 }
-
 function pivot(
   arr: number[],
   start = Math.floor(arr.length / 2),
@@ -27,7 +26,6 @@ function pivot(
   swap(start, pivotIdx, arr);
   return pivotIdx;
 }
-
 function swap(i: number, j: number, arr: number[]): void {
   [arr[i], arr[j]] = [arr[j], arr[i]];
 }
@@ -36,7 +34,6 @@ function quickSorter(arr: number[]): number[] {
   sorter(arr, 0, arr.length - 1);
   return arr;
 }
-
 function sorter(arr: number[], startIdx: number, endIdx: number): void {
   if (startIdx >= endIdx) return;
   const pivotIdx = startIdx;

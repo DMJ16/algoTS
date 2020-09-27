@@ -12,6 +12,6 @@ export {
   getNthFibExp,
   getNthFibDP,
 } from "./getNthFib";
-export { factorialRecurse, factorialIter } from "../dynamic/factorial";
-export { specialPythagoreanTriplet } from "../dynamic/specialPythagoreanTriplet";
+export { factorialRecurse, factorialIter } from "./factorial";
+export { specialPythagoreanTriplet } from "./specialPythagoreanTriplet";
 export { pow } from "./pow";

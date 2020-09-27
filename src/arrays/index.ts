@@ -15,3 +15,4 @@ export { kDiffPairs } from "./kDiffPairs";
 export { mergeTwoSortedArrays } from "./mergeTwoSortedArrays";
 export { zigzagTraverse } from "./zigzagTraverse";
 export { sameBST } from "./sameBST";
+export { riverSizes } from "./riverSizes";

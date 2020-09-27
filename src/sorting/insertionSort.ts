@@ -7,6 +7,5 @@ export function insertionSort(arr: number[]): number[] {
       j--;
     }
   }
-
   return arr;
 }
