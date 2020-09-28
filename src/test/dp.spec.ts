@@ -17,6 +17,10 @@ import {
   factorialIter,
   specialPythagoreanTriplet,
   pow,
+  getNumInPascalsTriangle,
+  getNumInPascalsTriangleMemo,
+  generatePascalsTriangle,
+  getRowOfPascalsTriangle,
 } from "../dp";
 
 describe("dynamic programming algorithms", () => {
@@ -209,5 +213,30 @@ describe("dynamic programming algorithms", () => {
     expect(pow(2, 1)).toBe(2);
     expect(pow(2, 2)).toBe(4);
     expect(pow(2, 7)).toBe(128);
+  });
+
+  test("pascal's triangle", () => {
+    expect(getNumInPascalsTriangle(1, 1)).toBe(1);
+    expect(getNumInPascalsTriangle(3, 2)).toBe(2);
+    expect(getNumInPascalsTriangle(5, 3)).toBe(6);
+  });
+
+  test("pascal's triangle memoized", () => {
+    expect(getNumInPascalsTriangleMemo(1, 1)).toBe(1);
+    expect(getNumInPascalsTriangleMemo(3, 2)).toBe(2);
+    expect(getNumInPascalsTriangleMemo(5, 3)).toBe(6);
+  });
+
+  test("generate pascal's triangle", () => {
+    expect(generatePascalsTriangle(1)).toStrictEqual([[1]]);
+    expect(generatePascalsTriangle(2)).toStrictEqual([[1], [1, 1]]);
+    expect(generatePascalsTriangle(3)).toStrictEqual([[1], [1, 1], [1, 2, 1]]);
+  });
+
+  test("get full row from pascal's triangle given row index", () => {
+    expect(getRowOfPascalsTriangle(0)).toStrictEqual([1]);
+    expect(getRowOfPascalsTriangle(1)).toStrictEqual([1, 1]);
+    expect(getRowOfPascalsTriangle(2)).toStrictEqual([1, 2, 1]);
+    expect(getRowOfPascalsTriangle(3)).toStrictEqual([1, 3, 3, 1]);
   });
 });

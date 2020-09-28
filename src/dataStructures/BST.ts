@@ -8,19 +8,23 @@ interface ITreeNode {
 
 interface IBST {
   root: ITreeNode | null;
+  size(): number;
+  height(): number;
   insert(val: number): this | null;
   search(val: number): boolean;
-  dfsPreOrder(): number[] | null;
-  dfsInOrder(): number[] | null;
-  dfsPostOrder(): number[] | null;
-  bfs(): number[] | null;
-  zigzagTraversal(): number[] | null;
+  remove(val: number): ITreeNode | null;
   invert(): this | null;
   validate(): boolean;
   rangeSum(left: number, right: number): number | null;
-  size(): number;
-  height(): number;
-  remove(val: number): ITreeNode | null;
+  flatten(): this | null;
+  bfs(): number[] | null;
+  zigzagTraversal(): number[] | null;
+  dfsPreOrder(): number[] | null;
+  dfsInOrder(): number[] | null;
+  dfsPostOrder(): number[] | null;
+  dfsPreOrderIter(): number[] | null;
+  dfsInOrderIter(): number[] | null;
+  dfsPostOrderIter(): number[] | null;
 }
 
 class TreeNode implements ITreeNode {
@@ -93,6 +97,37 @@ export class BST implements IBST {
     return false;
   }
 
+  remove(val: number): TreeNode | null {
+    const removeNode = (
+      node: TreeNode | null,
+      val: number
+    ): TreeNode | null => {
+      if (node === null) return null;
+      if (val === node?.val) {
+        if (node.left === null && node.right === null) return null;
+        if (node.left === null) return node.right;
+        if (node.right === null) return node.left;
+        let temp: TreeNode | null = node.right;
+        while (temp?.left === null) {
+          temp = temp.left;
+        }
+        if (temp !== null) {
+          node.val = temp.val;
+          node.right = removeNode(node.right, temp.val);
+        }
+      } else if (val < node.val) {
+        node.left = removeNode(node.left, val);
+        return node;
+      } else {
+        node.right = removeNode(node.right, val);
+        return node;
+      }
+      return null;
+    };
+    this.root = removeNode(this.root, val);
+    return this.root;
+  }
+
   invert(): this | null {
     if (this.root === null) return null;
     const traverse = (node: TreeNode): void => {
@@ -101,6 +136,82 @@ export class BST implements IBST {
       if (node.right) traverse(node.right);
     };
     traverse(this.root);
+    return this;
+  }
+
+  validate(): boolean {
+    const helper = (
+      node: TreeNode | null,
+      min: number,
+      max: number
+    ): boolean => {
+      if (node === null) return true;
+      if (node.val < min || node.val >= max) return false;
+      const leftIsValid = helper(node.left, min, node.val);
+      return leftIsValid && helper(node.right, node.val, max);
+    };
+    return helper(this.root, -Infinity, Infinity);
+  }
+
+  rangeSum(left: number, right: number): number | null {
+    if (this.root === null) return null;
+    let sum = 0;
+    const traverse = (node: TreeNode): void => {
+      if (node.left && left < node.val) traverse(node.left);
+      if (node.val >= left && node.val <= right) sum += node.val;
+      if (node.right && right > node.val) traverse(node.right);
+    };
+    traverse(this.root);
+    return sum;
+  }
+
+  maxPathSum(): number | null {
+    if (this.root === null) return null;
+    const traverse = (node: TreeNode | null): [number, number] => {
+      if (node === null) return [0, 0];
+      const [leftMaxBranchSum, leftMaxPathSum] = traverse(node.left);
+      const [rightMaxBranchSum, rightMaxPathSum] = traverse(node.right);
+      const maxChildBranchSum = Math.max(leftMaxBranchSum, rightMaxBranchSum);
+
+      const { val } = node;
+      const maxBranchSum = Math.max(maxChildBranchSum + val, val);
+      const maxRootPathSum = Math.max(
+        leftMaxBranchSum + val + rightMaxBranchSum,
+        maxBranchSum
+      );
+      const maxPathSum = Math.max(
+        leftMaxPathSum,
+        rightMaxPathSum,
+        maxRootPathSum
+      );
+      return [maxBranchSum, maxPathSum];
+    };
+    const [_, maxSum] = traverse(this.root);
+    return maxSum;
+  }
+
+  flatten(): this | null {
+    if (this.root === null) return null;
+    const traverse = (node: TreeNode): void => {
+      if (node.left) traverse(node.left);
+      treeNodes.push(node);
+      if (node.right) traverse(node.right);
+    };
+    const treeNodes: TreeNode[] = [];
+    traverse(this.root);
+    for (let i = 0; i < treeNodes.length; i++) {
+      if (i === 0) {
+        this.root = treeNodes[i];
+        this.root.left = null;
+      } else {
+        treeNodes[i].left = treeNodes[i - 1];
+      }
+      if (i === treeNodes.length - 1) {
+        treeNodes[i].right = null;
+      } else {
+        treeNodes[i].right = treeNodes[i + 1];
+      }
+    }
     return this;
   }
 
@@ -227,98 +338,5 @@ export class BST implements IBST {
       if (currentNode?.right) stack.push(currentNode.right);
     }
     return result;
-  }
-
-  validate(): boolean {
-    const helper = (
-      node: TreeNode | null,
-      min: number,
-      max: number
-    ): boolean => {
-      if (node === null) return true;
-      if (node.val < min || node.val >= max) return false;
-      const leftIsValid = helper(node.left, min, node.val);
-      return leftIsValid && helper(node.right, node.val, max);
-    };
-    return helper(this.root, -Infinity, Infinity);
-  }
-
-  rangeSum(left: number, right: number): number | null {
-    if (this.root === null) return null;
-    let sum = 0;
-    const traverse = (node: TreeNode): void => {
-      if (node.left && left < node.val) traverse(node.left);
-      if (node.val >= left && node.val <= right) sum += node.val;
-      if (node.right && right > node.val) traverse(node.right);
-    };
-    traverse(this.root);
-    return sum;
-  }
-
-  maxPathSum(): number | null {
-    if (this.root === null) return null;
-    const traverse = (node: TreeNode | null): [number, number] => {
-      if (node === null) return [0, 0];
-      const [leftMaxBranchSum, leftMaxPathSum] = traverse(node.left);
-      const [rightMaxBranchSum, rightMaxPathSum] = traverse(node.right);
-      const maxChildBranchSum = Math.max(leftMaxBranchSum, rightMaxBranchSum);
-
-      const { val } = node;
-      const maxBranchSum = Math.max(maxChildBranchSum + val, val);
-      const maxRootPathSum = Math.max(
-        leftMaxBranchSum + val + rightMaxBranchSum,
-        maxBranchSum
-      );
-      const maxPathSum = Math.max(
-        leftMaxPathSum,
-        rightMaxPathSum,
-        maxRootPathSum
-      );
-      return [maxBranchSum, maxPathSum];
-    };
-    const [_, maxSum] = traverse(this.root);
-    return maxSum;
-  }
-
-  remove(val: number): TreeNode | null {
-    const removeNode = (
-      node: TreeNode | null,
-      val: number
-    ): TreeNode | null => {
-      if (node === null) return null;
-      if (val === node?.val) {
-        if (node.left === null && node.right === null) {
-          return null;
-        }
-
-        if (node.left === null) {
-          return node.right;
-        }
-
-        if (node.right === null) {
-          return node.left;
-        }
-
-        let temp: TreeNode | null = node.right;
-
-        while (temp?.left === null) {
-          temp = temp.left;
-        }
-
-        if (temp !== null) {
-          node.val = temp.val;
-          node.right = removeNode(node.right, temp.val);
-        }
-      } else if (val < node.val) {
-        node.left = removeNode(node.left, val);
-        return node;
-      } else {
-        node.right = removeNode(node.right, val);
-        return node;
-      }
-      return null;
-    };
-    this.root = removeNode(this.root, val);
-    return this.root;
   }
 }

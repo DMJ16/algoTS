@@ -69,4 +69,31 @@ describe("BinarySearchTree", () => {
     bst.remove(100);
     expect(bst.root).toBeNull();
   });
+
+  test("flatten tree", () => {
+    bst.insert(100);
+    bst.insert(1);
+    bst.insert(600);
+    bst.insert(300);
+    bst.insert(20);
+    bst.insert(5);
+    bst.flatten();
+    const left: number[] = [];
+    const right: number[] = [];
+    let currentNode = bst.root;
+    while (currentNode) {
+      if (currentNode.left) {
+        left.push(currentNode.left.val);
+      } else {
+        right.push(currentNode.val);
+      }
+      if (currentNode.right) {
+        right.push(currentNode.right.val);
+      } else {
+        left.push(currentNode.val);
+      }
+      currentNode = currentNode.right;
+    }
+    expect(left).toEqual(right);
+  });
 });
