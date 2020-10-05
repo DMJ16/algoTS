@@ -1,15 +1,12 @@
 interface Cache {
   [key: string]: number;
 }
-export function getNthFibRecurse(
-  n: number,
-  mem: Cache = { 0: 0, 1: 1 }
-): number {
-  if (n in mem) {
-    return mem[n];
+export function fibMemo(n: number, memo: Cache = { 0: 0, 1: 1 }): number {
+  if (n in memo) {
+    return memo[n];
   } else {
-    mem[n] = getNthFibRecurse(n - 1, mem) + getNthFibRecurse(n - 2, mem);
-    return mem[n];
+    memo[n] = fibMemo(n - 1, memo) + fibMemo(n - 2, memo);
+    return memo[n];
   }
 }
 

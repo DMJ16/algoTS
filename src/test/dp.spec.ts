@@ -10,7 +10,7 @@ import {
   getNumPermutations,
   getStrPermutations,
   getNthFibIter,
-  getNthFibRecurse,
+  fibMemo,
   getNthFibExp,
   getNthFibDP,
   factorialRecurse,
@@ -139,14 +139,14 @@ describe("dynamic programming algorithms", () => {
   });
 
   test("fibonacci function recursive solution", () => {
-    expect(getNthFibRecurse(0)).toBe(0);
-    expect(getNthFibRecurse(1)).toBe(1);
-    expect(getNthFibRecurse(2)).toBe(1);
-    expect(getNthFibRecurse(3)).toBe(2);
-    expect(getNthFibRecurse(4)).toBe(3);
-    expect(getNthFibRecurse(5)).toBe(5);
-    expect(getNthFibRecurse(6)).toBe(8);
-    expect(getNthFibRecurse(7)).toBe(13);
+    expect(fibMemo(0)).toBe(0);
+    expect(fibMemo(1)).toBe(1);
+    expect(fibMemo(2)).toBe(1);
+    expect(fibMemo(3)).toBe(2);
+    expect(fibMemo(4)).toBe(3);
+    expect(fibMemo(5)).toBe(5);
+    expect(fibMemo(6)).toBe(8);
+    expect(fibMemo(7)).toBe(13);
   });
 
   test("fibonacci function dp solution", () => {

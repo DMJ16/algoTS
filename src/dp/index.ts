@@ -6,12 +6,7 @@ export { climbStairs, climbStairsMemo } from "./climbStairs";
 export { genParens } from "./generateParens";
 export { uniquePaths } from "./uniquePath";
 export { getNumPermutations, getStrPermutations } from "./getPermutations";
-export {
-  getNthFibRecurse,
-  getNthFibIter,
-  getNthFibExp,
-  getNthFibDP,
-} from "./getNthFib";
+export { fibMemo, getNthFibIter, getNthFibExp, getNthFibDP } from "./fib";
 export { factorialRecurse, factorialIter } from "./factorial";
 export { specialPythagoreanTriplet } from "./specialPythagoreanTriplet";
 export { pow } from "./pow";

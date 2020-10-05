@@ -18,6 +18,16 @@ import {
   zigzagTraverse,
   sameBST,
   riverSizes,
+  minSubarrayLen,
+  removeDuplicates,
+  maxProfit,
+  rotate,
+  rotateIter,
+  containsDuplicateObj,
+  containsDuplicateSet,
+  containsDuplicateMap,
+  singleNumber,
+  singleNumberBitwise,
 } from "../arrays";
 
 describe("array algorithms", () => {
@@ -284,5 +294,49 @@ describe("array algorithms", () => {
         [0, 0, 0, 0],
       ])
     ).toStrictEqual([]);
+  });
+
+  test("minSubarrayLen", () => {
+    expect(minSubarrayLen([2, 3, 1, 2, 4, 3], 7)).toBe(2);
+    expect(minSubarrayLen([0], 7)).toBe(0);
+    expect(minSubarrayLen([], 7)).toBe(0);
+  });
+
+  test("rotate array", () => {
+    const arr1 = [1, 2, 3, 4, 5, 6, 7];
+    const arr2 = [-1, -100, 3, 99];
+    rotate(arr1, 3);
+    rotateIter(arr2, 2);
+    expect(arr1).toStrictEqual([5, 6, 7, 1, 2, 3, 4]);
+    expect(arr2).toStrictEqual([3, 99, -1, -100]);
+  });
+
+  test("maxProfit", () => {
+    expect(maxProfit([7, 1, 5, 3, 6, 4])).toBe(7);
+    expect(maxProfit([1, 2, 3, 4, 5])).toBe(4);
+    expect(maxProfit([7, 6, 4, 3, 1])).toBe(0);
+  });
+
+  test("removeDuplicates and returns new array length", () => {
+    expect(removeDuplicates([1, 1, 2])).toBe(2);
+    expect(removeDuplicates([0, 0, 1, 1, 1, 2, 2, 3, 3, 4])).toBe(5);
+  });
+
+  test("containsDuplicate", () => {
+    expect(containsDuplicateSet([1, 2, 3, 1])).toBeTruthy();
+    expect(containsDuplicateSet([1, 2, 3, 4])).toBeFalsy();
+    expect(containsDuplicateObj([1, 2, 3, 4])).toBeFalsy();
+    expect(containsDuplicateObj([1, 1, 1, 3, 3, 4, 3, 2, 4, 2])).toBeTruthy();
+    expect(containsDuplicateMap([1, 2, 3, 4])).toBeFalsy();
+    expect(containsDuplicateMap([1, 1, 1, 3, 3, 4, 3, 2, 4, 2])).toBeTruthy();
+  });
+
+  test("singleNumber finds number with no duplicates", () => {
+    expect(singleNumber([2, 2, 1])).toBe(1);
+    expect(singleNumber([4, 1, 2, 1, 2])).toBe(4);
+    expect(singleNumber([1])).toBe(1);
+    expect(singleNumberBitwise([2, 2, 1])).toBe(1);
+    expect(singleNumberBitwise([4, 1, 2, 1, 2])).toBe(4);
+    expect(singleNumberBitwise([1])).toBe(1);
   });
 });

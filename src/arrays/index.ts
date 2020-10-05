@@ -16,3 +16,13 @@ export { mergeTwoSortedArrays } from "./mergeTwoSortedArrays";
 export { zigzagTraverse } from "./zigzagTraverse";
 export { sameBST } from "./sameBST";
 export { riverSizes } from "./riverSizes";
+export { minSubarrayLen } from "./minSubarrayLen";
+export { removeDuplicates } from "./removeDuplicates";
+export { maxProfit } from "./maxProfit";
+export { rotate, rotateIter } from "./rotate";
+export {
+  containsDuplicateObj,
+  containsDuplicateSet,
+  containsDuplicateMap,
+} from "./containsDuplicate";
+export { singleNumber, singleNumberBitwise } from "./singleNumber";
