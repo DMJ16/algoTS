@@ -28,6 +28,9 @@ import {
   containsDuplicateMap,
   singleNumber,
   singleNumberBitwise,
+  intersect,
+  digitPlusOne,
+  twoSum,
 } from "../arrays";
 
 describe("array algorithms", () => {
@@ -337,6 +340,30 @@ describe("array algorithms", () => {
     expect(singleNumber([1])).toBe(1);
     expect(singleNumberBitwise([2, 2, 1])).toBe(1);
     expect(singleNumberBitwise([4, 1, 2, 1, 2])).toBe(4);
+    expect(singleNumberBitwise([4, 1, 3, 3, 2, 1, 2, 5, 5])).toBe(4);
     expect(singleNumberBitwise([1])).toBe(1);
+  });
+
+  test("intersect returns unordered subarray of common elements between two input arrays", () => {
+    expect(
+      intersect([4, 9, 5], [9, 4, 9, 8, 4]).sort((a, b) => a - b)
+    ).toEqual([4, 9]);
+    expect(intersect([1, 2, 2, 1], [2, 2]).sort((a, b) => a - b)).toEqual([
+      2,
+      2,
+    ]);
+  });
+
+  test("digitPlusOne returns incremented integer represented as an arr of digits", () => {
+    expect(digitPlusOne([1, 2, 3])).toEqual([1, 2, 4]);
+    expect(digitPlusOne([4, 3, 2, 1])).toEqual([4, 3, 2, 2]);
+    expect(digitPlusOne([0])).toEqual([1]);
+  });
+
+  test("twoSum returns tuple of arr elements that sum to target input", () => {
+    expect(twoSum([2, 7, 11, 15], 9)).toEqual([0, 1]);
+    expect(twoSum([4, 3, 2], 6)).toEqual([0, 2]);
+    expect(twoSum([3, 3], 6)).toEqual([0, 1]);
+    expect(twoSum([3, 3], 10)).toBeNull();
   });
 });

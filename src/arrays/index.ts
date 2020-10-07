@@ -26,3 +26,6 @@ export {
   containsDuplicateMap,
 } from "./containsDuplicate";
 export { singleNumber, singleNumberBitwise } from "./singleNumber";
+export { intersect } from "./intersect";
+export { digitPlusOne } from "./digitPlusOne";
+export { twoSum } from "./twoSum";

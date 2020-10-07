@@ -7,10 +7,7 @@ export function singleNumber(nums: number[]): number {
   const [[num, _]] = [...map].filter(([_, count]) => count === 1);
   return num;
 }
+
 export function singleNumberBitwise(nums: number[]): number {
-  let x = 0;
-  nums.forEach((num) => {
-    x ^= num;
-  });
-  return x;
+  return nums.reduce((acc, val) => acc ^ val);
 }
