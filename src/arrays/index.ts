@@ -18,7 +18,12 @@ export { sameBST } from "./sameBST";
 export { riverSizes } from "./riverSizes";
 export { minSubarrayLen } from "./minSubarrayLen";
 export { removeDuplicates } from "./removeDuplicates";
-export { maxProfit } from "./maxProfit";
+export {
+  maxProfitOneTxn,
+  maxProfitMultiTxn,
+  maxProfitTwoTxn,
+  maxProfitKTxn,
+} from "./maxProfit";
 export { rotate, rotateIter } from "./rotate";
 export {
   containsDuplicateObj,
@@ -29,3 +34,9 @@ export { singleNumber, singleNumberBitwise } from "./singleNumber";
 export { intersect } from "./intersect";
 export { digitPlusOne } from "./digitPlusOne";
 export { twoSum } from "./twoSum";
+export { mapProductExcludeCurrIdx } from "./mapProductExcludeCurrIdx";
+export {
+  threeNumMaxProduct,
+  threeNumMaxProductNoSort,
+} from "./threeNumMaxProduct";
+export { productSum } from "./productSum";

@@ -20,7 +20,10 @@ import {
   riverSizes,
   minSubarrayLen,
   removeDuplicates,
-  maxProfit,
+  maxProfitOneTxn,
+  maxProfitMultiTxn,
+  maxProfitTwoTxn,
+  maxProfitKTxn,
   rotate,
   rotateIter,
   containsDuplicateObj,
@@ -31,6 +34,10 @@ import {
   intersect,
   digitPlusOne,
   twoSum,
+  mapProductExcludeCurrIdx,
+  threeNumMaxProduct,
+  threeNumMaxProductNoSort,
+  productSum,
 } from "../arrays";
 
 describe("array algorithms", () => {
@@ -314,10 +321,28 @@ describe("array algorithms", () => {
     expect(arr2).toStrictEqual([3, 99, -1, -100]);
   });
 
-  test("maxProfit", () => {
-    expect(maxProfit([7, 1, 5, 3, 6, 4])).toBe(7);
-    expect(maxProfit([1, 2, 3, 4, 5])).toBe(4);
-    expect(maxProfit([7, 6, 4, 3, 1])).toBe(0);
+  test("maxProfit trading stocks with 1 transaction", () => {
+    expect(maxProfitOneTxn([7, 1, 5, 3, 6, 4])).toBe(5);
+    expect(maxProfitOneTxn([1, 2, 3, 4, 5])).toBe(4);
+    expect(maxProfitOneTxn([7, 6, 4, 3, 1])).toBe(0);
+  });
+
+  test("maxProfit trading stocks with no limit on transactions", () => {
+    expect(maxProfitMultiTxn([7, 1, 5, 3, 6, 4])).toBe(7);
+    expect(maxProfitMultiTxn([1, 2, 3, 4, 5])).toBe(4);
+    expect(maxProfitMultiTxn([7, 6, 4, 3, 1])).toBe(0);
+  });
+
+  test("maxProfit trading stocks with two transactions", () => {
+    expect(maxProfitTwoTxn([3, 3, 5, 0, 0, 3, 1, 4])).toBe(6);
+    expect(maxProfitTwoTxn([1, 2, 3, 4, 5])).toBe(4);
+    expect(maxProfitTwoTxn([7, 6, 4, 3, 1])).toBe(0);
+    expect(maxProfitTwoTxn([1])).toBe(0);
+  });
+
+  test("maxProfit trading stocks with k transactions", () => {
+    expect(maxProfitKTxn([2, 4, 1], 2)).toBe(2);
+    expect(maxProfitKTxn([3, 2, 6, 5, 0, 3], 2)).toBe(7);
   });
 
   test("removeDuplicates and returns new array length", () => {
@@ -365,5 +390,28 @@ describe("array algorithms", () => {
     expect(twoSum([4, 3, 2], 6)).toEqual([0, 2]);
     expect(twoSum([3, 3], 6)).toEqual([0, 1]);
     expect(twoSum([3, 3], 10)).toBeNull();
+  });
+
+  test("mapProductExcludeCurrIdx maps elements of input arr to the product of all other elements excluding the current element", () => {
+    expect(mapProductExcludeCurrIdx([1, 7, 3, 4])).toEqual([84, 12, 28, 21]);
+    expect(mapProductExcludeCurrIdx([1, 2, 3, 4])).toEqual([24, 12, 8, 6]);
+  });
+
+  test("threeNumMaxProduct returns max product of three integers of input arr by initially sorting", () => {
+    expect(threeNumMaxProduct([1, 2, 3])).toBe(6);
+    expect(threeNumMaxProduct([1, 2, 3, 4])).toBe(24);
+    expect(threeNumMaxProduct([-10, -5, -1, -2, -3, 4])).toBe(200);
+  });
+
+  test("threeNumMaxProductNoSort returns max product of three integers of input arr by initially sorting", () => {
+    expect(threeNumMaxProductNoSort([1, 2, 3])).toBe(6);
+    expect(threeNumMaxProductNoSort([1, 2, 3, 4])).toBe(24);
+    expect(threeNumMaxProductNoSort([-10, -5, -1, -2, -3, 4])).toBe(200);
+  });
+
+  test("productSum returns sum of integers where nested arrays are summed and then the global sum is multiplied by the nested array sum  ", () => {
+    expect(productSum([5, 2, [7, -1], 3, [6, [-13, 8], 4]])).toBe(12);
+    expect(productSum([[[[[5]]]]])).toBe(600);
+    expect(productSum([[1, 2], 3, [4, 5]])).toBe(27);
   });
 });

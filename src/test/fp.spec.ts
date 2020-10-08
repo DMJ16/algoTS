@@ -20,7 +20,7 @@ describe("functional programming implementations", () => {
     ).toEqual([26]);
   });
 
-  test("reduceObj reduces input obj's values according to reducer callback fn", () => {
+  test("reduceObj reduces input obj's values to single value according to reducer callback fn", () => {
     const obj = { age: 26, state: 101 };
     expect(fp.reduceObj((acc, val) => acc + val, obj, 100)).toBe(227);
   });
