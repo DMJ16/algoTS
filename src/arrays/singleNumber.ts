@@ -1,11 +1,19 @@
-export function singleNumber(nums: number[]): number {
+export function singleNumberMap(nums: number[]): number {
   const map = new Map<number, number>();
   nums.forEach((num) => {
-    if (map.has(num)) map.set(num, map.get(num)! + 1);
+    if (map.has(num)) map.delete(num);
     else map.set(num, 1);
   });
-  const [[num, _]] = [...map].filter(([_, count]) => count === 1);
-  return num;
+  return [...map][0][0];
+}
+
+export function singleNumberObj(nums: number[]): number {
+  const obj: { [key: string]: number } = {};
+  nums.forEach((num) => {
+    if (obj[num] !== undefined) delete obj[num];
+    else obj[num] = 1;
+  });
+  return parseInt(Object.keys(obj)[0]);
 }
 
 export function singleNumberBitwise(nums: number[]): number {

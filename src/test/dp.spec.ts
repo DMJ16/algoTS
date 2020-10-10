@@ -21,6 +21,10 @@ import {
   getNumInPascalsTriangleMemo,
   generatePascalsTriangle,
   getRowOfPascalsTriangle,
+  kadanesAlgo,
+  kadanesAlgoFP,
+  rob,
+  robHouse,
 } from "../dp";
 
 describe("dynamic programming algorithms", () => {
@@ -238,5 +242,27 @@ describe("dynamic programming algorithms", () => {
     expect(getRowOfPascalsTriangle(1)).toStrictEqual([1, 1]);
     expect(getRowOfPascalsTriangle(2)).toStrictEqual([1, 2, 1]);
     expect(getRowOfPascalsTriangle(3)).toStrictEqual([1, 3, 3, 1]);
+  });
+
+  test("kadane's algorithm for finding max subarray", () => {
+    expect(
+      kadanesAlgo([3, 5, -9, 1, 3, -2, 3, 4, 7, 2, -9, 6, 3, 1, -5, 4])
+    ).toBe(19);
+    expect(kadanesAlgo([-10, -2, -9, -4, -8, -6, -7, -1, -3, -5])).toBe(-1);
+
+    expect(
+      kadanesAlgoFP([3, 5, -9, 1, 3, -2, 3, 4, 7, 2, -9, 6, 3, 1, -5, 4])
+    ).toBe(19);
+    expect(kadanesAlgoFP([-10, -2, -9, -4, -8, -6, -7, -1, -3, -5])).toBe(-1);
+  });
+
+  test("rob returns the max amount possible to steal given that adjacent homes (elements of input arr) cannot both be robbed without alerting the police", () => {
+    expect(rob([1, 2, 3, 1])).toBe(4);
+    expect(rob([2, 7, 9, 3, 1])).toBe(12);
+    expect(rob([2, 1, 1, 2])).toBe(4);
+
+    expect(robHouse([1, 2, 3, 1])).toBe(4);
+    expect(robHouse([2, 7, 9, 3, 1])).toBe(12);
+    expect(robHouse([2, 1, 1, 2])).toBe(4);
   });
 });

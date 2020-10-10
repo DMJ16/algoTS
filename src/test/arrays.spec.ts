@@ -1,5 +1,4 @@
 import {
-  kadanesAlgo,
   flatten,
   reduce,
   findThreeLargestNumbers,
@@ -29,7 +28,8 @@ import {
   containsDuplicateObj,
   containsDuplicateSet,
   containsDuplicateMap,
-  singleNumber,
+  singleNumberMap,
+  singleNumberObj,
   singleNumberBitwise,
   intersect,
   digitPlusOne,
@@ -38,20 +38,21 @@ import {
   threeNumMaxProduct,
   threeNumMaxProductNoSort,
   productSum,
+  moveZeroes,
+  moveZeroesIter,
+  nextGreatestLetter,
+  diagonalSum,
+  diagSum,
+  runningSum,
+  runningSumMut,
 } from "../arrays";
 
 describe("array algorithms", () => {
-  test("kadane's algorithm", () => {
-    expect(
-      kadanesAlgo([3, 5, -9, 1, 3, -2, 3, 4, 7, 2, -9, 6, 3, 1, -5, 4])
-    ).toBe(19);
-    expect(kadanesAlgo([-10, -2, -9, -4, -8, -6, -7, -1, -3, -5])).toBe(-1);
-  });
-
-  test("flatten nest arrays", () => {
+  test("flatten nested arrays", () => {
     const arr = [[[[[[55], 33], 28]]]];
     expect(flatten(arr)).toStrictEqual([55, 33, 28]);
   });
+
   test("reduce an array", () => {
     function add(a: number, b: number): number {
       return a + b;
@@ -360,9 +361,14 @@ describe("array algorithms", () => {
   });
 
   test("singleNumber finds number with no duplicates", () => {
-    expect(singleNumber([2, 2, 1])).toBe(1);
-    expect(singleNumber([4, 1, 2, 1, 2])).toBe(4);
-    expect(singleNumber([1])).toBe(1);
+    expect(singleNumberMap([2, 2, 1])).toBe(1);
+    expect(singleNumberMap([4, 1, 2, 1, 2])).toBe(4);
+    expect(singleNumberMap([4, 1, 3, 3, 2, 1, 2, 5, 5])).toBe(4);
+    expect(singleNumberMap([1])).toBe(1);
+    expect(singleNumberObj([2, 2, 1])).toBe(1);
+    expect(singleNumberObj([4, 1, 2, 1, 2])).toBe(4);
+    expect(singleNumberObj([4, 1, 3, 3, 2, 1, 2, 5, 5])).toBe(4);
+    expect(singleNumberObj([1])).toBe(1);
     expect(singleNumberBitwise([2, 2, 1])).toBe(1);
     expect(singleNumberBitwise([4, 1, 2, 1, 2])).toBe(4);
     expect(singleNumberBitwise([4, 1, 3, 3, 2, 1, 2, 5, 5])).toBe(4);
@@ -413,5 +419,78 @@ describe("array algorithms", () => {
     expect(productSum([5, 2, [7, -1], 3, [6, [-13, 8], 4]])).toBe(12);
     expect(productSum([[[[[5]]]]])).toBe(600);
     expect(productSum([[1, 2], 3, [4, 5]])).toBe(27);
+  });
+
+  test("moveZeroes mutates arr in-place by moving all zeroes to the end of the list", () => {
+    const arr1 = [0, 0, 1],
+      arr2 = [0, 1, 0, 3, 12],
+      arr3 = [0, 0, 4, 9, 0, 22, 0, 3, 0, 100];
+    moveZeroes(arr1);
+    moveZeroes(arr2);
+    moveZeroes(arr3);
+    expect(arr1).toEqual([1, 0, 0]);
+    expect(arr2).toEqual([1, 3, 12, 0, 0]);
+    expect(arr3).toEqual([4, 9, 22, 3, 100, 0, 0, 0, 0, 0]);
+
+    const nums1 = [0, 0, 1],
+      nums2 = [0, 1, 0, 3, 12],
+      nums3 = [0, 0, 4, 9, 0, 22, 0, 3, 0, 100];
+    moveZeroesIter(nums1);
+    moveZeroesIter(nums2);
+    moveZeroesIter(nums3);
+    expect(nums1).toEqual([1, 0, 0]);
+    expect(nums2).toEqual([1, 3, 12, 0, 0]);
+    expect(nums3).toEqual([4, 9, 22, 3, 100, 0, 0, 0, 0, 0]);
+  });
+
+  test("nextGreatestLetter returns the smallest letter from a sorted list of lowercase letters that is larger than target letter.", () => {
+    expect(nextGreatestLetter(["c", "f", "j"], "a")).toBe("c");
+    expect(nextGreatestLetter(["c", "f", "j"], "c")).toBe("f");
+    expect(nextGreatestLetter(["c", "f", "j"], "d")).toBe("f");
+    expect(nextGreatestLetter(["c", "f", "j"], "g")).toBe("j");
+    expect(nextGreatestLetter(["c", "f", "j"], "j")).toBe("c");
+    expect(nextGreatestLetter(["c", "f", "j"], "k")).toBe("c");
+  });
+
+  test("diagonalSum sums diagonals of input matrix", () => {
+    expect(
+      diagonalSum([
+        [1, 2, 3],
+        [4, 5, 6],
+        [7, 8, 9],
+      ])
+    ).toBe(25);
+    expect(
+      diagonalSum([
+        [1, 1, 1, 1],
+        [1, 1, 1, 1],
+        [1, 1, 1, 1],
+        [1, 1, 1, 1],
+      ])
+    ).toBe(8);
+    expect(
+      diagSum([
+        [1, 2, 3],
+        [4, 5, 6],
+        [7, 8, 9],
+      ])
+    ).toBe(25);
+    expect(
+      diagSum([
+        [1, 1, 1, 1],
+        [1, 1, 1, 1],
+        [1, 1, 1, 1],
+        [1, 1, 1, 1],
+      ])
+    ).toBe(8);
+  });
+
+  test("runningSum maps input arr to new arr and runningSumMut mutates input arr so that each element is the sum of all previous elements inclusive", () => {
+    expect(runningSum([1, 2, 3, 4])).toEqual([1, 3, 6, 10]);
+    expect(runningSum([1, 1, 1, 1, 1])).toEqual([1, 2, 3, 4, 5]);
+    expect(runningSum([3, 1, 2, 10, 1])).toEqual([3, 4, 6, 16, 17]);
+    expect(runningSumMut([1, 2, 3, 4])).toEqual([1, 3, 6, 10]);
+    expect(runningSumMut([1, 1, 1, 1, 1])).toEqual([1, 2, 3, 4, 5]);
+    expect(runningSumMut([3, 1, 2, 10, 1])).toEqual([3, 4, 6, 16, 17]);
   });
 });

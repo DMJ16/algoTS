@@ -1,4 +1,3 @@
-export { kadanesAlgo } from "./kadanesAlgo";
 export { flatten } from "./flatten";
 export { reduce } from "./reduce";
 export { findThreeLargestNumbers } from "./findThreeLargestNumbers";
@@ -30,7 +29,11 @@ export {
   containsDuplicateSet,
   containsDuplicateMap,
 } from "./containsDuplicate";
-export { singleNumber, singleNumberBitwise } from "./singleNumber";
+export {
+  singleNumberMap,
+  singleNumberObj,
+  singleNumberBitwise,
+} from "./singleNumber";
 export { intersect } from "./intersect";
 export { digitPlusOne } from "./digitPlusOne";
 export { twoSum } from "./twoSum";
@@ -40,3 +43,7 @@ export {
   threeNumMaxProductNoSort,
 } from "./threeNumMaxProduct";
 export { productSum } from "./productSum";
+export { moveZeroes, moveZeroesIter } from "./moveZeroes";
+export { nextGreatestLetter } from "./nextGreatestLetter";
+export { diagonalSum, diagSum } from "./diagonalSum";
+export { runningSum, runningSumMut } from "./runningSum";
