@@ -25,6 +25,8 @@ import {
   kadanesAlgoFP,
   rob,
   robHouse,
+  countPrimes,
+  genPrimes,
 } from "../dp";
 
 describe("dynamic programming algorithms", () => {
@@ -264,5 +266,35 @@ describe("dynamic programming algorithms", () => {
     expect(robHouse([1, 2, 3, 1])).toBe(4);
     expect(robHouse([2, 7, 9, 3, 1])).toBe(12);
     expect(robHouse([2, 1, 1, 2])).toBe(4);
+  });
+
+  describe("primes", () => {
+    test("countPrimes returns total number of primes less than or equal to a non-negative number.", () => {
+      expect(countPrimes(5)).toBe(3);
+      expect(countPrimes(20)).toBe(8);
+      expect(countPrimes(50)).toBe(15);
+    });
+
+    test("genPrimes returns an arr of all prime numbers less than or equal to a non-negative number.", () => {
+      expect(genPrimes(5)).toStrictEqual([2, 3, 5]);
+      expect(genPrimes(20)).toStrictEqual([2, 3, 5, 7, 11, 13, 17, 19]);
+      expect(genPrimes(50)).toStrictEqual([
+        2,
+        3,
+        5,
+        7,
+        11,
+        13,
+        17,
+        19,
+        23,
+        29,
+        31,
+        37,
+        41,
+        43,
+        47,
+      ]);
+    });
   });
 });
