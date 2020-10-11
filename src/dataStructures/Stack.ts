@@ -1,16 +1,16 @@
 import { Node } from "./Node";
 
 interface IStack<T> {
-  head: Node<T> | null;
-  tail: Node<T> | null;
+  head?: Node<T>;
+  tail?: Node<T>;
   size: number;
   push(val: T): number;
-  pop(): T | null;
+  pop(): T | undefined;
 }
 
 export class Stack<T> implements IStack<T> {
-  head: Node<T> | null = null;
-  tail: Node<T> | null = null;
+  head?: Node<T>;
+  tail?: Node<T>;
   size: number = 0;
 
   push(val: T): number {
@@ -24,11 +24,11 @@ export class Stack<T> implements IStack<T> {
     }
     return ++this.size;
   }
-  pop(): T | null {
-    if (!this.head) return null;
+  pop(): T | undefined {
+    if (!this.head) return undefined;
     let popped = this.head;
     if (this.head === this.tail) {
-      this.tail = null;
+      this.tail = undefined;
     }
     this.head = this.head.next;
     this.size--;

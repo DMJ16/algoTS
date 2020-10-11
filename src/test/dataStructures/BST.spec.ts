@@ -67,7 +67,7 @@ describe("BinarySearchTree", () => {
 
   test("remove tree nodes", () => {
     bst.remove(100);
-    expect(bst.root).toBeNull();
+    expect(bst.root).toBeUndefined();
   });
 
   test("flatten tree", () => {

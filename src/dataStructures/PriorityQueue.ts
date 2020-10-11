@@ -54,7 +54,7 @@ export class PriorityQueue<T> implements IPriorityQueue<T> {
       let rightChildIdx = 2 * i + 2;
       let leftChild: PQNode<T>;
       let rightChild: PQNode<T>;
-      let swap: number | null = null;
+      let swap: number | undefined;
       if (leftChildIdx < len) {
         leftChild = this.values[leftChildIdx];
         if (leftChild.priority < temp.priority) swap = leftChildIdx;
@@ -63,15 +63,15 @@ export class PriorityQueue<T> implements IPriorityQueue<T> {
       if (rightChildIdx < len) {
         rightChild = this.values[rightChildIdx];
         if (
-          (swap === null && rightChild.priority < temp.priority) ||
-          (swap !== null &&
+          (swap === undefined && rightChild.priority < temp.priority) ||
+          (swap !== undefined &&
             rightChild.priority < this.values[leftChildIdx].priority)
         ) {
           swap = rightChildIdx;
         }
       }
 
-      if (swap === null) break;
+      if (swap === undefined) break;
       [this.values[i], this.values[swap]] = [this.values[swap], temp];
       i = swap;
     }

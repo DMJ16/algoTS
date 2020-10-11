@@ -18,14 +18,14 @@ export class LRUCache {
     this.updateMostRecent(this.cache[key]);
   }
 
-  getValueFromKey(key: string): number | null {
-    if (!(key in this.cache)) return null;
+  getValueFromKey(key: string): number | undefined {
+    if (!(key in this.cache)) return undefined;
     this.updateMostRecent(this.cache[key]);
     return this.cache[key].value;
   }
 
   getMostRecentKey() {
-    if (this.mostRecentList.head === null) return null;
+    if (this.mostRecentList.head === undefined) return undefined;
     return this.mostRecentList.head.key;
   }
 
@@ -48,13 +48,13 @@ export class LRUCache {
 }
 
 class LRULinkedList {
-  head: LRUNode | null = null;
-  tail: LRUNode | null = null;
+  head: LRUNode | undefined = undefined;
+  tail: LRUNode | undefined = undefined;
 
   setHead(node: LRUNode): void {
     if (this.head === node) {
       return;
-    } else if (this.head === null) {
+    } else if (this.head === undefined) {
       this.head = node;
       this.tail = node;
     } else if (this.head === this.tail) {
@@ -71,31 +71,31 @@ class LRULinkedList {
   }
 
   removeTail(): void {
-    if (this.tail === null) return;
+    if (this.tail === undefined) return;
     if (this.tail === this.head) {
-      this.head = null;
-      this.tail = null;
+      this.head = undefined;
+      this.tail = undefined;
       return;
     }
     this.tail = this.tail.prev;
-    if (this.tail) this.tail.next = null;
+    if (this.tail) this.tail.next = undefined;
   }
 }
 
 class LRUNode {
   key: string;
   value: number;
-  next: LRUNode | null = null;
-  prev: LRUNode | null = null;
+  next: LRUNode | undefined = undefined;
+  prev: LRUNode | undefined = undefined;
   constructor(key: string, value: number) {
     this.key = key;
     this.value = value;
   }
 
   removeBindings(): void {
-    if (this.prev !== null) this.prev.next = this.next;
-    if (this.next !== null) this.next.prev = this.prev;
-    this.prev = null;
-    this.next = null;
+    if (this.prev !== undefined) this.prev.next = this.next;
+    if (this.next !== undefined) this.next.prev = this.prev;
+    this.prev = undefined;
+    this.next = undefined;
   }
 }

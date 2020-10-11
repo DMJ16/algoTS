@@ -10,9 +10,9 @@ interface IGraph<T> {
   removeVertex(vertex: T): void;
   addEdge(v1: T, v2: T, weight: number): void;
   removeEdge(v1: T, v2: T): void;
-  DFSRecursive(startVertex: T): T[];
-  DFSIterative(startVertex: T): T[];
-  BFS(startVertex: T): T[];
+  dfsRecursive(startVertex: T): T[];
+  dfsIterative(startVertex: T): T[];
+  bfs(startVertex: T): T[];
   Dijkstra(start: string, end: string): string[];
 }
 
@@ -21,12 +21,15 @@ export class Graph implements IGraph<string> {
 
   addVertex(vertex: string): void {
     if (this.adjList[vertex] === undefined) this.adjList[vertex] = [];
+    else throw new Error("adjList contains vertex");
   }
 
   addEdge(v1: string, v2: string, weight: number): void {
     if (v1 in this.adjList && v2 in this.adjList) {
       this.adjList[v1].push({ vertex: v2, weight });
       this.adjList[v2].push({ vertex: v1, weight });
+    } else {
+      throw new Error("one or both input vertices are not contained in graph");
     }
   }
 
@@ -40,6 +43,8 @@ export class Graph implements IGraph<string> {
         this.adjList[v2] = this.adjList[v2].filter(
           (edge) => edge.vertex !== v1
         );
+    } else {
+      throw new Error("one or both input vertices are not contained in graph");
     }
   }
 
@@ -49,16 +54,18 @@ export class Graph implements IGraph<string> {
         this.removeEdge(vertex, edge.vertex);
       }
       delete this.adjList[vertex];
+    } else {
+      throw new Error("input vertex is not contained in graph");
     }
   }
 
-  DFSRecursive(startVertex: string): string[] {
+  dfsRecursive(startVertex: string): string[] {
     let data: string[] = [];
     let visited: { [key: string]: boolean } = {};
     const visitedHelper = (v: string): boolean => {
       return this.adjList[v].every((item) => !!visited[item.vertex] === true);
     };
-    const DFS = (v: string): void => {
+    const dfs = (v: string): void => {
       if (this.adjList[v].length === 0) return;
       if (v in visited === false) visited[v] = true;
       data.push(v);
@@ -66,15 +73,15 @@ export class Graph implements IGraph<string> {
       for (let i = 0, len = this.adjList[v].length; i < len; i++) {
         const node = this.adjList[v][i];
         if (visited[node.vertex] === undefined) {
-          DFS(node.vertex);
+          dfs(node.vertex);
         }
       }
     };
-    DFS(startVertex);
+    dfs(startVertex);
     return data;
   }
 
-  DFSIterative(startVertex: string): string[] {
+  dfsIterative(startVertex: string): string[] {
     let stack = [startVertex];
     let data: string[] = [];
     let visited: { [key: string]: boolean } = {};
@@ -96,7 +103,7 @@ export class Graph implements IGraph<string> {
     return data;
   }
 
-  BFS(startVertex: string): string[] {
+  bfs(startVertex: string): string[] {
     const queue = [startVertex];
     const data: string[] = [];
     const visited: { [key: string]: boolean } = {};
@@ -156,8 +163,8 @@ export class Graph implements IGraph<string> {
         distances[vertex] = 0;
         PQ.enqueue(vertex, 0);
       } else {
-        distances[vertex] = Number.POSITIVE_INFINITY;
-        PQ.enqueue(vertex, Number.POSITIVE_INFINITY);
+        distances[vertex] = Infinity;
+        PQ.enqueue(vertex, Infinity);
       }
       prev[vertex] = "";
     });
@@ -172,10 +179,7 @@ export class Graph implements IGraph<string> {
         break;
       }
 
-      if (
-        nearestVertex ||
-        distances[nearestVertex] !== Number.POSITIVE_INFINITY
-      ) {
+      if (nearestVertex || distances[nearestVertex] !== Infinity) {
         for (const neighbor in this.adjList[nearestVertex]) {
           let nextNode = this.adjList[nearestVertex][neighbor];
           let newDistance = distances[nearestVertex] + nextNode.weight;
@@ -231,7 +235,7 @@ class PriorityQueue {
       let leftChildIdx = 2 * i + 1;
       let rightChildIdx = 2 * i + 2;
       let leftChild, rightChild;
-      let swap = null;
+      let swap = undefined;
       if (leftChildIdx < len) {
         leftChild = this.values[leftChildIdx];
         if (leftChild.priority < temp.priority) swap = leftChildIdx;
@@ -240,13 +244,13 @@ class PriorityQueue {
         rightChild = this.values[rightChildIdx];
         if (leftChild)
           if (
-            (swap === null && rightChild.priority < temp.priority) ||
-            (swap !== null && rightChild.priority < leftChild.priority)
+            (swap === undefined && rightChild.priority < temp.priority) ||
+            (swap !== undefined && rightChild.priority < leftChild.priority)
           ) {
             swap = rightChildIdx;
           }
       }
-      if (swap === null) break;
+      if (swap === undefined) break;
       [this.values[i], this.values[swap]] = [this.values[swap], temp];
       i = swap;
     }

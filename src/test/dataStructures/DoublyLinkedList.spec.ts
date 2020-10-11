@@ -25,7 +25,7 @@ describe("DoublyLinkedList", () => {
   test("remove and pop nodes", () => {
     const removedNode = list.remove(1);
     expect(removedNode?.val).toBe(36);
-    expect(removedNode?.next).toBeNull();
+    expect(removedNode?.next).toBeUndefined();
     const poppedNode = list.pop();
     expect(poppedNode?.val).toBe(100);
     expect(list.length).toBe(2);

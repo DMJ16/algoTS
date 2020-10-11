@@ -14,7 +14,7 @@ describe("HashTable", () => {
     expect(table.get("Wayne")).toBe("Bruce");
     expect(table.get("Prince")).toBe("Diana");
     expect(table.get("Kent")).toBe("Clark");
-    expect(table.get("Stark")).toBeNull();
+    expect(table.get("Stark")).toBeUndefined();
   });
   test("get keys array", () => {
     expect(table.keys()).toContain("Skywalker");

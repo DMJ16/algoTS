@@ -1,22 +1,22 @@
 import { Node } from "./Node";
 
 interface IList<T> {
-  head: Node<T> | null;
-  tail: Node<T> | null;
+  head?: Node<T>;
+  tail?: Node<T>;
   push(val: T): this;
-  pop(): Node<T> | null;
-  shift(): Node<T> | null;
+  pop(): Node<T> | undefined;
+  shift(): Node<T> | undefined;
   unshift(val: T): this;
-  get(idx: number): Node<T> | null;
+  get(idx: number): Node<T> | undefined;
   set(idx: number, val: T): boolean;
   insert(idx: number, val: T): boolean;
-  remove(idx: number): Node<T> | null;
+  remove(idx: number): Node<T> | undefined;
   reverse(): this;
 }
 
 export class LinkedList<T> implements IList<T> {
-  head: Node<T> | null = null;
-  tail: Node<T> | null = null;
+  head?: Node<T>;
+  tail?: Node<T>;
   private length: number = 0;
 
   get len(): number {
@@ -25,7 +25,7 @@ export class LinkedList<T> implements IList<T> {
 
   push(val: T): this {
     const newNode = new Node(val);
-    if (this.head === null) {
+    if (this.head === undefined) {
       this.head = newNode;
       this.tail = newNode;
     } else {
@@ -36,33 +36,33 @@ export class LinkedList<T> implements IList<T> {
     return this;
   }
 
-  pop(): Node<T> | null {
-    if (this.head === null || this.tail === null) return null;
+  pop(): Node<T> | undefined {
+    if (this.head === undefined || this.tail === undefined) return undefined;
     let currentNode = this.head;
     const oldTail = this.tail;
     while (currentNode.next) {
       if (currentNode.next === oldTail) break;
       currentNode = currentNode.next;
     }
-    currentNode.next = null;
+    currentNode.next = undefined;
     this.tail = currentNode;
     this.length--;
     return oldTail;
   }
 
-  shift(): Node<T> | null {
-    if (this.head === null) return null;
+  shift(): Node<T> | undefined {
+    if (this.head === undefined) return undefined;
     const shiftNode = this.head;
     this.head = this.head.next;
-    shiftNode.next = null;
-    if (this.length === 1) this.tail = null;
+    shiftNode.next = undefined;
+    if (this.length === 1) this.tail = undefined;
     this.length--;
     return shiftNode;
   }
 
   unshift(val: T): this {
     const newNode = new Node(val);
-    if (this.head === null) {
+    if (this.head === undefined) {
       this.head = newNode;
       this.tail = newNode;
     } else {
@@ -73,12 +73,12 @@ export class LinkedList<T> implements IList<T> {
     return this;
   }
 
-  get(idx: number): Node<T> | null {
-    if (idx < 0 || idx >= this.length) return null;
+  get(idx: number): Node<T> | undefined {
+    if (idx < 0 || idx >= this.length) return undefined;
     let listIdx = 0;
     let currentNode = this.head;
     while (idx !== listIdx) {
-      currentNode = currentNode?.next ? currentNode?.next : null;
+      currentNode = currentNode?.next ? currentNode?.next : undefined;
       listIdx++;
     }
     return currentNode;
@@ -102,14 +102,14 @@ export class LinkedList<T> implements IList<T> {
     return true;
   }
 
-  remove(idx: number): Node<T> | null {
-    if (idx < 0 || idx >= this.length) return null;
+  remove(idx: number): Node<T> | undefined {
+    if (idx < 0 || idx >= this.length) return undefined;
     if (idx === 0) return this.shift();
     if (idx === this.length - 1) return this.pop();
     const prevNode = this.get(idx - 1) as Node<T>;
     const removeNode = prevNode.next as Node<T>;
     prevNode.next = removeNode.next;
-    removeNode.next = null;
+    removeNode.next = undefined;
     this.length--;
     return removeNode;
   }
@@ -117,10 +117,10 @@ export class LinkedList<T> implements IList<T> {
   reverse(): this {
     let currentNode = this.head;
     [this.head, this.tail] = [this.tail, currentNode];
-    let next = null;
-    let prev = null;
+    let next = undefined;
+    let prev = undefined;
     for (let i = 0; i < this.length; i++) {
-      next = currentNode?.next ? currentNode?.next : null;
+      next = currentNode?.next ? currentNode?.next : undefined;
       if (currentNode) currentNode.next = prev;
       prev = currentNode;
       currentNode = next;
@@ -130,11 +130,11 @@ export class LinkedList<T> implements IList<T> {
 }
 
 export function mergeTwoSortedLists(
-  list1: Node<number> | null,
-  list2: Node<number> | null
-): Node<number> | null {
-  if (list1 === null) return list2;
-  if (list2 === null) return list1;
+  list1: Node<number> | undefined,
+  list2: Node<number> | undefined
+): Node<number> | undefined {
+  if (list1 === undefined) return list2;
+  if (list2 === undefined) return list1;
   if (list1.val < list2.val) {
     list1.next = mergeTwoSortedLists(list1.next, list2);
     return list1;

@@ -22,7 +22,7 @@ describe("LRUCache", () => {
 
   test("get values by key lookup", () => {
     cache.insertKeyValuePair("e", 5);
-    expect(cache.getValueFromKey("a")).toBeNull();
+    expect(cache.getValueFromKey("a")).toBeUndefined();
     expect(cache.getValueFromKey("b")).toBe(2);
     expect(cache.getValueFromKey("c")).toBe(3);
     expect(cache.getValueFromKey("d")).toBe(4);

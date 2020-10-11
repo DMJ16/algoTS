@@ -25,7 +25,7 @@ describe("LinkedList", () => {
   test("remove and pop nodes", () => {
     const removedNode = list.remove(1);
     expect(removedNode?.val).toBe(36);
-    expect(removedNode?.next).toBeNull();
+    expect(removedNode?.next).toBeUndefined();
     const poppedNode = list.pop();
     expect(poppedNode?.val).toBe(100);
     expect(list.len).toBe(2);
@@ -52,10 +52,10 @@ describe("LinkedList", () => {
 
   test("merge two sorted LinkedLists", () => {
     const testArr: number[] = [];
-    const list1: Node<number> | null = new Node<number>(1);
+    const list1: Node<number> | undefined = new Node<number>(1);
     list1!.next = new Node<number>(2);
     list1!.next!.next = new Node<number>(4);
-    const list2: Node<number> | null = new Node<number>(1);
+    const list2: Node<number> | undefined = new Node<number>(1);
     list2!.next = new Node<number>(3);
     list2!.next!.next = new Node<number>(4);
 

@@ -1,8 +1,13 @@
 interface IHashTable {
   keyMap: string[][][];
+  hash(key: string): number;
+  set(key: string, val: string): void;
+  get(key: string): string | undefined;
+  keys(): string[];
+  values(): string[];
 }
 
-export class HashTable {
+export class HashTable implements IHashTable {
   keyMap: string[][][];
   constructor(size: number = 53) {
     this.keyMap = new Array(size);
@@ -25,14 +30,14 @@ export class HashTable {
     this.keyMap[idx].push([key, val]);
   }
 
-  get(key: string): string | null {
+  get(key: string): string | undefined {
     const idx = this.hash(key);
     if (this.keyMap[idx]) {
       for (let i = 0; i < this.keyMap[idx].length; i++) {
         if (this.keyMap[idx][i][0] === key) return this.keyMap[idx][i][1];
       }
     }
-    return null;
+    return undefined;
   }
 
   keys(): string[] {

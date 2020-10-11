@@ -30,8 +30,8 @@ describe("Graph", () => {
     expect(graph.adjList["F"].length).toBe(3);
   });
 
-  test("DFS recursive and iterative traversal", () => {
-    expect(graph.DFSIterative("A")).toStrictEqual([
+  test("dfs recursive and iterative traversal", () => {
+    expect(graph.dfsIterative("A")).toStrictEqual([
       "A",
       "C",
       "F",
@@ -40,7 +40,7 @@ describe("Graph", () => {
       "B",
     ]);
 
-    expect(graph.DFSRecursive("A")).toStrictEqual([
+    expect(graph.dfsRecursive("A")).toStrictEqual([
       "A",
       "B",
       "E",
@@ -50,8 +50,8 @@ describe("Graph", () => {
     ]);
   });
 
-  test("BFS traversal", () => {
-    expect(graph.BFS("A")).toStrictEqual(["A", "B", "C", "E", "D", "F"]);
+  test("bfs traversal", () => {
+    expect(graph.bfs("A")).toStrictEqual(["A", "B", "C", "E", "D", "F"]);
   });
 
   test("topological sort ", () => {

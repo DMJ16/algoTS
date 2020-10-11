@@ -3,8 +3,8 @@ import { Stack } from "../../dataStructures";
 describe("Stack", () => {
   const stack: Stack<number> = new Stack<number>();
 
-  test("pop empty stack returns null", () => {
-    expect(stack.pop()).toBeNull();
+  test("pop empty stack returns undefined", () => {
+    expect(stack.pop()).toBeUndefined();
   });
 
   test("push node", () => {
