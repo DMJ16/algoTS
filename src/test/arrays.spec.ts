@@ -322,28 +322,30 @@ describe("array algorithms", () => {
     expect(arr2).toStrictEqual([3, 99, -1, -100]);
   });
 
-  test("maxProfit trading stocks with 1 transaction", () => {
-    expect(maxProfitOneTxn([7, 1, 5, 3, 6, 4])).toBe(5);
-    expect(maxProfitOneTxn([1, 2, 3, 4, 5])).toBe(4);
-    expect(maxProfitOneTxn([7, 6, 4, 3, 1])).toBe(0);
-  });
+  describe("maxProfit algorithms", () => {
+    test("maxProfit trading stocks with 1 transaction", () => {
+      expect(maxProfitOneTxn([7, 1, 5, 3, 6, 4])).toBe(5);
+      expect(maxProfitOneTxn([1, 2, 3, 4, 5])).toBe(4);
+      expect(maxProfitOneTxn([7, 6, 4, 3, 1])).toBe(0);
+    });
 
-  test("maxProfit trading stocks with no limit on transactions", () => {
-    expect(maxProfitMultiTxn([7, 1, 5, 3, 6, 4])).toBe(7);
-    expect(maxProfitMultiTxn([1, 2, 3, 4, 5])).toBe(4);
-    expect(maxProfitMultiTxn([7, 6, 4, 3, 1])).toBe(0);
-  });
+    test("maxProfit trading stocks with no limit on transactions", () => {
+      expect(maxProfitMultiTxn([7, 1, 5, 3, 6, 4])).toBe(7);
+      expect(maxProfitMultiTxn([1, 2, 3, 4, 5])).toBe(4);
+      expect(maxProfitMultiTxn([7, 6, 4, 3, 1])).toBe(0);
+    });
 
-  test("maxProfit trading stocks with two transactions", () => {
-    expect(maxProfitTwoTxn([3, 3, 5, 0, 0, 3, 1, 4])).toBe(6);
-    expect(maxProfitTwoTxn([1, 2, 3, 4, 5])).toBe(4);
-    expect(maxProfitTwoTxn([7, 6, 4, 3, 1])).toBe(0);
-    expect(maxProfitTwoTxn([1])).toBe(0);
-  });
+    test("maxProfit trading stocks with two transactions", () => {
+      expect(maxProfitTwoTxn([3, 3, 5, 0, 0, 3, 1, 4])).toBe(6);
+      expect(maxProfitTwoTxn([1, 2, 3, 4, 5])).toBe(4);
+      expect(maxProfitTwoTxn([7, 6, 4, 3, 1])).toBe(0);
+      expect(maxProfitTwoTxn([1])).toBe(0);
+    });
 
-  test("maxProfit trading stocks with k transactions", () => {
-    expect(maxProfitKTxn([2, 4, 1], 2)).toBe(2);
-    expect(maxProfitKTxn([3, 2, 6, 5, 0, 3], 2)).toBe(7);
+    test("maxProfit trading stocks with k transactions", () => {
+      expect(maxProfitKTxn([2, 4, 1], 2)).toBe(2);
+      expect(maxProfitKTxn([3, 2, 6, 5, 0, 3], 2)).toBe(7);
+    });
   });
 
   test("removeDuplicates and returns new array length", () => {
@@ -351,28 +353,40 @@ describe("array algorithms", () => {
     expect(removeDuplicates([0, 0, 1, 1, 1, 2, 2, 3, 3, 4])).toBe(5);
   });
 
-  test("containsDuplicate", () => {
-    expect(containsDuplicateSet([1, 2, 3, 1])).toBeTruthy();
-    expect(containsDuplicateSet([1, 2, 3, 4])).toBeFalsy();
-    expect(containsDuplicateObj([1, 2, 3, 4])).toBeFalsy();
-    expect(containsDuplicateObj([1, 1, 1, 3, 3, 4, 3, 2, 4, 2])).toBeTruthy();
-    expect(containsDuplicateMap([1, 2, 3, 4])).toBeFalsy();
-    expect(containsDuplicateMap([1, 1, 1, 3, 3, 4, 3, 2, 4, 2])).toBeTruthy();
+  describe("containsDuplicate", () => {
+    test("containsDuplicateSet", () => {
+      expect(containsDuplicateSet([1, 2, 3, 1])).toBeTruthy();
+      expect(containsDuplicateSet([1, 2, 3, 4])).toBeFalsy();
+    });
+    test("containsDuplicateObj", () => {
+      expect(containsDuplicateObj([1, 2, 3, 4])).toBeFalsy();
+      expect(containsDuplicateObj([1, 1, 1, 3, 3, 4, 3, 2, 4, 2])).toBeTruthy();
+    });
+    test("containsDuplicateMap", () => {
+      expect(containsDuplicateMap([1, 2, 3, 4])).toBeFalsy();
+      expect(containsDuplicateMap([1, 1, 1, 3, 3, 4, 3, 2, 4, 2])).toBeTruthy();
+    });
   });
 
-  test("singleNumber finds number with no duplicates", () => {
-    expect(singleNumberMap([2, 2, 1])).toBe(1);
-    expect(singleNumberMap([4, 1, 2, 1, 2])).toBe(4);
-    expect(singleNumberMap([4, 1, 3, 3, 2, 1, 2, 5, 5])).toBe(4);
-    expect(singleNumberMap([1])).toBe(1);
-    expect(singleNumberObj([2, 2, 1])).toBe(1);
-    expect(singleNumberObj([4, 1, 2, 1, 2])).toBe(4);
-    expect(singleNumberObj([4, 1, 3, 3, 2, 1, 2, 5, 5])).toBe(4);
-    expect(singleNumberObj([1])).toBe(1);
-    expect(singleNumberBitwise([2, 2, 1])).toBe(1);
-    expect(singleNumberBitwise([4, 1, 2, 1, 2])).toBe(4);
-    expect(singleNumberBitwise([4, 1, 3, 3, 2, 1, 2, 5, 5])).toBe(4);
-    expect(singleNumberBitwise([1])).toBe(1);
+  describe("singleNumber finds number with no duplicates", () => {
+    test("singleNumberMap", () => {
+      expect(singleNumberMap([2, 2, 1])).toBe(1);
+      expect(singleNumberMap([4, 1, 2, 1, 2])).toBe(4);
+      expect(singleNumberMap([4, 1, 3, 3, 2, 1, 2, 5, 5])).toBe(4);
+      expect(singleNumberMap([1])).toBe(1);
+    });
+    test("singleNumberObj", () => {
+      expect(singleNumberObj([2, 2, 1])).toBe(1);
+      expect(singleNumberObj([4, 1, 2, 1, 2])).toBe(4);
+      expect(singleNumberObj([4, 1, 3, 3, 2, 1, 2, 5, 5])).toBe(4);
+      expect(singleNumberObj([1])).toBe(1);
+    });
+    test("singleNumberBitwise", () => {
+      expect(singleNumberBitwise([2, 2, 1])).toBe(1);
+      expect(singleNumberBitwise([4, 1, 2, 1, 2])).toBe(4);
+      expect(singleNumberBitwise([4, 1, 3, 3, 2, 1, 2, 5, 5])).toBe(4);
+      expect(singleNumberBitwise([1])).toBe(1);
+    });
   });
 
   test("intersect returns unordered subarray of common elements between two input arrays", () => {
@@ -485,12 +499,16 @@ describe("array algorithms", () => {
     ).toBe(8);
   });
 
-  test("runningSum maps input arr to new arr and runningSumMut mutates input arr so that each element is the sum of all previous elements inclusive", () => {
-    expect(runningSum([1, 2, 3, 4])).toEqual([1, 3, 6, 10]);
-    expect(runningSum([1, 1, 1, 1, 1])).toEqual([1, 2, 3, 4, 5]);
-    expect(runningSum([3, 1, 2, 10, 1])).toEqual([3, 4, 6, 16, 17]);
-    expect(runningSumMut([1, 2, 3, 4])).toEqual([1, 3, 6, 10]);
-    expect(runningSumMut([1, 1, 1, 1, 1])).toEqual([1, 2, 3, 4, 5]);
-    expect(runningSumMut([3, 1, 2, 10, 1])).toEqual([3, 4, 6, 16, 17]);
+  describe("runningSum", () => {
+    test("runningSum maps input arr so that each element is the sum of all previous elements inclusive.", () => {
+      expect(runningSum([1, 2, 3, 4])).toEqual([1, 3, 6, 10]);
+      expect(runningSum([1, 1, 1, 1, 1])).toEqual([1, 2, 3, 4, 5]);
+      expect(runningSum([3, 1, 2, 10, 1])).toEqual([3, 4, 6, 16, 17]);
+    });
+    test("runningSumMut mutates input arr so that each element is the sum of all previous elements inclusive.", () => {
+      expect(runningSumMut([1, 2, 3, 4])).toEqual([1, 3, 6, 10]);
+      expect(runningSumMut([1, 1, 1, 1, 1])).toEqual([1, 2, 3, 4, 5]);
+      expect(runningSumMut([3, 1, 2, 10, 1])).toEqual([3, 4, 6, 16, 17]);
+    });
   });
 });
