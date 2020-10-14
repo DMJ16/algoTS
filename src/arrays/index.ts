@@ -47,3 +47,6 @@ export { moveZeroes, moveZeroesIter } from "./moveZeroes";
 export { nextGreatestLetter } from "./nextGreatestLetter";
 export { diagonalSum, diagSum } from "./diagonalSum";
 export { runningSum, runningSumMut } from "./runningSum";
+export { isArithmeticProgression } from "./isArithmeticProgression";
+export { thirdMax } from "./thirdMax";
+export { countNegatives } from "./countNegatives";

@@ -4,6 +4,9 @@ import {
   regExMatch,
   longestPalindromicSubstring,
   groupAnagrams,
+  groupAnagramsMap,
+  reverseStr,
+  reverseInt,
 } from "../strings";
 
 describe("string algorithms", () => {
@@ -36,34 +39,89 @@ describe("string algorithms", () => {
     expect(longestPalindromicSubstring("abaxyzzyxf")).toBe("xyzzyx");
   });
 
-  test("group anagrams in subarrays", () => {
-    expect(
-      groupAnagrams(["iceman", "woc", "pizza", "cinema", "cow"]).map((item) =>
-        item.sort()
-      )
-    ).toEqual(
-      [["cinema", "iceman"], ["cow", "woc"], ["pizza"]].map((item) =>
-        item.sort()
-      )
-    );
-    expect(
-      groupAnagrams([
-        "yo",
-        "act",
-        "flop",
-        "tac",
-        "foo",
-        "cat",
-        "oy",
-        "olfp",
-      ]).map((item) => item.sort())
-    ).toEqual(
-      [
-        ["yo", "oy"],
-        ["act", "tac", "cat"],
-        ["flop", "olfp"],
-        ["foo"],
-      ].map((item) => item.sort())
-    );
+  describe("groupAnagrams returns array of string arrays grouped by anagram", () => {
+    test("groupAnagrams obj implementation", () => {
+      expect(
+        groupAnagrams(["iceman", "woc", "pizza", "cinema", "cow"]).map((item) =>
+          item.sort()
+        )
+      ).toEqual(
+        [["cinema", "iceman"], ["cow", "woc"], ["pizza"]].map((item) =>
+          item.sort()
+        )
+      );
+
+      expect(
+        groupAnagrams([
+          "yo",
+          "act",
+          "flop",
+          "tac",
+          "foo",
+          "cat",
+          "oy",
+          "olfp",
+        ]).map((item) => item.sort())
+      ).toEqual(
+        [
+          ["yo", "oy"],
+          ["act", "tac", "cat"],
+          ["flop", "olfp"],
+          ["foo"],
+        ].map((item) => item.sort())
+      );
+    });
+
+    test("groupAnagrams with Map implementation", () => {
+      expect(
+        groupAnagramsMap([
+          "iceman",
+          "woc",
+          "pizza",
+          "cinema",
+          "cow",
+        ]).map((item) => item.sort())
+      ).toEqual(
+        [["cinema", "iceman"], ["cow", "woc"], ["pizza"]].map((item) =>
+          item.sort()
+        )
+      );
+
+      expect(
+        groupAnagramsMap([
+          "yo",
+          "act",
+          "flop",
+          "tac",
+          "foo",
+          "cat",
+          "oy",
+          "olfp",
+        ]).map((item) => item.sort())
+      ).toEqual(
+        [
+          ["yo", "oy"],
+          ["act", "tac", "cat"],
+          ["flop", "olfp"],
+          ["foo"],
+        ].map((item) => item.sort())
+      );
+    });
+  });
+
+  describe("reverse algorithms", () => {
+    test("reverseStr returns input str in reverse order.", () => {
+      expect(reverseStr("hello")).toBe("olleh");
+      expect(reverseStr("hannah")).toBe("hannah");
+    });
+
+    test("reverseInt returns input integer in reverse order. Returns 0 if reversed integer is outside 32-bit range.", () => {
+      expect(reverseInt(123)).toBe(321);
+      expect(reverseInt(-123)).toBe(-321);
+      expect(reverseInt(120)).toBe(21);
+      expect(reverseInt(0)).toBe(0);
+      expect(reverseInt(7463847412 + 1)).toBe(0);
+      expect(reverseInt(-8463847412 - 1)).toBe(0);
+    });
   });
 });

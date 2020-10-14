@@ -45,6 +45,9 @@ import {
   diagSum,
   runningSum,
   runningSumMut,
+  isArithmeticProgression,
+  thirdMax,
+  countNegatives,
 } from "../arrays";
 
 describe("array algorithms", () => {
@@ -510,5 +513,40 @@ describe("array algorithms", () => {
       expect(runningSumMut([1, 1, 1, 1, 1])).toEqual([1, 2, 3, 4, 5]);
       expect(runningSumMut([3, 1, 2, 10, 1])).toEqual([3, 4, 6, 16, 17]);
     });
+  });
+
+  test("isArithmeticProgression returns true if the array can be rearranged to form an arithmetic progression, else return false (sequence is an arithmetic progression if the difference between any two consecutive elements is the same).", () => {
+    expect(isArithmeticProgression([3, 5, 1])).toBe(true);
+    expect(isArithmeticProgression([1, 2, 4])).toBe(false);
+  });
+
+  test("thirdMax returns third max number from arr if it exists, else return max", () => {
+    expect(thirdMax([3, 2, 1])).toBe(1);
+    expect(thirdMax([1, 2])).toBe(2);
+    expect(thirdMax([2, 2, 3, 1])).toBe(1);
+  });
+
+  test("countNegatives returns the number of negative numbers in input matrix. Matrix is an m * n grid which is sorted in non-increasing order.", () => {
+    expect(
+      countNegatives([
+        [4, 3, 2, -1],
+        [3, 2, 1, -1],
+        [1, 1, -1, -2],
+        [-1, -1, -2, -3],
+      ])
+    ).toBe(8);
+    expect(
+      countNegatives([
+        [3, 2],
+        [1, 0],
+      ])
+    ).toBe(0);
+    expect(
+      countNegatives([
+        [1, -1],
+        [-1, -1],
+      ])
+    ).toBe(3);
+    expect(countNegatives([[-1]])).toBe(1);
   });
 });
