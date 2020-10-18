@@ -32,7 +32,7 @@ export function maxProfitTwoTxn(prices: number[]): number {
 
 export function maxProfitKTxn(prices: number[], k: number): number {
   if (k * 2 >= prices.length) return maxProfitMultiTxn(prices);
-  const minPrices = new Array<number>(k + 1).fill(-Number.MAX_VALUE);
+  const minPrices = new Array<number>(k + 1).fill(-Infinity);
   const maxProfitsArr = new Array<number>(k + 1).fill(0);
   return prices.reduce((maxProfits, currentPrice) => {
     for (let i = 1; i <= k; i++) {

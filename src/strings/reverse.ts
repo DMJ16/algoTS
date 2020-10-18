@@ -11,3 +11,18 @@ export function reverseInt(num: number): number {
     (!isNegative && Math.abs(revNum) > Math.pow(2, 31) - 1);
   return isRevNumOutside32BitIntRange ? 0 : revNum;
 }
+
+export function reverseIntFP(num: number): number {
+  const isNegative = (x: number): boolean => x < 0;
+  const signNum = (num: number) => (x: number): number =>
+    isNegative(num) ? -x : x;
+  const isRevNumOutside32BitIntRange = (num: number) => (x: number): boolean =>
+    (isNegative(num) && Math.abs(x) > Math.pow(2, 31)) ||
+    (!isNegative(num) && Math.abs(x) > Math.pow(2, 31) - 1);
+
+  return isRevNumOutside32BitIntRange(num)(
+    parseInt(num.toString().split("").reverse().join(""))
+  )
+    ? 0
+    : signNum(num)(parseInt(num.toString().split("").reverse().join("")));
+}

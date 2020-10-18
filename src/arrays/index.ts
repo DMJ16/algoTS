@@ -50,3 +50,4 @@ export { runningSum, runningSumMut } from "./runningSum";
 export { isArithmeticProgression } from "./isArithmeticProgression";
 export { thirdMax } from "./thirdMax";
 export { countNegatives } from "./countNegatives";
+export { maxTwoNumProduct } from "./maxTwoNumProduct";

@@ -48,6 +48,7 @@ import {
   isArithmeticProgression,
   thirdMax,
   countNegatives,
+  maxTwoNumProduct,
 } from "../arrays";
 
 describe("array algorithms", () => {
@@ -331,20 +332,17 @@ describe("array algorithms", () => {
       expect(maxProfitOneTxn([1, 2, 3, 4, 5])).toBe(4);
       expect(maxProfitOneTxn([7, 6, 4, 3, 1])).toBe(0);
     });
-
     test("maxProfit trading stocks with no limit on transactions", () => {
       expect(maxProfitMultiTxn([7, 1, 5, 3, 6, 4])).toBe(7);
       expect(maxProfitMultiTxn([1, 2, 3, 4, 5])).toBe(4);
       expect(maxProfitMultiTxn([7, 6, 4, 3, 1])).toBe(0);
     });
-
     test("maxProfit trading stocks with two transactions", () => {
       expect(maxProfitTwoTxn([3, 3, 5, 0, 0, 3, 1, 4])).toBe(6);
       expect(maxProfitTwoTxn([1, 2, 3, 4, 5])).toBe(4);
       expect(maxProfitTwoTxn([7, 6, 4, 3, 1])).toBe(0);
       expect(maxProfitTwoTxn([1])).toBe(0);
     });
-
     test("maxProfit trading stocks with k transactions", () => {
       expect(maxProfitKTxn([2, 4, 1], 2)).toBe(2);
       expect(maxProfitKTxn([3, 2, 6, 5, 0, 3], 2)).toBe(7);
@@ -420,16 +418,17 @@ describe("array algorithms", () => {
     expect(mapProductExcludeCurrIdx([1, 2, 3, 4])).toEqual([24, 12, 8, 6]);
   });
 
-  test("threeNumMaxProduct returns max product of three integers of input arr by initially sorting", () => {
-    expect(threeNumMaxProduct([1, 2, 3])).toBe(6);
-    expect(threeNumMaxProduct([1, 2, 3, 4])).toBe(24);
-    expect(threeNumMaxProduct([-10, -5, -1, -2, -3, 4])).toBe(200);
-  });
-
-  test("threeNumMaxProductNoSort returns max product of three integers of input arr by initially sorting", () => {
-    expect(threeNumMaxProductNoSort([1, 2, 3])).toBe(6);
-    expect(threeNumMaxProductNoSort([1, 2, 3, 4])).toBe(24);
-    expect(threeNumMaxProductNoSort([-10, -5, -1, -2, -3, 4])).toBe(200);
+  describe("threeNumMaxProduct", () => {
+    test("threeNumMaxProduct returns max product of three integers of input arr by initially sorting", () => {
+      expect(threeNumMaxProduct([1, 2, 3])).toBe(6);
+      expect(threeNumMaxProduct([1, 2, 3, 4])).toBe(24);
+      expect(threeNumMaxProduct([-10, -5, -1, -2, -3, 4])).toBe(200);
+    });
+    test("threeNumMaxProductNoSort returns max product of three integers of input arr by initially sorting", () => {
+      expect(threeNumMaxProductNoSort([1, 2, 3])).toBe(6);
+      expect(threeNumMaxProductNoSort([1, 2, 3, 4])).toBe(24);
+      expect(threeNumMaxProductNoSort([-10, -5, -1, -2, -3, 4])).toBe(200);
+    });
   });
 
   test("productSum returns sum of integers where nested arrays are summed and then the global sum is multiplied by the nested array sum  ", () => {
@@ -448,7 +447,6 @@ describe("array algorithms", () => {
     expect(arr1).toEqual([1, 0, 0]);
     expect(arr2).toEqual([1, 3, 12, 0, 0]);
     expect(arr3).toEqual([4, 9, 22, 3, 100, 0, 0, 0, 0, 0]);
-
     const nums1 = [0, 0, 1],
       nums2 = [0, 1, 0, 3, 12],
       nums3 = [0, 0, 4, 9, 0, 22, 0, 3, 0, 100];
@@ -460,7 +458,7 @@ describe("array algorithms", () => {
     expect(nums3).toEqual([4, 9, 22, 3, 100, 0, 0, 0, 0, 0]);
   });
 
-  test("nextGreatestLetter returns the smallest letter from a sorted list of lowercase letters that is larger than target letter.", () => {
+  test("nextGreatestLetter returns the smallest letter from a sorted list of lowercase letters that is larger than target letter", () => {
     expect(nextGreatestLetter(["c", "f", "j"], "a")).toBe("c");
     expect(nextGreatestLetter(["c", "f", "j"], "c")).toBe("f");
     expect(nextGreatestLetter(["c", "f", "j"], "d")).toBe("f");
@@ -503,19 +501,19 @@ describe("array algorithms", () => {
   });
 
   describe("runningSum", () => {
-    test("runningSum maps input arr so that each element is the sum of all previous elements inclusive.", () => {
+    test("runningSum maps input arr so that each element is the sum of all previous elements inclusive", () => {
       expect(runningSum([1, 2, 3, 4])).toEqual([1, 3, 6, 10]);
       expect(runningSum([1, 1, 1, 1, 1])).toEqual([1, 2, 3, 4, 5]);
       expect(runningSum([3, 1, 2, 10, 1])).toEqual([3, 4, 6, 16, 17]);
     });
-    test("runningSumMut mutates input arr so that each element is the sum of all previous elements inclusive.", () => {
+    test("runningSumMut mutates input arr so that each element is the sum of all previous elements inclusive", () => {
       expect(runningSumMut([1, 2, 3, 4])).toEqual([1, 3, 6, 10]);
       expect(runningSumMut([1, 1, 1, 1, 1])).toEqual([1, 2, 3, 4, 5]);
       expect(runningSumMut([3, 1, 2, 10, 1])).toEqual([3, 4, 6, 16, 17]);
     });
   });
 
-  test("isArithmeticProgression returns true if the array can be rearranged to form an arithmetic progression, else return false (sequence is an arithmetic progression if the difference between any two consecutive elements is the same).", () => {
+  test("isArithmeticProgression returns true if the array can be rearranged to form an arithmetic progression, else return false (sequence is an arithmetic progression if the difference between any two consecutive elements is the same)", () => {
     expect(isArithmeticProgression([3, 5, 1])).toBe(true);
     expect(isArithmeticProgression([1, 2, 4])).toBe(false);
   });
@@ -526,7 +524,7 @@ describe("array algorithms", () => {
     expect(thirdMax([2, 2, 3, 1])).toBe(1);
   });
 
-  test("countNegatives returns the number of negative numbers in input matrix. Matrix is an m * n grid which is sorted in non-increasing order.", () => {
+  test("countNegatives returns the number of negative numbers in input matrix. Matrix is an m * n grid which is sorted in non-increasing order", () => {
     expect(
       countNegatives([
         [4, 3, 2, -1],
@@ -548,5 +546,11 @@ describe("array algorithms", () => {
       ])
     ).toBe(3);
     expect(countNegatives([[-1]])).toBe(1);
+  });
+
+  test("maxTwoNumProduct returns max value of (someElement1 - 1) * (someElement2 - 1) where the input arr contains integers >= 1", () => {
+    expect(maxTwoNumProduct([3, 4, 5, 2])).toBe(12);
+    expect(maxTwoNumProduct([1, 5, 4, 5])).toBe(16);
+    expect(maxTwoNumProduct([3, 7])).toBe(12);
   });
 });
