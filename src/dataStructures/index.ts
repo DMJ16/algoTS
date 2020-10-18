@@ -1,7 +1,7 @@
 export { Node } from "./Node";
 export { Stack } from "./Stack";
 export { Queue } from "./Queue";
-export { LinkedList, mergeTwoSortedLists } from "./LinkedList";
+export { LinkedList } from "./LinkedList";
 export { DoublyLinkedList } from "./DoublyLinkedList";
 export { HashTable } from "./HashTable";
 export { LRUCache } from "./LRUCache";
