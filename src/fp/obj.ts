@@ -1,7 +1,7 @@
 type Obj<T> = { [key: string]: T };
 type mappedObj<U> = { [key: string]: U };
 
-export function mapObj<T, U>(
+export function map<T, U>(
   mapper: (value: T, key?: string, obj?: Obj<T>) => U,
   obj: Obj<T>
 ): mappedObj<U> {
@@ -12,7 +12,7 @@ export function mapObj<T, U>(
   }, {} as mappedObj<U>);
 }
 
-export function filterObj<T>(
+export function filter<T>(
   predicate: (value: T, key?: string, obj?: Obj<T>) => boolean,
   obj: Obj<T>
 ): Obj<T> {
@@ -23,7 +23,7 @@ export function filterObj<T>(
   }, {} as Obj<T>);
 }
 
-export function reduceObj<T, R>(
+export function reduce<T, R>(
   reducer: (acc: T | R, value: T, key?: string, obj?: Obj<T>) => T | R,
   obj: Obj<T>,
   initialValue: T | R = Object.values(obj)[0]
