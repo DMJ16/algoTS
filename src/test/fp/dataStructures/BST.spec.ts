@@ -5,16 +5,23 @@ const { Tree, ...fn } = BST;
 describe("BinarySearchTree", () => {
   const tree: BST.Tree = new Tree(100);
 
+  test("generateBST", () => {
+    expect(
+      fn.generateBST(tree, [1, 600, 300]) instanceof BST.Tree
+    ).toBeTruthy();
+  });
+
   test("insert node", () => {
-    fn.insert(1, tree);
-    fn.insert(600, tree);
-    fn.insert(300, tree);
     fn.insert(20, tree);
     fn.insert(5, tree);
   });
 
   test("validate BST", () => {
     expect(fn.validate(tree)).toBe(true);
+  });
+
+  test("maxDepth", () => {
+    expect(fn.maxDepth(tree)).toBe(4);
   });
 
   test("inclusive and in order sum of nodes in given range", () => {

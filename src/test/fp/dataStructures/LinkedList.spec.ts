@@ -31,7 +31,6 @@ describe("LinkedList", () => {
   test("reverse returns reversed input list.", () => {
     const revList = fn.reverse(list);
     const revList2 = fn.reverse(list2);
-    console.log(revList, revList2);
     expect(revList?.val).toBe(18);
     expect(revList?.next?.val).toBe(12);
     expect(revList?.next?.next?.val).toBe(6);

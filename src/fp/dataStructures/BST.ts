@@ -10,6 +10,22 @@ export class Tree implements ITree {
   constructor(public val: number = 0) {}
 }
 
+export function generateBST(
+  tree: Tree = new Tree(),
+  values: number | number[]
+): Tree | undefined {
+  if (typeof values === "number") return insert(values, tree);
+  else if (Array.isArray(values) && values.length === 0) return undefined;
+  else if (Array.isArray(values) && values.length === 1)
+    return insert(values[0], tree);
+  else {
+    values.forEach((val) => {
+      insert(val, tree);
+    });
+    return tree;
+  }
+}
+
 export function insert(val: number, tree?: Tree): Tree | undefined {
   const newNode = new Tree(val);
   if (tree === undefined) {
@@ -99,25 +115,24 @@ export function DFSPostOrder(tree?: Tree, result: number[] = []): number[] {
 }
 
 export function validate(tree?: Tree): boolean {
-  const helper = (
-    node: Tree | undefined,
-    min: number,
+  const isValid = (node: Tree | undefined) => (min: number) => (
     max: number
   ): boolean => {
-    if (!node) return true;
-    if (node.val < min || node.val >= max) return false;
-    const leftIsValid = helper(node.left, min, node.val);
-    return leftIsValid && helper(node.right, node.val, max);
+    if (node === undefined) return true;
+    if (node.val <= min || node.val >= max) return false;
+    return (
+      isValid(node.left)(min)(node.val) && isValid(node.right)(node.val)(max)
+    );
   };
-  return helper(tree, -Number.MAX_SAFE_INTEGER, Number.MAX_SAFE_INTEGER);
+  return isValid(tree)(-Infinity)(Infinity);
 }
 
 export function rangeSum(
-  tree: Tree,
+  tree: Tree | undefined,
   left: number,
   right: number
 ): number | undefined {
-  if (tree === undefined) undefined;
+  if (tree === undefined) return undefined;
   let sum = 0;
   const traverse = (node: Tree): void => {
     if (node.left && left < node.val) traverse(node.left);
@@ -126,4 +141,9 @@ export function rangeSum(
   };
   traverse(tree);
   return sum;
+}
+
+export function maxDepth(root?: Tree): number {
+  if (root === undefined) return 0;
+  return 1 + Math.max(maxDepth(root.left), maxDepth(root.right));
 }
