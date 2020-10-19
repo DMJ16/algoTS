@@ -16,17 +16,22 @@ import {
   atoi,
   strStr,
   strStrIdxOf,
+  countAndSay,
+  longestCommonPrefix,
+  robotPosition,
 } from "../strings";
 
 describe("string algorithms", () => {
   describe("isPalindrome algorithms", () => {
-    test("isPalindrome returns true if input string is a palindrome, otherwise returns false", () => {
+    test(`isPalindrome returns true if input string is a palindrome, 
+          otherwise returns false`, () => {
       expect(isPalindrome("hannah")).toBe(true);
       expect(isPalindrome("racecar")).toBe(true);
       expect(isPalindrome("A man, a plan, a canal: Panama")).toBe(false);
       expect(isPalindrome("race a car")).toBe(false);
     });
-    test("isPalindromeWithSpaces returns true if input string is a palindrome ignoring spaces, otherwise returns false", () => {
+    test(`isPalindromeWithSpaces returns true if input string is a palindrome ignoring spaces, 
+          otherwise returns false`, () => {
       expect(isPalindromeWithSpaces("hannah")).toBe(true);
       expect(isPalindromeWithSpaces("racecar")).toBe(true);
       expect(isPalindromeWithSpaces("A man, a plan, a canal: Panama")).toBe(
@@ -34,7 +39,8 @@ describe("string algorithms", () => {
       );
       expect(isPalindromeWithSpaces("race a car")).toBe(false);
     });
-    test("isPalindromeWithSpacesFP returns true if input string is a palindrome ignoring spaces, otherwise returns false. Uses functional style", () => {
+    test(`isPalindromeWithSpacesFP returns true if input string is a palindrome ignoring spaces, 
+          otherwise returns false. Uses functional style`, () => {
       expect(isPalindromeWithSpacesFP("hannah")).toBe(true);
       expect(isPalindromeWithSpacesFP("racecar")).toBe(true);
       expect(isPalindromeWithSpacesFP("A man, a plan, a canal: Panama")).toBe(
@@ -139,7 +145,8 @@ describe("string algorithms", () => {
       expect(reverseStr("hello")).toBe("olleh");
       expect(reverseStr("hannah")).toBe("hannah");
     });
-    test("reverseInt returns input integer in reverse order. Returns 0 if reversed integer is outside 32-bit range", () => {
+    test(`reverseInt returns input integer in reverse order. 
+          Returns 0 if reversed integer is outside 32-bit range`, () => {
       expect(reverseInt(123)).toBe(321);
       expect(reverseInt(-123)).toBe(-321);
       expect(reverseInt(120)).toBe(21);
@@ -147,7 +154,8 @@ describe("string algorithms", () => {
       expect(reverseInt(7463847412 + 1)).toBe(0);
       expect(reverseInt(-8463847412 - 1)).toBe(0);
     });
-    test("reverseIntFP returns input integer in reverse order. Returns 0 if reversed integer is outside 32-bit range", () => {
+    test(`reverseIntFP returns input integer in reverse order. 
+          Returns 0 if reversed integer is outside 32-bit range`, () => {
       expect(reverseIntFP(123)).toBe(321);
       expect(reverseIntFP(-123)).toBe(-321);
       expect(reverseIntFP(120)).toBe(21);
@@ -175,7 +183,9 @@ describe("string algorithms", () => {
     });
   });
 
-  test("atoi returns number from input string within 32-bit signed integer range. If input string's first non-whitespace character is not an integer then returns 0. If result is out of range, returns min or max in 32-bit range", () => {
+  test(`atoi returns number from input string within 32-bit signed integer range. 
+        If input string's first non-whitespace character is not an integer then returns 0. 
+        If result is out of range, returns min or max in 32-bit range`, () => {
     expect(atoi("42")).toBe(42);
     expect(atoi("   -42")).toBe(-42);
     expect(atoi("4193 with words")).toBe(4193);
@@ -183,16 +193,41 @@ describe("string algorithms", () => {
     expect(atoi("-91283472332")).toBe(-2147483648);
   });
 
-  describe("atoi returns number from input string within 32-bit signed integer range. If input string's first non-whitespace character is not an integer returns 0. If result is out of range, returns either min or max of 32-bit range depending on output sign", () => {
+  describe(`strStr returns the index of the first occurrence of needle in haystack, returns 0 if needle is '', and returns -1 if needle is not part of haystack.`, () => {
     test("strStr uses KMP similar method", () => {
       expect(strStr("hello", "ll")).toBe(2);
       expect(strStr("aaaaa", "bba")).toBe(-1);
-      expect(strStr("", "")).toBe(0);
+      expect(strStr("a", "")).toBe(0);
     });
     test("strStrIdxOf uses the build-in indexOf method", () => {
       expect(strStrIdxOf("hello", "ll")).toBe(2);
       expect(strStrIdxOf("aaaaa", "bba")).toBe(-1);
       expect(strStrIdxOf("", "")).toBe(0);
     });
+  });
+  test(`countAndSay returns a string representation of the nth value in the count-and-say sequence. 
+        The count-and-say sequence is the sequence of integers with the first five terms as following: 
+        '1', '11', '21', '1211', '111221'.`, () => {
+    expect(countAndSay(1)).toBe("1");
+    expect(countAndSay(2)).toBe("11");
+    expect(countAndSay(3)).toBe("21");
+    expect(countAndSay(4)).toBe("1211");
+    expect(countAndSay(5)).toBe("111221");
+    expect(countAndSay(6)).toBe("312211");
+  });
+
+  test("longestCommonPrefix returns the longest common prefix string from array of strings. If no common prefix, returns ''.", () => {
+    expect(longestCommonPrefix(["flower", "flow", "flight"])).toBe("fl");
+    expect(longestCommonPrefix(["dog", "racecar", "car"])).toBe("");
+  });
+
+  test(`robotPosition returns true if instructins return robot back to starting position, otherwise returns false.
+    The instructions string will only contain L, R, U, and D, representing left, right, up, and down`, () => {
+    expect(robotPosition("")).toBe(true);
+    expect(robotPosition("LR")).toBe(true);
+    expect(robotPosition("URURD")).toBe(false);
+    expect(robotPosition("RRDD")).toBe(false);
+    expect(robotPosition("LDRRLRUULR")).toBe(false);
+    expect(robotPosition("RUULLDRD")).toBe(true);
   });
 });

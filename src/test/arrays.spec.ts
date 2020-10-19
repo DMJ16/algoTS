@@ -23,8 +23,9 @@ import {
   maxProfitMultiTxn,
   maxProfitTwoTxn,
   maxProfitKTxn,
-  rotate,
-  rotateIter,
+  rotateArr,
+  rotateArrIter,
+  rotateMatrix,
   containsDuplicateObj,
   containsDuplicateSet,
   containsDuplicateMap,
@@ -49,6 +50,7 @@ import {
   thirdMax,
   countNegatives,
   maxTwoNumProduct,
+  isValidSudoku,
 } from "../arrays";
 
 describe("array algorithms", () => {
@@ -317,13 +319,61 @@ describe("array algorithms", () => {
     expect(minSubarrayLen([], 7)).toBe(0);
   });
 
-  test("rotate array", () => {
-    const arr1 = [1, 2, 3, 4, 5, 6, 7];
-    const arr2 = [-1, -100, 3, 99];
-    rotate(arr1, 3);
-    rotateIter(arr2, 2);
-    expect(arr1).toStrictEqual([5, 6, 7, 1, 2, 3, 4]);
-    expect(arr2).toStrictEqual([3, 99, -1, -100]);
+  describe("rotate", () => {
+    test("rotateArr rotates input arr in-place to the right by k steps--where k is >= 0", () => {
+      const arr1 = [1, 2, 3, 4, 5, 6, 7];
+      rotateArr(arr1, 3);
+      rotateArr(arr1, 0); // test that when k is 0 the arr is not modified
+      expect(arr1).toStrictEqual([5, 6, 7, 1, 2, 3, 4]);
+      const arr2 = [-1, -100, 3, 99];
+      rotateArrIter(arr2, 2);
+      rotateArrIter(arr2, 0); // test that when k is 0 the arr is not modified
+      expect(arr2).toStrictEqual([3, 99, -1, -100]);
+    });
+
+    test("rotateMatrix rotates n x n 2D input matrix in-place by 90 degrees", () => {
+      [
+        [
+          [1, 2, 3],
+          [4, 5, 6],
+          [7, 8, 9],
+        ],
+        [
+          [5, 1, 9, 11],
+          [2, 4, 8, 10],
+          [13, 3, 6, 7],
+          [15, 14, 12, 16],
+        ],
+        [
+          [1, 2],
+          [3, 4],
+        ],
+        [[1]],
+        [[]],
+      ].forEach((input, i) => {
+        rotateMatrix(input);
+        if (i === 0)
+          expect(input).toStrictEqual([
+            [7, 4, 1],
+            [8, 5, 2],
+            [9, 6, 3],
+          ]);
+        else if (i === 1)
+          expect(input).toStrictEqual([
+            [15, 13, 2, 5],
+            [14, 3, 4, 1],
+            [12, 6, 8, 9],
+            [16, 7, 10, 11],
+          ]);
+        else if (i === 2)
+          expect(input).toStrictEqual([
+            [3, 1],
+            [4, 2],
+          ]);
+        else if (i === 3) expect(input).toStrictEqual([[1]]);
+        else expect(input).toStrictEqual([[]]);
+      });
+    });
   });
 
   describe("maxProfit algorithms", () => {
@@ -552,5 +602,34 @@ describe("array algorithms", () => {
     expect(maxTwoNumProduct([3, 4, 5, 2])).toBe(12);
     expect(maxTwoNumProduct([1, 5, 4, 5])).toBe(16);
     expect(maxTwoNumProduct([3, 7])).toBe(12);
+  });
+
+  test("isValidSudoku", () => {
+    expect(
+      isValidSudoku([
+        ["5", "3", ".", ".", "7", ".", ".", ".", "."],
+        ["6", ".", ".", "1", "9", "5", ".", ".", "."],
+        [".", "9", "8", ".", ".", ".", ".", "6", "."],
+        ["8", ".", ".", ".", "6", ".", ".", ".", "3"],
+        ["4", ".", ".", "8", ".", "3", ".", ".", "1"],
+        ["7", ".", ".", ".", "2", ".", ".", ".", "6"],
+        [".", "6", ".", ".", ".", ".", "2", "8", "."],
+        [".", ".", ".", "4", "1", "9", ".", ".", "5"],
+        [".", ".", ".", ".", "8", ".", ".", "7", "9"],
+      ])
+    ).toBe(true);
+    expect(
+      isValidSudoku([
+        ["8", "3", ".", ".", "7", ".", ".", ".", "."],
+        ["6", ".", ".", "1", "9", "5", ".", ".", "."],
+        [".", "9", "8", ".", ".", ".", ".", "6", "."],
+        ["8", ".", ".", ".", "6", ".", ".", ".", "3"],
+        ["4", ".", ".", "8", ".", "3", ".", ".", "1"],
+        ["7", ".", ".", ".", "2", ".", ".", ".", "6"],
+        [".", "6", ".", ".", ".", ".", "2", "8", "."],
+        [".", ".", ".", "4", "1", "9", ".", ".", "5"],
+        [".", ".", ".", ".", "8", ".", ".", "7", "9"],
+      ])
+    ).toBe(false);
   });
 });

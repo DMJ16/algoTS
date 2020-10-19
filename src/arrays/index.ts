@@ -23,7 +23,7 @@ export {
   maxProfitTwoTxn,
   maxProfitKTxn,
 } from "./maxProfit";
-export { rotate, rotateIter } from "./rotate";
+export { rotateArr, rotateArrIter, rotateMatrix } from "./rotate";
 export {
   containsDuplicateObj,
   containsDuplicateSet,
@@ -51,3 +51,4 @@ export { isArithmeticProgression } from "./isArithmeticProgression";
 export { thirdMax } from "./thirdMax";
 export { countNegatives } from "./countNegatives";
 export { maxTwoNumProduct } from "./maxTwoNumProduct";
+export { isValidSudoku } from "./isValidSudoku";
