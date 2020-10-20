@@ -51,6 +51,8 @@ import {
   countNegatives,
   maxTwoNumProduct,
   isValidSudoku,
+  kthLargestElementInArr,
+  topKFrequentElements,
 } from "../arrays";
 
 describe("array algorithms", () => {
@@ -631,5 +633,22 @@ describe("array algorithms", () => {
         [".", ".", ".", ".", "8", ".", ".", "7", "9"],
       ])
     ).toBe(false);
+  });
+
+  test("kthLargestElementInArr returns the kth largest non-unique number from input arr", () => {
+    expect(kthLargestElementInArr([3, 2, 1, 5, 6, 4], 2)).toBe(5);
+    expect(kthLargestElementInArr([3, 2, 3, 1, 2, 4, 5, 5, 6], 4)).toBe(4);
+    expect(() => kthLargestElementInArr([3, 2, 1, 5, 6, 4], -1)).toThrow();
+    expect(() => kthLargestElementInArr([3, 2, 1, 5, 6, 4], 7)).toThrow();
+  });
+
+  test("topKFrequentElements returns the kth largest non-unique number from input arr", () => {
+    expect(topKFrequentElements([1, 1, 1, 2, 2, 3], 2).sort()).toEqual([1, 2]);
+    expect(
+      topKFrequentElements([3, 2, 3, 1, 2, 4, 5, 5, 5, 6, 1], 4).sort()
+    ).toEqual([1, 2, 3, 5]);
+    expect(topKFrequentElements([1], 1)).toEqual([1]);
+    expect(() => topKFrequentElements([3, 2, 1, 5, 6, 4], -1)).toThrow();
+    expect(() => topKFrequentElements([3, 2, 1, 5, 6, 4], 7)).toThrow();
   });
 });

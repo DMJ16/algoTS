@@ -15,3 +15,7 @@ export { strStr, strStrIdxOf } from "./strStr";
 export { countAndSay } from "./countAndSay";
 export { longestCommonPrefix } from "./longestCommonPrefix";
 export { robotPosition } from "./robotPosition";
+export { frequencySort } from "./frequencySort";
+export { lengthOfLongestNonRepeatingSubstr } from "./lengthOfLongestNonRepeatingSubstr";
+export { correctCapitalization } from "./correctCapitalization";
+export { romanToInt } from "./romanToInt";

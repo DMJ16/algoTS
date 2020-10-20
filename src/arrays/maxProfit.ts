@@ -1,10 +1,11 @@
 export function maxProfitOneTxn(prices: number[]): number {
-  let minPrice = prices[0] || 0;
-  return prices.reduce((maxProfit, currentPrice) => {
-    maxProfit = Math.max(maxProfit, currentPrice - minPrice);
-    minPrice = Math.min(minPrice, currentPrice);
-    return maxProfit;
-  }, prices[1] - prices[0] || 0);
+  return prices.reduce<[maxProfit: number, minPrice: number]>(
+    ([maxProfit, minPrice], currentPrice) => [
+      Math.max(maxProfit, currentPrice - minPrice),
+      Math.min(minPrice, currentPrice),
+    ],
+    [prices[1] - prices[0] || 0, prices[0] || 0]
+  )[0];
 }
 
 export function maxProfitMultiTxn(prices: number[]): number {
@@ -16,18 +17,31 @@ export function maxProfitMultiTxn(prices: number[]): number {
 }
 
 export function maxProfitTwoTxn(prices: number[]): number {
-  let minPrice1 = Infinity;
-  let minPrice2 = Infinity;
-  return prices.reduce(
-    ([maxProfit1, maxProfit2], currentPrice) => {
-      minPrice1 = Math.min(minPrice1, currentPrice);
-      maxProfit1 = Math.max(maxProfit1, currentPrice - minPrice1);
-      minPrice2 = Math.min(minPrice2, currentPrice - maxProfit1);
-      maxProfit2 = Math.max(maxProfit2, currentPrice - minPrice2);
-      return [maxProfit1, maxProfit2];
-    },
-    [0, 0]
-  )[1];
+  const maxProfit = (prices: number[]): number => {
+    const { maxProfit } = prices.reduce(
+      (
+        { secondMinPrice, secondMaxProfit, minPrice, maxProfit },
+        currentPrice
+      ) => {
+        secondMinPrice = Math.min(secondMinPrice, currentPrice);
+        secondMaxProfit = Math.max(
+          secondMaxProfit,
+          currentPrice - secondMinPrice
+        );
+        minPrice = Math.min(minPrice, currentPrice - secondMaxProfit);
+        maxProfit = Math.max(maxProfit, currentPrice - minPrice);
+        return { secondMinPrice, secondMaxProfit, minPrice, maxProfit };
+      },
+      {
+        secondMinPrice: Infinity,
+        secondMaxProfit: 0,
+        minPrice: Infinity,
+        maxProfit: 0,
+      }
+    );
+    return maxProfit;
+  };
+  return maxProfit(prices);
 }
 
 export function maxProfitKTxn(prices: number[], k: number): number {

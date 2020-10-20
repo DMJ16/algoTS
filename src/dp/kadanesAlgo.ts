@@ -1,9 +1,9 @@
-export function kadanesAlgo(arr: number[]): number {
-  let maxAtIdx = arr[0];
-  let currentMax = arr[0];
+export function kadanesAlgo(nums: number[]): number {
+  let maxAtIdx = nums[0];
+  let currentMax = nums[0];
 
-  for (let i = 1; i < arr.length; i++) {
-    const num = arr[i];
+  for (let i = 1; i < nums.length; i++) {
+    const num = nums[i];
     maxAtIdx = Math.max(num, maxAtIdx + num);
     currentMax = Math.max(currentMax, maxAtIdx);
   }
@@ -11,15 +11,12 @@ export function kadanesAlgo(arr: number[]): number {
   return currentMax;
 }
 
-export function kadanesAlgoFP(arr: number[]): number {
-  const [_, max] = arr.reduce(
-    ([maxAtIdx, currentMax], val, i) => {
-      if (i === 0) return [maxAtIdx, currentMax];
-      maxAtIdx = Math.max(val, val + maxAtIdx);
-      currentMax = Math.max(currentMax, maxAtIdx);
-      return [maxAtIdx, currentMax];
-    },
-    [arr[0], arr[0]]
-  );
-  return max;
+export function kadanesAlgoFP(nums: number[]): number {
+  return nums.reduce<[currentMax: number, maxAtIdx: number]>(
+    ([currentMax, maxAtIdx], val, i) =>
+      i === 0
+        ? [currentMax, maxAtIdx]
+        : [Math.max(currentMax, maxAtIdx), Math.max(val, val + maxAtIdx)],
+    [nums[0], nums[0]]
+  )[0];
 }

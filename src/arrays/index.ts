@@ -52,3 +52,5 @@ export { thirdMax } from "./thirdMax";
 export { countNegatives } from "./countNegatives";
 export { maxTwoNumProduct } from "./maxTwoNumProduct";
 export { isValidSudoku } from "./isValidSudoku";
+export { kthLargestElementInArr } from "./kthLargestElementInArr";
+export { topKFrequentElements } from "./topKFrequentElements";

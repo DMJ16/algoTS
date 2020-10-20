@@ -19,6 +19,10 @@ import {
   countAndSay,
   longestCommonPrefix,
   robotPosition,
+  frequencySort,
+  lengthOfLongestNonRepeatingSubstr,
+  correctCapitalization,
+  romanToInt,
 } from "../strings";
 
 describe("string algorithms", () => {
@@ -221,7 +225,7 @@ describe("string algorithms", () => {
     expect(longestCommonPrefix(["dog", "racecar", "car"])).toBe("");
   });
 
-  test(`robotPosition returns true if instructins return robot back to starting position, otherwise returns false.
+  test(`robotPosition returns true if instructions return robot back to starting position, otherwise returns false.
     The instructions string will only contain L, R, U, and D, representing left, right, up, and down`, () => {
     expect(robotPosition("")).toBe(true);
     expect(robotPosition("LR")).toBe(true);
@@ -229,5 +233,35 @@ describe("string algorithms", () => {
     expect(robotPosition("RRDD")).toBe(false);
     expect(robotPosition("LDRRLRUULR")).toBe(false);
     expect(robotPosition("RUULLDRD")).toBe(true);
+  });
+
+  test("frequencySort returns input string sorted in order of decreasing frequency.", () => {
+    expect(frequencySort("tree")).toBe("eetr");
+    expect(frequencySort("cccaaa")).toBe("cccaaa");
+    expect(frequencySort("Aabb")).toBe("bbAa");
+  });
+
+  test("lengthOfLongestNonRepeatingSubstr returns length of the longest substring without repeating characters of input string.", () => {
+    expect(lengthOfLongestNonRepeatingSubstr("abcabcbb")).toBe(3);
+    expect(lengthOfLongestNonRepeatingSubstr("bbbbb")).toBe(1);
+    expect(lengthOfLongestNonRepeatingSubstr("pwwkew")).toBe(3);
+    expect(lengthOfLongestNonRepeatingSubstr("")).toBe(0);
+  });
+
+  test("correctCapitalization returns true if input string correctly uses capitalization, otherwise returns false.", () => {
+    expect(correctCapitalization("abcabcbb")).toBe(true);
+    expect(correctCapitalization("Arizona")).toBe(true);
+    expect(correctCapitalization("USA")).toBe(true);
+    expect(correctCapitalization("FlaG")).toBe(false);
+  });
+
+  test("romanToInt converts roman numeral input string to corresponding decimal number.", () => {
+    expect(() => romanToInt("")).toThrow();
+    expect(() => romanToInt("AB")).toThrow();
+    expect(romanToInt("III")).toBe(3);
+    expect(romanToInt("IV")).toBe(4);
+    expect(romanToInt("IX")).toBe(9);
+    expect(romanToInt("LVIII")).toBe(58);
+    expect(romanToInt("MCMXCIV")).toBe(1994);
   });
 });

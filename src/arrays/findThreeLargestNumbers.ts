@@ -1,4 +1,13 @@
 export function findThreeLargestNumbers(arr: number[]): number[] {
+  return arr.length <= 3
+    ? arr
+    : arr
+        .sort((a, b) => b - a)
+        .slice(0, 3)
+        .sort((a, b) => a - b);
+}
+
+export function _findThreeLargestNumbers(arr: number[]): number[] {
   let threeLargest: number[] = [];
 
   for (const num of arr) {
