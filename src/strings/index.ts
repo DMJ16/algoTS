@@ -19,3 +19,5 @@ export { frequencySort } from "./frequencySort";
 export { lengthOfLongestNonRepeatingSubstr } from "./lengthOfLongestNonRepeatingSubstr";
 export { correctCapitalization } from "./correctCapitalization";
 export { romanToInt } from "./romanToInt";
+export { addBinaryStrings } from "./addBinaryStrings";
+export { multiplyStrings } from "./multiplyStrings";

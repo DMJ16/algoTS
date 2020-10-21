@@ -23,6 +23,8 @@ import {
   lengthOfLongestNonRepeatingSubstr,
   correctCapitalization,
   romanToInt,
+  addBinaryStrings,
+  multiplyStrings,
 } from "../strings";
 
 describe("string algorithms", () => {
@@ -263,5 +265,15 @@ describe("string algorithms", () => {
     expect(romanToInt("IX")).toBe(9);
     expect(romanToInt("LVIII")).toBe(58);
     expect(romanToInt("MCMXCIV")).toBe(1994);
+  });
+
+  test("addBinaryStrings returns stringified sum of two input strings representing binary numbers", () => {
+    expect(addBinaryStrings("11", "1")).toBe("100");
+    expect(addBinaryStrings("1010", "1011")).toBe("10101");
+  });
+
+  test("multiplyStrings returns stringified product of two input strings representing non-negative integers", () => {
+    expect(multiplyStrings("2", "3")).toBe("6");
+    expect(multiplyStrings("123", "456")).toBe("56088");
   });
 });
