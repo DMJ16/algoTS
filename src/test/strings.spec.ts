@@ -25,6 +25,10 @@ import {
   romanToInt,
   addBinaryStrings,
   multiplyStrings,
+  numJewelsInStones,
+  isNumPalindrome,
+  findTheDifference,
+  findTheDiff,
 } from "../strings";
 
 describe("string algorithms", () => {
@@ -172,8 +176,8 @@ describe("string algorithms", () => {
   });
 
   test("firstUniqChar returns index of first unique character from input string, otherwise returns -1", () => {
-    expect(firstUniqChar("leetcode")).toBe(0);
-    expect(firstUniqChar("loveleetcode")).toBe(2);
+    expect(firstUniqChar("leetcode")()).toBe(0);
+    expect(firstUniqChar("loveleetcode")()).toBe(2);
   });
 
   describe("isAnagram returns true if input strings are proper anagrams, otherwise returns false", () => {
@@ -275,5 +279,28 @@ describe("string algorithms", () => {
   test("multiplyStrings returns stringified product of two input strings representing non-negative integers", () => {
     expect(multiplyStrings("2", "3")).toBe("6");
     expect(multiplyStrings("123", "456")).toBe("56088");
+  });
+
+  test("numJewelsInStones returns frequency of character in jewels input string in stones input string. The characters in jewels are distinct, and all characters in both inputs are letters. Letters are case sensitive.", () => {
+    expect(numJewelsInStones("aA", "aAAbbbb")).toBe(3);
+    expect(numJewelsInStones("z", "ZZ")).toBe(0);
+  });
+
+  test("isNumPalindrome returns true if input number is a palindrome, otherwise returns false", () => {
+    expect(isNumPalindrome(121)).toBe(true);
+    expect(isNumPalindrome(-121)).toBe(false);
+    expect(isNumPalindrome(10)).toBe(false);
+    expect(isNumPalindrome(-101)).toBe(false);
+  });
+
+  test("findTheDifference returns the character from editedStr which is the shuffled originalStr plus 1 character. If no edit was made, returns empty string.", () => {
+    expect(findTheDifference("foobar", "barfoot")).toBe("t");
+    expect(findTheDifference("ide", "idea")).toBe("a");
+    expect(findTheDifference("coding", "ingcod")).toBe("");
+
+    // using charCodes
+    expect(findTheDiff("foobar", "barfoot")).toBe("t");
+    expect(findTheDiff("ide", "idea")).toBe("a");
+    expect(findTheDiff("coding", "ingcod")).toBe("");
   });
 });

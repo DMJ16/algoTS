@@ -53,6 +53,12 @@ import {
   isValidSudoku,
   kthLargestElementInArr,
   topKFrequentElements,
+  distributeCandies,
+  removeElement,
+  searchInsert,
+  fizzBuzz,
+  _fizzBuzz,
+  __fizzBuzz,
 } from "../arrays";
 
 describe("array algorithms", () => {
@@ -638,6 +644,7 @@ describe("array algorithms", () => {
   test("kthLargestElementInArr returns the kth largest non-unique number from input arr", () => {
     expect(kthLargestElementInArr([3, 2, 1, 5, 6, 4], 2)).toBe(5);
     expect(kthLargestElementInArr([3, 2, 3, 1, 2, 4, 5, 5, 6], 4)).toBe(4);
+    expect(kthLargestElementInArr([3, 2, 3, 1, 2, 4, 5, 5, 6, 6], 2)).toBe(6);
     expect(() => kthLargestElementInArr([3, 2, 1, 5, 6, 4], -1)).toThrow();
     expect(() => kthLargestElementInArr([3, 2, 1, 5, 6, 4], 7)).toThrow();
   });
@@ -650,5 +657,49 @@ describe("array algorithms", () => {
     expect(topKFrequentElements([1], 1)).toEqual([1]);
     expect(() => topKFrequentElements([3, 2, 1, 5, 6, 4], -1)).toThrow();
     expect(() => topKFrequentElements([3, 2, 1, 5, 6, 4], 7)).toThrow();
+  });
+
+  test("distributeCandies returns the max number of different types of candies you can give to the other sibling. The goal is to distribute the candies equally between two siblings so that each of them gets n / 2 candies (n is even)", () => {
+    expect(distributeCandies([1, 1, 2, 2, 3, 3])).toBe(3);
+    expect(distributeCandies([1, 1, 2, 3])).toBe(2);
+    expect(distributeCandies([1, 1])).toBe(1);
+    expect(distributeCandies([1, 11])).toBe(1);
+    expect(distributeCandies([2, 2])).toBe(1);
+  });
+
+  test("removeElement returns length of modified input number array. Removes all instances of an input val in-place.", () => {
+    expect(removeElement([3, 2, 2, 3], 3)).toBe(2);
+    expect(removeElement([0, 1, 2, 2, 3, 0, 4, 2], 2)).toBe(5);
+  });
+
+  test("searchInsert returns Given a sorted array of distinct integers and a target value, return the index if the target is found. If not, return the index where it would be if it were inserted in order.", () => {
+    expect(searchInsert([1, 3, 5, 6], 5)).toBe(2);
+    expect(searchInsert([1, 3, 5, 6], 2)).toBe(1);
+    expect(searchInsert([1, 3, 5, 6], 7)).toBe(4);
+    expect(searchInsert([1, 3, 5, 6], 0)).toBe(0);
+    expect(searchInsert([1], 0)).toBe(0);
+  });
+
+  test("fizzBuzz", () => {
+    const result = [
+      "1",
+      "2",
+      "Fizz",
+      "4",
+      "Buzz",
+      "Fizz",
+      "7",
+      "8",
+      "Fizz",
+      "Buzz",
+      "11",
+      "Fizz",
+      "13",
+      "14",
+      "FizzBuzz",
+    ];
+    expect(fizzBuzz(15)).toStrictEqual(result);
+    expect(_fizzBuzz(15)).toStrictEqual(result);
+    expect(__fizzBuzz(15)).toStrictEqual(result);
   });
 });

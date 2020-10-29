@@ -26,7 +26,9 @@ import {
   rob,
   robHouse,
   countPrimes,
+  _countPrimes,
   genPrimes,
+  isPowerOfThree,
 } from "../dp";
 
 describe("dynamic programming algorithms", () => {
@@ -273,6 +275,10 @@ describe("dynamic programming algorithms", () => {
       expect(countPrimes(5)).toBe(3);
       expect(countPrimes(20)).toBe(8);
       expect(countPrimes(50)).toBe(15);
+
+      expect(_countPrimes(5)).toBe(3);
+      expect(_countPrimes(20)).toBe(8);
+      expect(_countPrimes(50)).toBe(15);
     });
     test("genPrimes returns an arr of all prime numbers less than or equal to a non-negative number", () => {
       expect(genPrimes(5)).toStrictEqual([2, 3, 5]);
@@ -294,6 +300,13 @@ describe("dynamic programming algorithms", () => {
         43,
         47,
       ]);
+    });
+
+    test("isPowerOfThree returns true if input number is a power of three, otherwise returns false", () => {
+      expect(isPowerOfThree(27)).toBe(true);
+      expect(isPowerOfThree(0)).toBe(false);
+      expect(isPowerOfThree(9)).toBe(true);
+      expect(isPowerOfThree(45)).toBe(false);
     });
   });
 });

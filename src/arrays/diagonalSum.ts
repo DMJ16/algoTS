@@ -8,10 +8,13 @@ export function diagonalSum(matrix: number[][]) {
 }
 
 export function diagSum(matrix: number[][]) {
-  const midIdx = Math.floor(matrix.length / 2);
-  const skip = matrix.length % 2 !== 0 ? matrix[midIdx][midIdx] : 0;
+  const skip = (matrix: number[][]) =>
+    matrix.length % 2 !== 0
+      ? matrix[Math.floor(matrix.length / 2)][Math.floor(matrix.length / 2)]
+      : 0;
+
   return matrix.reduce(
     (sum, row, i) => sum + row[i] + row[row.length - i - 1],
-    0 - skip
+    0 - skip(matrix)
   );
 }

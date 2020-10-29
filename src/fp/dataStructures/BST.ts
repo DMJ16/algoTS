@@ -5,9 +5,11 @@ interface ITree {
 }
 
 export class Tree implements ITree {
-  public left?: Tree;
-  public right?: Tree;
-  constructor(public val: number = 0) {}
+  constructor(
+    public val: number = 0,
+    public left?: Tree,
+    public right?: Tree
+  ) {}
 }
 
 export function generateBST(
@@ -146,4 +148,14 @@ export function rangeSum(
 export function maxDepth(root?: Tree): number {
   if (root === undefined) return 0;
   return 1 + Math.max(maxDepth(root.left), maxDepth(root.right));
+}
+
+export function mergeTrees(tree1?: Tree, tree2?: Tree): Tree | undefined {
+  return tree1 && tree2
+    ? new Tree(
+        tree1.val + tree2.val,
+        mergeTrees(tree1.left, tree2.left),
+        mergeTrees(tree1.right, tree2.right)
+      )
+    : tree1 || tree2;
 }

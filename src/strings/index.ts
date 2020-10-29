@@ -21,3 +21,6 @@ export { correctCapitalization } from "./correctCapitalization";
 export { romanToInt } from "./romanToInt";
 export { addBinaryStrings } from "./addBinaryStrings";
 export { multiplyStrings } from "./multiplyStrings";
+export { numJewelsInStones } from "./numJewelsInStones";
+export { isNumPalindrome } from "./isNumPalindrome";
+export { findTheDifference, findTheDiff } from "./findTheDifference";
