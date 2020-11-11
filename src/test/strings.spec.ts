@@ -29,6 +29,13 @@ import {
   isNumPalindrome,
   findTheDifference,
   findTheDiff,
+  lengthOfLastWord,
+  _lengthOfLastWord,
+  uncommonFromSentences,
+  removeAdjacentDuplicates,
+  _removeAdjacentDuplicates,
+  __removeAdjacentDuplicates,
+  removeKAdjacentDuplicates,
 } from "../strings";
 
 describe("string algorithms", () => {
@@ -281,7 +288,7 @@ describe("string algorithms", () => {
     expect(multiplyStrings("123", "456")).toBe("56088");
   });
 
-  test("numJewelsInStones returns frequency of character in jewels input string in stones input string. The characters in jewels are distinct, and all characters in both inputs are letters. Letters are case sensitive.", () => {
+  test("numJewelsInStones returns frequency of characters in jewels input string in stones input string. The characters in jewels are distinct, and all characters in both inputs are letters. Letters are case sensitive.", () => {
     expect(numJewelsInStones("aA", "aAAbbbb")).toBe(3);
     expect(numJewelsInStones("z", "ZZ")).toBe(0);
   });
@@ -302,5 +309,52 @@ describe("string algorithms", () => {
     expect(findTheDiff("foobar", "barfoot")).toBe("t");
     expect(findTheDiff("ide", "idea")).toBe("a");
     expect(findTheDiff("coding", "ingcod")).toBe("");
+  });
+
+  test("lengthOfLastWord returns the length of the last word in the input string (last word means the last appearing word if we loop from left to right). If the last word does not exist, return 0.", () => {
+    expect(lengthOfLastWord("hello        ")).toBe(5);
+    expect(_lengthOfLastWord("Hello World")).toBe(5);
+  });
+
+  test("uncommonFromSentences returns the words from the two input sentences that are not common to both sentences. Each sentence is a sequence of words (without punctuation) correctly separated using space characters.", () => {
+    expect(uncommonFromSentences("the quick", "brown fox").sort()).toEqual(
+      ["the", "quick", "brown", "fox"].sort()
+    );
+    expect(
+      uncommonFromSentences(
+        "the tortoise beat the haire",
+        "the tortoise lost to the haire"
+      )
+    ).toEqual(["beat", "to", "lost"].sort());
+    expect(
+      uncommonFromSentences("copper coffee pot", "hot coffee pot").sort()
+    ).toEqual(["copper", "hot"].sort());
+    expect(
+      uncommonFromSentences("this apple is sweet", "this apple is sour").sort()
+    ).toEqual(["sweet", "sour"].sort());
+    expect(uncommonFromSentences("apple apple", "banana").sort()).toEqual(
+      ["banana"].sort()
+    );
+  });
+
+  test("removeAdjacentDuplicates returns the result string after all duplicate removals have been made. Given an input string of lowercase letters, a duplicate removal consists of choosing two adjacent and equal letters and removing them. We repeatedly make duplicate removals on input string until we no longer can. Answer is guaranteed to be unique.", () => {
+    expect(removeAdjacentDuplicates("abbaca")).toBe("ca");
+    expect(removeAdjacentDuplicates("abccba")).toBe("");
+    expect(removeAdjacentDuplicates("foobar")).toBe("fbar");
+    expect(removeAdjacentDuplicates("abccbefggfe")).toBe("a");
+    expect(_removeAdjacentDuplicates("abbaca")).toBe("ca");
+    expect(_removeAdjacentDuplicates("abccba")).toBe("");
+    expect(_removeAdjacentDuplicates("foobar")).toBe("fbar");
+    expect(_removeAdjacentDuplicates("abccbefggfe")).toBe("a");
+    expect(__removeAdjacentDuplicates("abbaca")).toBe("ca");
+    expect(__removeAdjacentDuplicates("abccba")).toBe("");
+    expect(__removeAdjacentDuplicates("foobar")).toBe("fbar");
+    expect(__removeAdjacentDuplicates("abccbefggfe")).toBe("a");
+  });
+
+  test("removeKAdjacentDuplicates returns mutated input string after all possible k duplicate removals have been made. Given a number k, duplicate removal consists of choosing k adjacent and equal letters from input string and removing them causing the left and the right side of the deleted substring to concatenate together. We repeatedly make k duplicate removals on input string until we no longer can. Result is guaranteed to be unique.", () => {
+    expect(removeKAdjacentDuplicates("abcd", 2)).toBe("abcd");
+    expect(removeKAdjacentDuplicates("deeedbbcccbdaa", 3)).toBe("aa");
+    expect(removeKAdjacentDuplicates("pbbcggttciiippooaais", 2)).toBe("ps");
   });
 });

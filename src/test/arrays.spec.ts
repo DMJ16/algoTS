@@ -59,6 +59,11 @@ import {
   fizzBuzz,
   _fizzBuzz,
   __fizzBuzz,
+  transposeMatrix,
+  twoSumToTarget,
+  subarraySum,
+  kClosestPointsToOrigin,
+  fourNumSum,
 } from "../arrays";
 
 describe("array algorithms", () => {
@@ -467,8 +472,8 @@ describe("array algorithms", () => {
   test("twoSum returns tuple of arr elements that sum to target input", () => {
     expect(twoSum([2, 7, 11, 15], 9)).toEqual([0, 1]);
     expect(twoSum([4, 3, 2], 6)).toEqual([0, 2]);
+    expect(twoSum([3, 2, 4], 6)).toEqual([1, 2]);
     expect(twoSum([3, 3], 6)).toEqual([0, 1]);
-    expect(twoSum([3, 3], 10)).toBeNull();
   });
 
   test("mapProductExcludeCurrIdx maps elements of input arr to the product of all other elements excluding the current element", () => {
@@ -659,7 +664,7 @@ describe("array algorithms", () => {
     expect(() => topKFrequentElements([3, 2, 1, 5, 6, 4], 7)).toThrow();
   });
 
-  test("distributeCandies returns the max number of different types of candies you can give to the other sibling. The goal is to distribute the candies equally between two siblings so that each of them gets n / 2 candies (n is even)", () => {
+  test("distributeCandies returns the max number of different types of candies you can give to another person where the goal is to distribute the candies equally between two siblings so that each of them gets n / 2 candies (n is even)", () => {
     expect(distributeCandies([1, 1, 2, 2, 3, 3])).toBe(3);
     expect(distributeCandies([1, 1, 2, 3])).toBe(2);
     expect(distributeCandies([1, 1])).toBe(1);
@@ -667,12 +672,12 @@ describe("array algorithms", () => {
     expect(distributeCandies([2, 2])).toBe(1);
   });
 
-  test("removeElement returns length of modified input number array. Removes all instances of an input val in-place.", () => {
+  test("removeElement returns length of modified input number array. Removes all instances of an input value in-place.", () => {
     expect(removeElement([3, 2, 2, 3], 3)).toBe(2);
     expect(removeElement([0, 1, 2, 2, 3, 0, 4, 2], 2)).toBe(5);
   });
 
-  test("searchInsert returns Given a sorted array of distinct integers and a target value, return the index if the target is found. If not, return the index where it would be if it were inserted in order.", () => {
+  test("searchInsert returns the index where the target input is found in a sorted array of distinct integers. Otherwise, returns the index where target would be if it were inserted in order.", () => {
     expect(searchInsert([1, 3, 5, 6], 5)).toBe(2);
     expect(searchInsert([1, 3, 5, 6], 2)).toBe(1);
     expect(searchInsert([1, 3, 5, 6], 7)).toBe(4);
@@ -701,5 +706,86 @@ describe("array algorithms", () => {
     expect(fizzBuzz(15)).toStrictEqual(result);
     expect(_fizzBuzz(15)).toStrictEqual(result);
     expect(__fizzBuzz(15)).toStrictEqual(result);
+  });
+
+  test("transposeMatrix returns the transpose of an input matrix. A transpose is the matrix flipped over it's main diagonal, switching the row and column indices.", () => {
+    expect(
+      transposeMatrix([
+        [1, 2, 3],
+        [4, 5, 6],
+        [7, 8, 9],
+      ])
+    ).toStrictEqual([
+      [1, 4, 7],
+      [2, 5, 8],
+      [3, 6, 9],
+    ]);
+
+    expect(
+      transposeMatrix([
+        [1, 2, 3],
+        [4, 5, 6],
+      ])
+    ).toStrictEqual([
+      [1, 4],
+      [2, 5],
+      [3, 6],
+    ]);
+  });
+
+  test("twoSumToTarget returns array of ascending indices corresponding to two numbers that sum to an input target number from a sorted (ascending) input array.", () => {
+    expect(twoSumToTarget([2, 7, 11, 15], 9)).toEqual([1, 2]);
+    expect(twoSumToTarget([2, 3, 4], 6)).toEqual([1, 3]);
+    expect(twoSumToTarget([-1, 0], -1)).toEqual([1, 2]);
+    expect(twoSumToTarget([0, 0, 5], 0)).toEqual([1, 2]);
+  });
+
+  test("subarraySum returns the total number of continuous subarrays of input array whose sum is equal to k (k is an integer).", () => {
+    expect(subarraySum([1, 1, 1], 2)).toBe(2);
+    expect(subarraySum([1, 2, 3], 3)).toBe(2);
+    expect(subarraySum([1, 2, 1, 2, 1], 3)).toBe(4);
+  });
+
+  test("kClosestPointsToOrigin returns the k closest points to the origin (0, 0) given a list of points on the plane.", () => {
+    expect(
+      kClosestPointsToOrigin(
+        [
+          [1, 3],
+          [-2, 2],
+        ],
+        1
+      )
+    ).toEqual([[-2, 2]]);
+
+    expect(
+      kClosestPointsToOrigin(
+        [
+          [3, 3],
+          [5, -1],
+          [-2, 4],
+        ],
+        2
+      )
+    ).toEqual([
+      [3, 3],
+      [-2, 4],
+    ]);
+  });
+
+  test("fourNumSum returns all unique quadruplets from the input number array where each quadruplet sums to the input target number.", () => {
+    expect(
+      fourNumSum([1, 0, -1, 0, -2, 2], 0)
+        .map((quad) => quad.sort((a, b) => a - b))
+        .sort()
+    ).toEqual(
+      [
+        [-2, -1, 1, 2],
+        [-2, 0, 0, 2],
+        [-1, 0, 0, 1],
+      ]
+        .map((quad) => quad.sort((a, b) => a - b))
+        .sort()
+    );
+    expect(fourNumSum([], 0)).toEqual([]);
   });
 });

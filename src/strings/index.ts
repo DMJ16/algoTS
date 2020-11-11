@@ -24,3 +24,11 @@ export { multiplyStrings } from "./multiplyStrings";
 export { numJewelsInStones } from "./numJewelsInStones";
 export { isNumPalindrome } from "./isNumPalindrome";
 export { findTheDifference, findTheDiff } from "./findTheDifference";
+export { lengthOfLastWord, _lengthOfLastWord } from "./lengthOfLastWord";
+export { uncommonFromSentences } from "./uncommonFromSentences";
+export {
+  removeAdjacentDuplicates,
+  _removeAdjacentDuplicates,
+  __removeAdjacentDuplicates,
+} from "./removeAdjacentDuplicates";
+export { removeKAdjacentDuplicates } from "./removeKAdjacentDuplicates";

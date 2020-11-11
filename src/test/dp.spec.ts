@@ -29,6 +29,7 @@ import {
   _countPrimes,
   genPrimes,
   isPowerOfThree,
+  sqrtFloor,
 } from "../dp";
 
 describe("dynamic programming algorithms", () => {
@@ -307,6 +308,13 @@ describe("dynamic programming algorithms", () => {
       expect(isPowerOfThree(0)).toBe(false);
       expect(isPowerOfThree(9)).toBe(true);
       expect(isPowerOfThree(45)).toBe(false);
+    });
+
+    test("sqrtFloor returns square root of input number decimal digits are truncated (without using Math.sqrt()).", () => {
+      expect(sqrtFloor(2)).toBe(1);
+      expect(sqrtFloor(4)).toBe(2);
+      expect(sqrtFloor(8)).toBe(2);
+      expect(sqrtFloor(64)).toBe(8);
     });
   });
 });

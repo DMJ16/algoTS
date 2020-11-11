@@ -34,16 +34,34 @@ export function deleteNode<T>(list: IList<T> | undefined): void {
 
 export function removeNthNodeFromEnd<T>(
   head: IList<T> | undefined,
-  idx: number
+  n: number
 ): IList<T> | undefined {
-  if (head === undefined || idx < 0) return undefined;
+  const findLen = (node: IList<T> | undefined): number =>
+    node === undefined ? 0 : findLen(node.next) + 1;
+
+  const len = findLen(head);
+  let idx = len - n - 1;
+  let currentNode = head;
+  if (idx < 0) return head?.next;
+  while (idx--) {
+    currentNode = currentNode?.next;
+  }
+  if (currentNode !== undefined) currentNode.next = currentNode.next?.next;
+  return head;
+}
+
+export function _removeNthNodeFromEnd<T>(
+  head: IList<T> | undefined,
+  n: number
+): IList<T> | undefined {
+  if (head === undefined || n < 0) return undefined;
   let currentNode: IList<T> | undefined = head;
   const list: IList<T>[] = [];
   while (currentNode !== undefined) {
     list.push(currentNode);
     currentNode = currentNode.next;
   }
-  let i = list.length - idx;
+  let i = list.length - n;
   if (i === list.length - 1) {
     if (list.length === 1) return undefined;
     else list[i - 1].next = undefined;

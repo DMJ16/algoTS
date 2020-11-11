@@ -58,3 +58,8 @@ export { distributeCandies } from "./distributeCandies";
 export { removeElement } from "./removeElement";
 export { searchInsert } from "./searchInsert";
 export { fizzBuzz, _fizzBuzz, __fizzBuzz } from "./fizzBuzz";
+export { transposeMatrix } from "./transposeMatrix";
+export { twoSumToTarget } from "./twoSumToTarget";
+export { subarraySum } from "./subarraySum";
+export { kClosestPointsToOrigin } from "./kClosestPointsToOrigin";
+export { fourNumSum } from "./fourNumSum";

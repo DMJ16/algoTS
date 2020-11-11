@@ -150,6 +150,26 @@ export function maxDepth(root?: Tree): number {
   return 1 + Math.max(maxDepth(root.left), maxDepth(root.right));
 }
 
+export function deepestLeavesSum(root?: Tree): number {
+  let sum = 0;
+  let deepestLevel = 0;
+  const traverse = (node: Tree | undefined) => (depth: number): void => {
+    if (node == undefined) return;
+
+    if (depth === deepestLevel) {
+      sum += node.val;
+    } else if (depth > deepestLevel) {
+      deepestLevel = depth;
+      sum = node.val;
+    }
+
+    if (node.left) traverse(node.left)(depth + 1);
+    if (node.right) traverse(node.right)(depth + 1);
+  };
+  traverse(root)(0);
+  return sum;
+}
+
 export function mergeTrees(tree1?: Tree, tree2?: Tree): Tree | undefined {
   return tree1 && tree2
     ? new Tree(
