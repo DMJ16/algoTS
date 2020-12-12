@@ -10,3 +10,4 @@ export { MaxBinaryHeap } from "./MaxBinaryHeap";
 export { PriorityQueue } from "./PriorityQueue";
 export { Graph } from "./Graph";
 export { RecentCounter } from "./RecentCounter";
+export { MovingAverage } from "./MovingAverage";

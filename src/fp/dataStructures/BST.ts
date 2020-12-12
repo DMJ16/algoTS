@@ -179,3 +179,24 @@ export function mergeTrees(tree1?: Tree, tree2?: Tree): Tree | undefined {
       )
     : tree1 || tree2;
 }
+
+export function levelOrderBottomUp(root: Tree) {
+  const q = [root];
+  const result = [];
+
+  while (q.length > 0) {
+    const level = [];
+    const size = q.length;
+    for (let i = 0; i < size; i++) {
+      const currentNode = q.shift();
+      if (currentNode != null) {
+        level.push(currentNode.val);
+        if (currentNode.left != null) q.push(currentNode.left);
+        if (currentNode.right != null) q.push(currentNode.right);
+      }
+    }
+    result.unshift(level);
+  }
+
+  return result;
+}
