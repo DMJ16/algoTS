@@ -63,3 +63,4 @@ export { twoSumToTarget } from "./twoSumToTarget";
 export { subarraySum } from "./subarraySum";
 export { kClosestPointsToOrigin } from "./kClosestPointsToOrigin";
 export { fourNumSum } from "./fourNumSum";
+export { kadanesAlgo, kadanesAlgoFP } from "./kadanesAlgo";

@@ -19,6 +19,8 @@ import {
   riverSizes,
   minSubarrayLen,
   removeDuplicates,
+  kadanesAlgo,
+  kadanesAlgoFP,
   maxProfitOneTxn,
   maxProfitMultiTxn,
   maxProfitTwoTxn,
@@ -787,5 +789,17 @@ describe("array algorithms", () => {
         .sort()
     );
     expect(fourNumSum([], 0)).toEqual([]);
+  });
+
+  test("kadane's algorithm for finding max subarray", () => {
+    expect(
+      kadanesAlgo([3, 5, -9, 1, 3, -2, 3, 4, 7, 2, -9, 6, 3, 1, -5, 4])
+    ).toBe(19);
+    expect(kadanesAlgo([-10, -2, -9, -4, -8, -6, -7, -1, -3, -5])).toBe(-1);
+
+    expect(
+      kadanesAlgoFP([3, 5, -9, 1, 3, -2, 3, 4, 7, 2, -9, 6, 3, 1, -5, 4])
+    ).toBe(19);
+    expect(kadanesAlgoFP([-10, -2, -9, -4, -8, -6, -7, -1, -3, -5])).toBe(-1);
   });
 });

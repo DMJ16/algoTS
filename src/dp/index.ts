@@ -16,7 +16,6 @@ export {
   generatePascalsTriangle,
   getRowOfPascalsTriangle,
 } from "./pascalsTriangle";
-export { kadanesAlgo, kadanesAlgoFP } from "./kadanesAlgo";
 export { rob, robHouse } from "./houseRobber";
 export { countPrimes, _countPrimes, genPrimes } from "./primes";
 export { isPowerOfThree } from "./isPowerOfThree";
